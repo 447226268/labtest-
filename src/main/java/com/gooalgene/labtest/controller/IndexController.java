@@ -1,10 +1,11 @@
 package com.gooalgene.labtest.controller;
 
+import com.gooalgene.labtest.response.BaseResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,8 +19,12 @@ import java.util.List;
 public class IndexController {
 
     @GetMapping("/hello")
-    public List<String> hello(){
-        List<String> list = Arrays.asList("name:11","a:11");
-        return list;
+    public BaseResponse<List<String>> hello(){
+        BaseResponse<List<String>> response = new BaseResponse<>();
+        List<String> list = new ArrayList<>();
+        list.add("company : gooalgene");
+        list.add("name: gooalgene");
+        response.setResult(list);
+        return response;
     }
 }

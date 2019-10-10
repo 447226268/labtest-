@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.gooalgene</groupId>
 	<artifactId>labtest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>labtest</name>
 	<description>实习生项目作业</description>
 
