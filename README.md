@@ -9,5 +9,8 @@
        PASSWD: Gooalgene@33075
     ```
 2. JDK1.8+
-    
+   ```bash
+   接口请求demo：
+   curl http://192.168.0.146:8080/test/hello |python -m json.tool
+   ```
 3. Vue3
