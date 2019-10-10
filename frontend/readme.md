@@ -1,6 +1,6 @@
 ## 项目
 - web：前台页面
-- web：后台前端页面
+- backstage：后台前端页面
 
 ## 启动方式
  npm run start
