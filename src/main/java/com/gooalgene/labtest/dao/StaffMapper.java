@@ -11,3 +11,6 @@ public interface StaffMapper {
 
     Staff_list Sel(int id);
 }
+
+
+
