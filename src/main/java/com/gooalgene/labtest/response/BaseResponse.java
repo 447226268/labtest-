@@ -20,4 +20,12 @@ public class BaseResponse<T> {
     public void setResultCode(HttpStatus httpStatus) {
         this.code = httpStatus.value();
     }
+
+    public BaseResponse() {
+
+    }
+
+    public BaseResponse(T result) {
+        this.result = result;
+    }
 }
