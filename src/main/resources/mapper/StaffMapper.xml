@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gooalgene.labtest.mapper.StaffMapper">
+<mapper namespace="com.gooalgene.labtest.dao.StaffMapper">
     <select id="findAll" resultType="com.gooalgene.labtest.entity.Staff_list">
         select * from staff_list
     </select>
