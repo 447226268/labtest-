@@ -1,7 +1,10 @@
 package com.gooalgene.labtest.controller;
 
 import com.gooalgene.labtest.response.BaseResponse;
+import com.gooalgene.labtest.service.impl.StaffServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +21,9 @@ import java.util.List;
 @RequestMapping("/test")
 public class IndexController {
 
+    @Autowired
+    private StaffServiceImpl staffServiceImpl;
+
     @GetMapping("/hello")
     public BaseResponse<List<String>> hello(){
         BaseResponse<List<String>> response = new BaseResponse<>();
@@ -26,5 +32,15 @@ public class IndexController {
         list.add("name: gooalgene");
         response.setResult(list);
         return response;
+    }
+
+    @GetMapping("/getStaff/{sl_id}")
+    public String GetUser(@PathVariable int sl_id) {
+        return staffServiceImpl.Sel(sl_id).toString();
+    }
+
+    @GetMapping("/getAllStaff")
+    public String GetAll() {
+        return staffServiceImpl.findAll();
     }
 }
