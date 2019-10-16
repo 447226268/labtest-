@@ -12,5 +12,5 @@ spring:
     encoding:
       charset: UTF-8
 mybatis:
-  mapper-locations: classpath:mapping/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.gooalgene.labtest.entity

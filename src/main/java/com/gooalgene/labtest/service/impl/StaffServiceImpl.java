@@ -1,7 +1,7 @@
 package com.gooalgene.labtest.service.impl;
 
+import com.gooalgene.labtest.dao.StaffMapper;
 import com.gooalgene.labtest.entity.Staff_list;
-import com.gooalgene.labtest.mapper.StaffMapper;
 import com.gooalgene.labtest.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

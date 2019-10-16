@@ -35,7 +35,7 @@ public class IndexController {
     }
 
     @GetMapping("/getStaff/{sl_id}")
-    public String GetUser(@PathVariable int sl_id) {
+    public String GetStaff(@PathVariable int sl_id) {
         return staffServiceImpl.Sel(sl_id).toString();
     }
 
