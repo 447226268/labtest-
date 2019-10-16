@@ -37,8 +37,7 @@ public class IndexController {
 
     @GetMapping("/getStaff/{sl_id}")
     public BaseResponse<Staff_list> GetStaff(@PathVariable int sl_id) {
-        Staff_list ret = new Staff_list();
-        ret = staffServiceImpl.Sel(sl_id);
+        Staff_list ret = staffServiceImpl.Sel(sl_id);
         return new BaseResponse<>(ret);
     }
 
@@ -48,4 +47,6 @@ public class IndexController {
 
         return new BaseResponse<>(list);
     }
+
+
 }
