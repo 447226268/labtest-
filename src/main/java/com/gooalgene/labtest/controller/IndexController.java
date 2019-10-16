@@ -1,5 +1,6 @@
 package com.gooalgene.labtest.controller;
 
+import com.gooalgene.labtest.entity.Staff_list;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.impl.StaffServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,16 @@ public class IndexController {
     }
 
     @GetMapping("/getStaff/{sl_id}")
-    public String GetStaff(@PathVariable int sl_id) {
-        return staffServiceImpl.Sel(sl_id).toString();
+    public BaseResponse<Staff_list> GetStaff(@PathVariable int sl_id) {
+        Staff_list ret = new Staff_list();
+        ret = staffServiceImpl.Sel(sl_id);
+        return new BaseResponse<>(ret);
     }
 
     @GetMapping("/getAllStaff")
-    public String GetAll() {
-        return staffServiceImpl.findAll();
+    public BaseResponse<List<Staff_list>> GetAll() {
+        List<Staff_list> list = staffServiceImpl.findAll();
+
+        return new BaseResponse<>(list);
     }
 }

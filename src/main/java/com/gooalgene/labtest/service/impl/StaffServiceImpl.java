@@ -6,6 +6,8 @@ import com.gooalgene.labtest.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StaffServiceImpl implements StaffService {
     @Autowired
@@ -15,7 +17,7 @@ public class StaffServiceImpl implements StaffService {
         return staffMapper.Sel(id);
     }
 
-    public String findAll() {
-        return staffMapper.findAll().toString();
+    public List<Staff_list> findAll() {
+        return staffMapper.findAll();
     }
 }
