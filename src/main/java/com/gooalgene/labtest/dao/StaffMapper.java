@@ -10,4 +10,8 @@ public interface StaffMapper {
     List<Staff_list> findAll();
 
     Staff_list Sel(int id);
+
+    void Del(int id);
+
+    void Insert(Staff_list staff);
 }

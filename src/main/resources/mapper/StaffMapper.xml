@@ -7,4 +7,10 @@
     <select id="Sel" resultType="com.gooalgene.labtest.entity.Staff_list">
         select * from staff_list where sl_id = #{sl_id}
     </select>
+    <select id="Del" resultType="com.gooalgene.labtest.entity.Staff_list">
+        delete from staff_list where sl_id = #{sl_id}
+    </select>
+    <select id="Insert" resultType="com.gooalgene.labtest.entity.Staff_list">
+        insert into staff_list (sl_id,sl_name,sl_type_id) values (#{sl_id},#{sl_name},#{sl_type_id})
+    </select>
 </mapper>
