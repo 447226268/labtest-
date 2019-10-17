@@ -33,10 +33,8 @@ public class News_List {
         this.nl_date = nl_date;
         this.nl_url = nl_url;
     }
-
     public News_List() {
     }
-
     @Override
     public String toString() {
         return "News_List{" +
