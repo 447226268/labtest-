@@ -17,3 +17,6 @@ public interface StaffMapper {
 
     void Update(Staff_list staff);
 }
+
+
+
