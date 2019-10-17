@@ -1,5 +1,6 @@
 package com.gooalgene.labtest.entity;
 
+import com.gooalgene.labtest.dto.Staff;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +11,19 @@ public class Staff_list {
     private String sl_name;
     private Integer sl_type_id;
 
-    @Override
-    public String toString() {
-        return sl_id.toString() + "号是" + sl_name;
+    public Staff_list() {
+
+    }
+
+    public Staff_list(Staff staff) {
+        sl_id = staff.getId();
+        sl_name = staff.getName();
+        sl_type_id = null;
+    }
+
+    public Staff_list(Staff staff, Integer type) {
+        sl_id = staff.getId();
+        sl_name = staff.getName();
+        sl_type_id = type;
     }
 }

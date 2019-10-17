@@ -1,5 +1,6 @@
 package com.gooalgene.labtest.controller;
 
+import com.gooalgene.labtest.dto.Staff;
 import com.gooalgene.labtest.entity.Staff_list;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.impl.StaffServiceImpl;
@@ -16,19 +17,19 @@ public class StaffController {
     private StaffServiceImpl staffServiceImpl;
 
     @GetMapping("/getAllStaff")
-    public BaseResponse<List<Staff_list>> GetAll() {
-        List<Staff_list> list = staffServiceImpl.findAll();
+    public BaseResponse<List<Staff>> GetAll() {
+        List<Staff> list = staffServiceImpl.findAll();
         return new BaseResponse<>(list);
     }
 
     @GetMapping("/getStaff/{sl_id}")
-    public BaseResponse<Staff_list> GetStaff(@PathVariable int sl_id) {
-        Staff_list ret = staffServiceImpl.Sel(sl_id);
+    public BaseResponse<Staff> GetStaff(@PathVariable int sl_id) {
+        Staff ret = staffServiceImpl.Sel(sl_id);
         return new BaseResponse<>(ret);
     }
 
     @PostMapping("/insertStaff")
-    public String Insert(@RequestBody Staff_list staff) {
+    public String Insert(@RequestBody Staff staff) {
         String ret = staffServiceImpl.Insert(staff);
         return ret;
     }
@@ -43,5 +44,11 @@ public class StaffController {
     public void Update(@RequestBody Staff_list staff) {
         staffServiceImpl.Update(staff);
         return;
+    }
+
+    @GetMapping("/getAllType")
+    public BaseResponse<List<String>> GetAllType() {
+        List<String> list = staffServiceImpl.getAllType();
+        return new BaseResponse<>(list);
     }
 }
