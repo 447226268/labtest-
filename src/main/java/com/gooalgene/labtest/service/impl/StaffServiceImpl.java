@@ -22,12 +22,17 @@ public class StaffServiceImpl implements StaffService {
     }
 
     public String Del(int id) {
-        staffMapper.Del(id);
-        return "0";
+        String ret = staffMapper.Del(id);
+        return ret;
     }
 
     public String Insert(Staff_list staff) {
         staffMapper.Insert(staff);
         return "0";
+    }
+
+    public void Update(Staff_list staff) {
+        staffMapper.Update(staff);
+        return;
     }
 }
