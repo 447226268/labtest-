@@ -13,7 +13,6 @@ public class News_Type {
         this.nt_id = nt_id;
         this.nt_name = nt_name;
     }
-
     public News_Type() {
     }
 
