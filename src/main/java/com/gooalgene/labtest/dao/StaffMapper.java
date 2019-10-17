@@ -11,7 +11,9 @@ public interface StaffMapper {
 
     Staff_list Sel(int id);
 
-    void Del(int id);
+    String Del(int id);
 
-    void Insert(Staff_list staff);
+    String Insert(Staff_list staff);
+
+    void Update(Staff_list staff);
 }

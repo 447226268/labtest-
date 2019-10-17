@@ -38,4 +38,10 @@ public class StaffController {
         String ret = staffServiceImpl.Del(sl_id);
         return ret;
     }
+
+    @PostMapping("/update")
+    public void Update(@RequestBody Staff_list staff) {
+        staffServiceImpl.Update(staff);
+        return;
+    }
 }

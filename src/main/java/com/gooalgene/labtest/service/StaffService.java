@@ -12,4 +12,6 @@ public interface StaffService {
     String Del(int id);
 
     String Insert(Staff_list staff);
+
+    void Update(Staff_list staff);
 }
