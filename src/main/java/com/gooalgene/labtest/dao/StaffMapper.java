@@ -11,11 +11,17 @@ public interface StaffMapper {
 
     Staff_list Sel(int id);
 
-    String Del(int id);
+    void Del(int id);
 
-    String Insert(Staff_list staff);
+    void Insert(Staff_list staff);
 
     void Update(Staff_list staff);
+
+    String SearchType(int id);
+
+    List<String> getAllType();
+
+    Integer TypeToId(String st_name);
 }
 
 
