@@ -13,12 +13,15 @@ public interface NoticeMapper {
 
     List<News_List> findNotice();
 
-    void deleteNotices(String[] noticeIds);
+    void deleteNotices(@Param("nl_id") Integer noticeIds);
 
     void addNotice(News_List notice);
 
-    void updateState(@Param("notice.state") int state, @Param("notice.Ids") String[] noticeIds);
+    void updateState(News_List news_list);
 
-    void updateNotice(News_List notice);
+    void updateNotice(News_List news_list);
 
 }
+
+
+
