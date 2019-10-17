@@ -7,6 +7,7 @@ import com.gooalgene.labtest.entity.News_List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,12 +21,17 @@ public class NoticeServiceImpl implements com.gooalgene.labtest.service.NoticeSe
     @Override
     public List<News_List> findNotice() {
         List<News_List> list = noticeMapper.findNotice();
+        List<News_List> list1 = new ArrayList<>();
+        System.out.print(newsTypeMapper.findByName("公告").getNt_id());
         for (News_List n : list) {
-            n.setNl_nl_type_name(
-                    newsTypeMapper.findById(n.getNl_type_id()).getNt_name());
-            n.setNl_nl_subType_name(newsSubTypeMapper.findById(n.getNl_subType_id()).getNs_name());
+            if (n.getNl_type_id() == newsTypeMapper.findByName("公告").getNt_id()) {
+                n.setNl_nl_type_name(
+                        newsTypeMapper.findById(n.getNl_type_id()).getNt_name());
+                n.setNl_nl_subType_name(newsSubTypeMapper.findById(n.getNl_subType_id()).getNs_name());
+                list1.add(n);
+            }
         }
-        return list;
+        return list1;
     }
     @Override
     public void addNotice(String[] title, int[] date) {

@@ -13,5 +13,6 @@ public interface NewsTypeMapper {
 
     News_Type findById(@Param("nt_id") Integer nt_id);
 
+    News_Type findByName(@Param("nt_name") String nl_name);
     void insert(String name);
 }
