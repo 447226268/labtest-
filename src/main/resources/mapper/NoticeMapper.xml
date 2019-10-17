@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gooalgene.labtest.dao.NoticeMapper">
-    <select id="findNotice" resultType="com.gooalgene.labtest.entity.News_List">
-        select * from news_list where news_list.nl_type_id = news_type.id
+    <select id="findNotice" resultType="News_List">
+        select * from news_list
     </select>
     <delete id="deleteNotices">
         delete from news_list where news_list.nl_type_id in =
