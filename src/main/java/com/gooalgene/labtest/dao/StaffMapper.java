@@ -10,6 +10,12 @@ public interface StaffMapper {
     List<Staff_list> findAll();
 
     Staff_list Sel(int id);
+
+    String Del(int id);
+
+    String Insert(Staff_list staff);
+
+    void Update(Staff_list staff);
 }
 
 

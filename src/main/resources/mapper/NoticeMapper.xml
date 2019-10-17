@@ -9,7 +9,7 @@
         (<foreach collection="array" item="id">#{news_list.nl_type_id}</foreach>)
     </delete>
     <insert id="addNotice">INSERT  INTO  news_list VALUES (
-		#{id},#{title},#{content},#{date},#{type_id},#{subType_id},#{state},#{url}
+		#{nl_id},#{nl_title},#{nl_content},#{nl_date},#{nl_type_id},#{nl_subType_id},#{nl_state},#{nl_url}
 		)</insert>
     <update id="updateNotice">
         update news_list set nl_state = #{state},nl_content = #{content},nl_title = #{title},

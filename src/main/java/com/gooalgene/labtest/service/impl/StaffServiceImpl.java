@@ -20,4 +20,19 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff_list> findAll() {
         return staffMapper.findAll();
     }
+
+    public String Del(int id) {
+        String ret = staffMapper.Del(id);
+        return ret;
+    }
+
+    public String Insert(Staff_list staff) {
+        staffMapper.Insert(staff);
+        return "0";
+    }
+
+    public void Update(Staff_list staff) {
+        staffMapper.Update(staff);
+        return;
+    }
 }

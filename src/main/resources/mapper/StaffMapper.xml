@@ -7,4 +7,20 @@
     <select id="Sel" resultType="com.gooalgene.labtest.entity.Staff_list">
         select * from staff_list where sl_id = #{sl_id}
     </select>
+    <delete id="Del">
+        delete from staff_list where sl_id = #{sl_id}
+    </delete>
+    <insert id="Insert" parameterType="com.gooalgene.labtest.entity.Staff_list">
+        insert into staff_list (sl_id,sl_name,sl_type_id) values (#{sl_id},#{sl_name},#{sl_type_id})
+    </insert>
+    <update id="Update" parameterType="com.gooalgene.labtest.entity.Staff_list">
+        update staff_list
+        <trim prefix="set" suffixOverrides=",">
+            <if test="sl_name!=null">sl_name = #{sl_name},</if>
+            <if test="sl_type_id!=null">sl_type_id = #{sl_type_id},</if>
+        </trim>
+        WHERE
+        (sl_id = #{sl_id});
+    </update>
+
 </mapper>
