@@ -4,6 +4,9 @@
     <select id="findNotice" resultType="com.gooalgene.labtest.entity.News_List">
         select * from news_list
     </select>
+    <select id="findById" resultType="com.gooalgene.labtest.entity.News_List">
+        select * from news_list where nl_id =#{nl_id}
+    </select>
     <delete id="deleteNotices" parameterType="integer">
         delete from news_list where nl_id=#{nl_id}
     </delete>

@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
+
 @Getter
 @Setter
 public class News_List {
@@ -30,7 +31,6 @@ public class News_List {
         this.nl_subType_id = nl_subType_id;
         this.nl_nl_subType_name = nl_nl_subType_name;
         this.nl_state = nl_state;
-        this.nl_date = nl_date;
         this.nl_url = nl_url;
     }
     public News_List() {
