@@ -7,6 +7,7 @@ import com.gooalgene.labtest.service.NoticeService;
 import com.gooalgene.labtest.service.impl.StaffServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,5 +35,11 @@ public class NoticeController {
 ////        list.add(n);
         response.setResult(list1);
         return response;
+    }
+
+    @GetMapping("/hello1")
+    public BaseResponse<News_List> GetNotice(@PathVariable int nl_id) {
+        News_List n = noticeService.findById(nl_id);
+        return new BaseResponse<>(n);
     }
 }

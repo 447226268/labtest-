@@ -10,7 +10,7 @@ import java.util.List;
 public interface NoticeMapper {
 
     /*新增、编辑和删除操作公告；*/
-
+    News_List findById(@Param("nl_id") Integer nl_id);
     List<News_List> findNotice();
 
     void deleteNotices(@Param("nl_id") Integer noticeIds);

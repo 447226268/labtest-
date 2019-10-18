@@ -7,6 +7,7 @@ import com.gooalgene.labtest.entity.News_List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,31 +29,40 @@ public class NoticeServiceImpl implements com.gooalgene.labtest.service.NoticeSe
                 n.setNl_nl_type_name(
                         newsTypeMapper.findById(n.getNl_type_id()).getNt_name());
                 n.setNl_nl_subType_name(newsSubTypeMapper.findById(n.getNl_subType_id()).getNs_name());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+                System.out.print(n.getNl_date().getDate());
                 list1.add(n);
             }
         }
         return list1;
     }
+
     @Override
-    public void addNotice(String[] title, int[] date) {
+    public News_List findById(Integer nl_id) {
+        return noticeMapper.findById(nl_id);
+    }
+
+    @Override
+    public void addNotice(News_List news_list) {
         /*News_List notice = new News_List();
         notice.setNl_id();
         notice.setNl_title(title);
         notice.setNl_content(content);
         notice.setN*/
+        noticeMapper.addNotice(news_list);
 
 
 
     }
 
     @Override
-    public void deleteNotices(String[] noticeIds) {
-
+    public void deleteNotices(Integer nl_id) {
+        noticeMapper.deleteNotices(nl_id);
     }
 
     @Override
-    public void updateNotice(String noticeId, String title, String content, int state) {
-
+    public void updateNotice(News_List news_list) {
+        noticeMapper.updateNotice(news_list);
     }
 
     @Override
