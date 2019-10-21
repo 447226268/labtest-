@@ -10,12 +10,10 @@ public interface NoticeService {
 
     News_List findById(Integer nl_id);
 
-    void addNotice(News_List news_list);
+    void insertNotice(News_List news_list);
 
     void deleteNotices(Integer noticeIds);
 
     void updateNotice(News_List news_list);
-
-    void showNotices(String[] noticeIds);
 
 }
