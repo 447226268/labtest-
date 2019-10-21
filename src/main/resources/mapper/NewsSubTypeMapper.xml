@@ -7,5 +7,8 @@
     <select id="findById" resultType="com.gooalgene.labtest.entity.News_SubType">
         select * from news_subType where ns_id=#{ns_id}
     </select>
+    <select id="findByType" resultType="com.gooalgene.labtest.entity.News_SubType">
+        select * from news_subType where ns_type_id=#{ns_type_id}
+    </select>
 
 </mapper>

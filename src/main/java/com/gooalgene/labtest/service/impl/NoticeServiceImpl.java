@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,14 +24,14 @@ public class NoticeServiceImpl implements com.gooalgene.labtest.service.NoticeSe
     public List<News_List> findNotice() {
         List<News_List> list = noticeMapper.findNotice();
         List<News_List> list1 = new ArrayList<>();
-        System.out.print(newsTypeMapper.findByName("公告").getNt_id());
         for (News_List n : list) {
             if (n.getNl_type_id() == newsTypeMapper.findByName("公告").getNt_id()) {
                 n.setNl_nl_type_name(
                         newsTypeMapper.findById(n.getNl_type_id()).getNt_name());
                 n.setNl_nl_subType_name(newsSubTypeMapper.findById(n.getNl_subType_id()).getNs_name());
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-                System.out.print(n.getNl_date().getDate());
+                Date time = new Date(n.getNl_date().toString());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                n.setRealTime(sdf.format(time));
                 list1.add(n);
             }
         }
@@ -43,16 +44,9 @@ public class NoticeServiceImpl implements com.gooalgene.labtest.service.NoticeSe
     }
 
     @Override
-    public void addNotice(News_List news_list) {
-        /*News_List notice = new News_List();
-        notice.setNl_id();
-        notice.setNl_title(title);
-        notice.setNl_content(content);
-        notice.setN*/
+    public void insertNotice(News_List news_list) {
+        news_list.setNl_type_id(newsSubTypeMapper.findById(news_list.getNl_subType_id()).getNs_type_id());
         noticeMapper.addNotice(news_list);
-
-
-
     }
 
     @Override
@@ -62,11 +56,9 @@ public class NoticeServiceImpl implements com.gooalgene.labtest.service.NoticeSe
 
     @Override
     public void updateNotice(News_List news_list) {
+        news_list.setNl_type_id(newsSubTypeMapper.findById(news_list.getNl_subType_id()).getNs_type_id());
         noticeMapper.updateNotice(news_list);
     }
 
-    @Override
-    public void showNotices(String[] noticeIds) {
 
-    }
 }
