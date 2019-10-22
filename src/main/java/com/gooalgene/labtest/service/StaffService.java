@@ -15,7 +15,9 @@ public interface StaffService {
 
     String Insert(Staff staff);
 
-    void Update(Staff_list staff);
+    String Update(Staff_list staff);
 
     List<String> getAllType();
+
+    Staff getStaffInfo(int id);
 }

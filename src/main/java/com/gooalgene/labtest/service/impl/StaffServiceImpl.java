@@ -2,6 +2,7 @@ package com.gooalgene.labtest.service.impl;
 
 import com.gooalgene.labtest.dao.StaffMapper;
 import com.gooalgene.labtest.dto.Staff;
+import com.gooalgene.labtest.entity.Staff_info;
 import com.gooalgene.labtest.entity.Staff_list;
 import com.gooalgene.labtest.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ public class StaffServiceImpl implements StaffService {
 
     public Staff Sel(int id) {
         Staff_list staff_list = staffMapper.Sel(id);
-        Staff ret = new Staff(staff_list, staffMapper.SearchType(staff_list.getSl_id()));
+        String staff_type = staffMapper.SearchType(staff_list.getSl_id());
+        Staff ret = new Staff(staff_list, staff_type);
         return ret;
     }
 
@@ -25,7 +27,8 @@ public class StaffServiceImpl implements StaffService {
         List<Staff_list> list = staffMapper.findAll();
         List<Staff> ret = new ArrayList<>();
         for (Staff_list staff_list : list) {
-            Staff staff = new Staff(staff_list, staffMapper.SearchType(staff_list.getSl_id()));
+            String staff_type = staffMapper.SearchType(staff_list.getSl_id());
+            Staff staff = new Staff(staff_list, staff_type);
             ret.add(staff);
         }
         return ret;
@@ -45,9 +48,9 @@ public class StaffServiceImpl implements StaffService {
         return "success!";
     }
 
-    public void Update(Staff_list staff) {
+    public String Update(Staff_list staff) {
         staffMapper.Update(staff);
-        return;
+        return "success!";
     }
 
     public List<String> getAllType() {
@@ -56,5 +59,13 @@ public class StaffServiceImpl implements StaffService {
 
     public Integer TypeToId(String typename) {
         return staffMapper.TypeToId(typename);
+    }
+
+    public Staff getStaffInfo(int id) {
+        Staff_list staff_list = staffMapper.Sel(id);
+        String staff_type = staffMapper.SearchType(id);
+        Staff_info staff_info = staffMapper.getStaffInfo(id);
+        Staff ret = new Staff(staff_list, staff_type, staff_info);
+        return ret;
     }
 }
