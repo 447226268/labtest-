@@ -8,12 +8,12 @@ public interface NoticeService {
 
     List<News_List> findNotice();
 
-    void addNotice(String[] title, int[] date);
+    News_List findById(Integer nl_id);
 
-    void deleteNotices(String[] noticeIds);
+    void insertNotice(News_List news_list);
 
-    void updateNotice(String noticeId, String title, String content, int state);
+    void deleteNotices(Integer noticeIds);
 
-    void showNotices(String[] noticeIds);
+    void updateNotice(News_List news_list);
 
 }
