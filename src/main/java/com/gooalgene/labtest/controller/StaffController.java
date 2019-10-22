@@ -29,26 +29,32 @@ public class StaffController {
     }
 
     @PostMapping("/insertStaff")
-    public String Insert(@RequestBody Staff staff) {
+    public BaseResponse<String> Insert(@RequestBody Staff staff) {
         String ret = staffServiceImpl.Insert(staff);
-        return ret;
+        return new BaseResponse<>(ret);
     }
 
     @DeleteMapping("/del/{sl_id}")
-    public String Del(@PathVariable int sl_id) {
+    public BaseResponse<String> Del(@PathVariable int sl_id) {
         String ret = staffServiceImpl.Del(sl_id);
-        return ret;
+        return new BaseResponse<>(ret);
     }
 
     @PostMapping("/update")
-    public void Update(@RequestBody Staff_list staff) {
-        staffServiceImpl.Update(staff);
-        return;
+    public BaseResponse<String> Update(@RequestBody Staff_list staff) {
+        String ret = staffServiceImpl.Update(staff);
+        return new BaseResponse<>(ret);
     }
 
     @GetMapping("/getAllType")
     public BaseResponse<List<String>> GetAllType() {
         List<String> list = staffServiceImpl.getAllType();
         return new BaseResponse<>(list);
+    }
+
+    @GetMapping("/getStaffInfo/{sl_id}")
+    public BaseResponse<Staff> GetStaffInfo(@PathVariable int sl_id) {
+        Staff ret = staffServiceImpl.getStaffInfo(sl_id);
+        return new BaseResponse<>(ret);
     }
 }
