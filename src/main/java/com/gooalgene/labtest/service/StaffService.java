@@ -18,6 +18,8 @@ public interface StaffService {
 
     List<String> getAllType();
 
+    String deleteType(int id);
+
     Staff getStaffInfo(int id);
 
     String updateStaffInfo(Staff staff);

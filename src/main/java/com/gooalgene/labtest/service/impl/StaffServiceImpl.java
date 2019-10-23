@@ -61,6 +61,11 @@ public class StaffServiceImpl implements StaffService {
         return staffMapper.getAllType();
     }
 
+    public String deleteType(int id) {
+        staffMapper.deleteType(id);
+        return "success!";
+    }
+
     public Staff getStaffInfo(int id) {
         Staff_list staff_list = staffMapper.Sel(id);
         String staff_type = staffMapper.SearchType(id);

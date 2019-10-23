@@ -51,6 +51,12 @@ public class StaffController {
         return new BaseResponse<>(list);
     }
 
+    @DeleteMapping("/deleteType/{id}")
+    public BaseResponse<String> DeleteType(@PathVariable int id) {
+        String ret = staffServiceImpl.deleteType(id);
+        return new BaseResponse<>(ret);
+    }
+
     @GetMapping("/getStaffInfo/{sl_id}")
     public BaseResponse<Staff> GetStaffInfo(@PathVariable int sl_id) {
         Staff ret = staffServiceImpl.getStaffInfo(sl_id);

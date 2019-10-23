@@ -17,9 +17,9 @@ public interface StaffMapper {
 
     void Del(int id);
 
-    void Insert(Staff_list staff);
+    void Insert(Staff_list staff_list);
 
-    void Update(Staff_list staff);
+    void Update(Staff_list staff_list);
 
 //  staff_type表
 
@@ -28,6 +28,8 @@ public interface StaffMapper {
     List<String> getAllType();
 
     Integer TypeToId(String st_name);
+
+    void deleteType(int id);
 
 //  staff_info表
 
