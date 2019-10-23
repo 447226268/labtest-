@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gooalgene.labtest.dao.StaffMapper">
-    <!--  Staff_list表查询  <>-->
+    <!--  Staff_list表  <>-->
     <select id="findAll" resultType="com.gooalgene.labtest.entity.Staff_list">
         select * from staff_list
     </select>
@@ -20,13 +20,13 @@
             <if test="sl_name!=null">sl_name = #{sl_name},</if>
             <if test="sl_type_id!=null">sl_type_id = #{sl_type_id},</if>
         </trim>
-        WHERE
-        (sl_id = #{sl_id});
+        where
+        (sl_id = #{sl_id})
     </update>
 
-    <!--  Staff_type表查询  <>-->
+    <!--  Staff_type表  <>-->
     <select id="SearchType" resultType="String">
-        select st_name from staff_type where st_id=#{st_id}
+        select st_name from staff_type where st_id = #{st_id}
     </select>
     <select id="getAllType" resultType="String">
         select st_name from staff_type
@@ -34,11 +34,14 @@
     <select id="TypeToId" resultType="Integer">
         select st_id from staff_type where st_name=#{st_name}
     </select>
-
-    <!--  Staff_info表查询  <>-->
+    <delete id="deleteType">
+        delete from staff_type where st_id = #{st_id}
+    </delete>
+    <!--  Staff_info表  <>-->
     <select id="getStaffInfo" resultType="com.gooalgene.labtest.entity.Staff_info">
         select * from staff_info where si_uid = #{si_uid}
     </select>
+
     <insert id="insertStaffInfo" parameterType="com.gooalgene.labtest.entity.Staff_info">
         insert into staff_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
