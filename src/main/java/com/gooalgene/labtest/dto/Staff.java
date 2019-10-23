@@ -13,7 +13,7 @@ public class Staff {
     private String name;
     private Integer type_id;
     private String type;
-    private Staff_info info = null;
+    private Staff_info info;
 
     public Staff() {
 

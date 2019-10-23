@@ -1,7 +1,6 @@
 package com.gooalgene.labtest.controller;
 
 import com.gooalgene.labtest.dto.Staff;
-import com.gooalgene.labtest.entity.Staff_list;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.impl.StaffServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class StaffController {
     }
 
     @PostMapping("/update")
-    public BaseResponse<String> Update(@RequestBody Staff_list staff) {
+    public BaseResponse<String> Update(@RequestBody Staff staff) {
         String ret = staffServiceImpl.Update(staff);
         return new BaseResponse<>(ret);
     }
@@ -55,6 +54,12 @@ public class StaffController {
     @GetMapping("/getStaffInfo/{sl_id}")
     public BaseResponse<Staff> GetStaffInfo(@PathVariable int sl_id) {
         Staff ret = staffServiceImpl.getStaffInfo(sl_id);
+        return new BaseResponse<>(ret);
+    }
+
+    @PostMapping("/updateStaffInfo")
+    public BaseResponse<String> InsertStaffInfo(@RequestBody Staff staff) {
+        String ret = staffServiceImpl.updateStaffInfo(staff);
         return new BaseResponse<>(ret);
     }
 }

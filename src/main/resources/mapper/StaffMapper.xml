@@ -41,15 +41,31 @@
     </select>
     <insert id="insertStaffInfo" parameterType="com.gooalgene.labtest.entity.Staff_info">
         insert into staff_info
-        <trim prefix="(" suffix=")">
-            si_uid = #{si_uid},
-            si_state= #{si_state},
-            <if test="si_graph!=null">si_graph = #{si_graph}</if>
-            <if test="si_content!=null">si_content = #{si_content}</if>
-            <if test="si_url!=null">si_url = #{si_url}</if>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            si_uid,si_state,
+            <if test="si_graph!=null">si_graph,</if>
+            <if test="si_content!=null">si_content,</if>
+            <if test="si_url!=null">si_url,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{si_uid},#{si_state},
+            <if test="si_graph!=null">#{si_graph},</if>
+            <if test="si_content!=null">#{si_content},</if>
+            <if test="si_url!=null">#{si_url},</if>
         </trim>
     </insert>
     <delete id="deleteStaffInfo">
         delete from staff_info where si_uid = #{si_uid}
     </delete>
+
+    <update id="updateStaffInfo" parameterType="com.gooalgene.labtest.entity.Staff_info">
+        update staff_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="si_state!=null">si_state = #{si_state},</if>
+            <if test="si_content!=null">si_content = #{si_content},</if>
+            <if test="si_url!=null">si_url = #{si_url},</if>
+        </trim>
+        WHERE
+        (si_uid = #{si_uid});
+    </update>
 </mapper>
