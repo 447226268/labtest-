@@ -35,6 +35,9 @@ public class StaffServiceImpl implements StaffService {
     }
 
     public String Del(int id) {
+        Staff_info staff_info = staffMapper.getStaffInfo(id);
+        if (staff_info != null)
+            staffMapper.deleteStaffInfo(id);
         staffMapper.Del(id);
         return "success!";
     }
@@ -43,22 +46,19 @@ public class StaffServiceImpl implements StaffService {
         if (staff.getId() != null) {
             staff.setId(null);
         }
-        Staff_list staff_list = new Staff_list(staff, staffMapper.TypeToId(staff.getType()));
+        Staff_list staff_list = new Staff_list(staff);
         staffMapper.Insert(staff_list);
         return "success!";
     }
 
-    public String Update(Staff_list staff) {
-        staffMapper.Update(staff);
+    public String Update(Staff staff) {
+        Staff_list staff_list = new Staff_list(staff);
+        staffMapper.Update(staff_list);
         return "success!";
     }
 
     public List<String> getAllType() {
         return staffMapper.getAllType();
-    }
-
-    public Integer TypeToId(String typename) {
-        return staffMapper.TypeToId(typename);
     }
 
     public Staff getStaffInfo(int id) {
@@ -68,4 +68,24 @@ public class StaffServiceImpl implements StaffService {
         Staff ret = new Staff(staff_list, staff_type, staff_info);
         return ret;
     }
+
+    public String updateStaffInfo(Staff staff) {
+        Integer id = staff.getId();
+        Staff_list staff_list = staffMapper.Sel(id);
+        if (staff_list == null)
+            return "the staff doesn't exist!";
+        else {
+            Staff_info staff_info = staff.getInfo();
+            if (!staff_info.getSi_uid().equals(id))
+                staff_info.setSi_uid(id);
+            if (staffMapper.getStaffInfo(id) != null) {
+                staffMapper.updateStaffInfo(staff_info);
+                return "update success!";
+            } else {
+                staffMapper.insertStaffInfo(staff_info);
+                return "insertion success!";
+            }
+        }
+    }
+
 }

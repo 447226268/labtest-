@@ -18,12 +18,7 @@ public class Staff_list {
     public Staff_list(Staff staff) {
         sl_id = staff.getId();
         sl_name = staff.getName();
-        sl_type_id = null;
+        sl_type_id = staff.getType_id();
     }
 
-    public Staff_list(Staff staff, Integer type) {
-        sl_id = staff.getId();
-        sl_name = staff.getName();
-        sl_type_id = type;
-    }
 }

@@ -6,11 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Staff_info {
-    private int si_id;
-    private int si_uid;
+    private Integer si_id;
+    private Integer si_uid;
     private String si_graph;
     private String si_content;
-    private int si_state;
+    private Integer si_state;
     private String si_url;
 
 }
