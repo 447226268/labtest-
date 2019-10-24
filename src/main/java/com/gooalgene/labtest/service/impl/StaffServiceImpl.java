@@ -16,6 +16,7 @@ public class StaffServiceImpl implements StaffService {
     @Autowired
     private StaffMapper staffMapper;
 
+    @Override
     public Staff Sel(int id) {
         Staff_list staff_list = staffMapper.Sel(id);
         String staff_type = staffMapper.SearchType(staff_list.getSl_type_id());
@@ -23,6 +24,7 @@ public class StaffServiceImpl implements StaffService {
         return ret;
     }
 
+    @Override
     public List<Staff> findAll() {
         List<Staff_list> list = staffMapper.findAll();
         List<Staff> ret = new ArrayList<>();
@@ -34,6 +36,7 @@ public class StaffServiceImpl implements StaffService {
         return ret;
     }
 
+    @Override
     public String Del(int id) {
         Staff_info staff_info = staffMapper.getStaffInfo(id);
         if (staff_info != null)
@@ -42,6 +45,7 @@ public class StaffServiceImpl implements StaffService {
         return "success!";
     }
 
+    @Override
     public String Insert(Staff staff) {
         if (staff.getId() != null) {
             staff.setId(null);
@@ -51,21 +55,25 @@ public class StaffServiceImpl implements StaffService {
         return "success!";
     }
 
+    @Override
     public String Update(Staff staff) {
         Staff_list staff_list = new Staff_list(staff);
         staffMapper.Update(staff_list);
         return "success!";
     }
 
+    @Override
     public List<String> getAllType() {
         return staffMapper.getAllType();
     }
 
+    @Override
     public String deleteType(int id) {
         staffMapper.deleteType(id);
         return "success!";
     }
 
+    @Override
     public Staff getStaffInfo(int id) {
         Staff_list staff_list = staffMapper.Sel(id);
         String staff_type = staffMapper.SearchType(staff_list.getSl_type_id());
@@ -74,6 +82,7 @@ public class StaffServiceImpl implements StaffService {
         return ret;
     }
 
+    @Override
     public String updateStaffInfo(Staff staff) {
         Integer id = staff.getId();
         Staff_list staff_list = staffMapper.Sel(id);

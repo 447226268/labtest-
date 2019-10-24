@@ -16,6 +16,7 @@ public class PostgraduateServiceImpl implements PostgraduateService {
     @Autowired
     PostgraduateMapper postgraduateMapper;
 
+    @Override
     public BaseResponse<List<Postgraduate>> findAll() {
         List<Postgraduate_list> list = postgraduateMapper.findAll();
         List<Postgraduate> ret_list = new ArrayList<>();
@@ -26,6 +27,7 @@ public class PostgraduateServiceImpl implements PostgraduateService {
         return new BaseResponse<>(ret_list);
     }
 
+    @Override
     public BaseResponse<Postgraduate> getPostgraduate(int id) {
         Postgraduate_list postgraduate_list = postgraduateMapper.getPostgraduate(id);
         String postgraduate_type = postgraduateMapper.getType(postgraduate_list.getPl_type_id());
@@ -33,6 +35,7 @@ public class PostgraduateServiceImpl implements PostgraduateService {
         return new BaseResponse<>(ret);
     }
 
+    @Override
     public BaseResponse<String> insertPostgraduate(Postgraduate postgraduate) {
         Integer id = postgraduate.getId();
         if (postgraduateMapper.getPostgraduate(id) != null) {
@@ -44,11 +47,13 @@ public class PostgraduateServiceImpl implements PostgraduateService {
         }
     }
 
+    @Override
     public BaseResponse<String> deletePostgraduate(int id) {
         postgraduateMapper.deletePostgraduate(id);
         return new BaseResponse<>("success!");
     }
 
+    @Override
     public BaseResponse<List<String>> getAllType() {
         return new BaseResponse<>(postgraduateMapper.getAlltype());
     }
