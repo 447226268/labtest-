@@ -9,3 +9,5 @@ import ajax from './ajax';
  */
 //Home
 export const test = () => ajax('/', {}) //测试
+
+
