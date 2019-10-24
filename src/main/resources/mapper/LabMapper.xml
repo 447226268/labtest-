@@ -7,9 +7,10 @@
     </insert>
 
     <delete id="deleteLabIntro">
-        delete *
+        delete
         from lab_intro
-        where li_id = (select li_id from lab_intro order by li_id DESC LIMIT 1)
+        order by li_id desc
+        limit 1
     </delete>
 
     <select id="findAll" resultType="com.gooalgene.labtest.entity.Lab_intro">
