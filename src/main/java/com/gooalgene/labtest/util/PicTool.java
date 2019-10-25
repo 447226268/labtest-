@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.UUID;
 
 public class PicTool {
-    public static String uploadFiles1(MultipartFile file) {
+    public static String uploadFiles(MultipartFile file) {
         //文件上传
         if (!file.isEmpty()) {
             try {
