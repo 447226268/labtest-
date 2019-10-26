@@ -1,14 +1,17 @@
 <template>
   <div>
     <div>
-    <div class="show">新闻总览</div>
+      <div class="show" style="margin-right:30px">论文总览</div>
+      <div class="show" style="border-bottom: 0px ; cursor:pointer" v-on:click="go2academic">学术总论</div>
     </div>
     <el-button type="primary" style="width : 100px; margin : 10px" @click="tableCreat">新增</el-button>
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="nl_date" label="发布时间" width="180"></el-table-column>
-      <el-table-column prop="nl_state" label="发布状态" width="180"></el-table-column>
-      <el-table-column prop="nl_title" label="标题" width="400"></el-table-column>
-      <el-table-column prop="nl_nl_subType_name" label="类型" width="180"></el-table-column>
+      <el-table-column prop="nl_date" label="发布时间" width="120"></el-table-column>
+      <el-table-column prop="nl_state" label="发布状态" width="120"></el-table-column>
+      <el-table-column prop="nl_title" label="论文标题" width="230"></el-table-column>
+      <el-table-column prop="nl_title" label="刊物名称" width="230"></el-table-column>
+      <el-table-column prop="nl_title" label="第一作者" width="120"></el-table-column>
+      <el-table-column prop="nl_nl_subType_name" label="发表年度" width="120"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -27,7 +30,7 @@
 </template>
 
 <script>
-import { getNewsall, url_deleteNotice, deleteNotice } from "@/api/index.js";
+import { getNoticeall, url_deleteNotice, deleteNotice } from "@/api/index.js";
 export default {
   data() {
     return {
@@ -39,18 +42,23 @@ export default {
     };
   },
   created() {
-    this.getNews();
+    this.getNotice();
   },
   methods: {
+    go2academic() {
+      this.$router.push({
+        path: "/scince/academic/show"
+      });
+    },
     tableCreat() {
       this.$router.push({
-        path: "/news/edit" + -1
+        path: "/scince/article/edit" + -1
       });
     },
     handleEdit(index, row) {
       this.$router.push({
         path:
-          "/news/edit" +
+          "/scince/article/edit" +
           parseInt(
             this.alltableDate[(this.currentIndex - 1) * 10 + index].nl_id
           )
@@ -68,7 +76,7 @@ export default {
       );
       var arr = [(this.currentIndex - 1) * 10 + index + 1];
       this.alltableDate = [];
-      this.getNews();
+      this.getNotice();
       if (this.currentIndex < Math.ceil(this.alltableDate.length() / 10)) {
         this.currentIndex -= 1;
       }
@@ -78,8 +86,8 @@ export default {
       this.currentIndex = index;
       this.tableData = this.alltableDate.slice((index - 1) * 10, index * 10);
     },
-    async getNews() {
-      let a = await getNewsall();
+    async getNotice() {
+      let a = await getNoticeall();
       this.total = a.data.result.length;
       for (let i = 0; i < a.data.result.length; i++) {
         let s = {};

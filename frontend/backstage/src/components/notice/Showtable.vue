@@ -1,6 +1,8 @@
 <template>
   <div>
+    <div>
     <div class="show">通知公告</div>
+    </div>
     <el-button type="primary" style="width : 100px; margin : 10px" @click="tableCreat">新增</el-button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="nl_date" label="发布时间" width="180"></el-table-column>
@@ -55,7 +57,8 @@ export default {
       });
     },
     async handleDelete(index, row) {
-      let a = await deleteNotice(url_deleteNotice,
+      let a = await deleteNotice(
+        url_deleteNotice,
         {
           id: parseInt(
             this.alltableDate[(this.currentIndex - 1) * 10 + index].nl_id
@@ -100,6 +103,7 @@ export default {
   padding-bottom: 10px;
   margin: 5px;
   width: 80px;
+  display: inline-block;
   border-bottom: 2px solid green;
 }
 .postion {

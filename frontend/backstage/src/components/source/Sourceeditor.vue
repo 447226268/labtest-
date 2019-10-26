@@ -18,11 +18,11 @@
         <el-input v-model="form.nl_title"></el-input>
       </el-form-item>
 
-      <el-form-item label="活动时间:" :required="true">
+      <el-form-item label="发布时间:" :required="true">
         <el-date-picker type="date" placeholder="选择日期" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
       </el-form-item>
 
-      <el-form-item label="封面上传:">
+      <el-form-item label="封面上传:" :required="true">
         <el-upload
           class="upload"
           :action="url"
