@@ -1,24 +1,26 @@
 <template>
   <div>
-    <div class="show">通知编辑</div>
-
+    <div class="show">论文编辑</div>
+    
     <el-form ref="form" :model="form" label-width="85px" label-position="left" class="postion">
-      <el-form-item label="类型选择:" :required="true">
-        <el-select v-model="form.nl_subType_id">
-          <el-option
-            v-for="(item, i) in form_type"
-            :key="i"
-            :label="item.ns_name"
-            :value="item.ns_id"
-          ></el-option>
-        </el-select>
-      </el-form-item>
 
-      <el-form-item label="标题:" :required="true">
+      <el-form-item label="论文题目:" :required="true">
         <el-input v-model="form.nl_title"></el-input>
       </el-form-item>
 
-      <el-form-item label="活动时间:" :required="true">
+      <el-form-item label="刊物名称:" :required="true">
+        <el-input v-model="form.nl_title"></el-input>
+      </el-form-item>
+      
+      <el-form-item label="第一作者:" :required="true">
+        <el-input v-model="form.nl_title"></el-input>
+      </el-form-item>
+
+      <el-form-item label="发表年度:" :required="true">
+        <el-date-picker type="year" placeholder="选择日期" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
+      </el-form-item>
+
+      <el-form-item label="发表时间:" :required="true">
         <el-date-picker type="date" placeholder="选择日期" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
       </el-form-item>
 

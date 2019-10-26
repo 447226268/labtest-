@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div class="show">新闻编辑</div>
+    <div class="show">学术编辑</div>
 
     <el-form ref="form" :model="form" label-width="85px" label-position="left" class="postion">
+      
       <el-form-item label="类型选择:" :required="true">
         <el-select v-model="form.nl_subType_id">
           <el-option
@@ -18,29 +19,8 @@
         <el-input v-model="form.nl_title"></el-input>
       </el-form-item>
 
-      <el-form-item label="活动时间:" :required="true">
+      <el-form-item label="发布时间:" :required="true">
         <el-date-picker type="date" placeholder="选择日期" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
-      </el-form-item>
-
-      <el-form-item label="封面上传:">
-        <el-upload
-          class="upload"
-          :action="url"
-          :multiple="false"
-          name="file"
-          ref="upload"
-          :limit="1"
-          :file-list="filelist"
-          :on-success="success"
-          :on-remove="removeimg"
-        >
-          <i class="el-icon-plus plus"></i>
-        </el-upload>
-
-        <el-dialog :visible.sync="dialogVisible" size="tiny">
-          <img width="100%" :src="dialogImageUrl" alt="" />
-        </el-dialog>
-        <el-button type="primary" @click="showpic" class="width">预览图片</el-button>
       </el-form-item>
 
       <el-radio class="postion" v-model="radio" label="1">自定义编辑</el-radio>
@@ -55,8 +35,8 @@
       </div>
 
       <div class="postion">
-        <el-button type="primary" @click="updataNews" class="width">保存</el-button>
-        <el-button type="primary" @click="updataNewsstate" class="width">发布</el-button>
+        <el-button type="primary" @click="updataNotice" class="width">保存</el-button>
+        <el-button type="primary" @click="updataNoticestate" class="width">发布</el-button>
         <el-button type="danger" @click="gobackpage" class="width">取消</el-button>
       </div>
     </el-form>
@@ -65,23 +45,18 @@
 <script>
 import tinymce from "@/components/tinymce.vue";
 import {
-  url_getNewsIndex,
-  getNewsIndex,
-  url_updataNewsIndex,
-  updataNewsIndex,
-  url_insertNews,
-  insertNews,
-  url_uploadPic
+  url_getNoticetIndex,
+  getNoticetIndex,
+  url_updataNoticeIndex,
+  updataNoticeIndex,
+  url_insertNotice,
+  insertNotice
 } from "@/api";
 export default {
   data() {
     return {
       index: 0,
       radio: "1",
-      url: url_uploadPic,
-      filelist:[],
-      dialogImageUrl:"",
-      dialogVisible: false,
       form_type: [],
       form: {
         nl_id: -1,
@@ -90,8 +65,7 @@ export default {
         nl_title: "",
         nl_date: "",
         nl_content: "",
-        nl_url: "",
-        nl_graph: ""
+        nl_url: ""
       }
     };
   },
@@ -113,43 +87,33 @@ export default {
   },
   created() {
     this.index = this.$route.params.index;
-    this.getNews();
+    this.getNotification();
   },
   methods: {
     gobackpage() {
       this.$router.go(-1);
     },
-    success(res, file){
-      this.dialogImageUrl = URL.createObjectURL(file.raw);
-      this.form.nl_graph = URL.createObjectURL(file.raw);
-      let s = {name: file.name, url: URL.createObjectURL(file.raw)};
-      this.filelist.push(s);
-    },
-    removeimg(){
-      this.dialogImageUrl = "";
-      this.form.nl_graph = "";
-      this.filelist.splice(0, 1);
-      this.dialogVisible = false;
-    },
-    showpic(){
-      this.dialogVisible = true;
-    },
-    async updataNewsstate() {
+    async updataNoticestate() {
       this.form.nl_state = 1;
-      let a = await updataNewsIndex(url_updataNewsIndex, this.form, "post");
+      let a = await updataNoticeIndex(url_updataNoticeIndex, this.form, "post");
       this.$router.go(-1);
     },
-    async updataNews() {
+    async updataNotice() {
       if (this.index == "-1") {
-        let a = await insertNews(url_insertNews, this.form, "post");
+        let a = await insertNotice(url_insertNotice, this.form, "post");
       } else {
-        let a = await updataNewsIndex(url_updataNewsIndex, this.form, "post");
+        let a = await updataNoticeIndex(
+          url_updataNoticeIndex,
+          this.form,
+          "post"
+        );
       }
       this.$router.go(-1);
     },
-    async getNews() {
+
+    async getNotification() {
       let s = { id: this.$route.params.index };
-      let a = await getNewsIndex(url_getNewsIndex, s);
+      let a = await getNoticetIndex(url_getNoticetIndex, s);
       if (a.data.result.notice != null) {
         this.form.nl_id = a.data.result.notice.nl_id;
         this.form.nl_state = a.data.result.notice.nl_state;
@@ -158,14 +122,8 @@ export default {
         this.form.nl_date = a.data.result.notice.nl_date;
         this.form.nl_content = a.data.result.notice.nl_content;
         this.form.nl_url = a.data.result.notice.nl_url;
-        this.form.nl_graph = a.data.result.notice.nl_graph;
         if (this.form.nl_content === "") {
           this.radio = "2";
-        }
-        if(this.form.nl_graph !== ""){
-          this.dialogImageUrl = this.form.nl_graph;
-          let s = {name: this.form.nl_graph, url: this.form.nl_graph};
-          this.filelist.push(s);
         }
       }
       for (let i = 0; i < a.data.result.type.length; i++) {
@@ -192,18 +150,5 @@ export default {
 }
 .width {
   width: 100px;
-}
-.upload {
-  height: 100px;
-  width: 300px;
-  border: 1px solid #c0c4cc;
-  margin-bottom: 40px;
-}
-.plus {
-  font-size: 50px;
-  text-align: center;
-  width: 300px;
-  margin-top: 20px;
-  margin-bottom: 30px;
 }
 </style>
