@@ -1,9 +1,10 @@
 package com.gooalgene.labtest.service.impl;
 
+import com.gooalgene.labtest.dao.NewsMapper;
 import com.gooalgene.labtest.dao.NewsSubTypeMapper;
 import com.gooalgene.labtest.dao.NewsTypeMapper;
-import com.gooalgene.labtest.dao.NoticeMapper;
 import com.gooalgene.labtest.entity.News_List;
+import com.gooalgene.labtest.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +14,20 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class NoticeServiceImpl implements com.gooalgene.labtest.service.NoticeService {
+public class NewsServiceImpl implements NewsService {
     @Autowired
-    NoticeMapper noticeMapper;
+    NewsMapper newsMapper;
     @Autowired
     private NewsTypeMapper newsTypeMapper;
     @Autowired
     private NewsSubTypeMapper newsSubTypeMapper;
+
     @Override
-    public List<News_List> findNotice() {
-        List<News_List> list = noticeMapper.findNotice();
-        List<News_List> list1 = new ArrayList<>();
+    public List<News_List> findNews() {
+        List<News_List> list = newsMapper.findNews();
+        List<News_List> list1 = new ArrayList<News_List>();
         for (News_List n : list) {
-            if (n.getNl_type_id() == newsTypeMapper.findByName("公告").getNt_id()) {
+            if (n.getNl_type_id() == newsTypeMapper.findByName("新闻").getNt_id()) {
                 n.setNl_nl_type_name(
                         newsTypeMapper.findById(n.getNl_type_id()).getNt_name());
                 n.setNl_nl_subType_name(newsSubTypeMapper.findById(n.getNl_subType_id()).getNs_name());
@@ -40,25 +42,25 @@ public class NoticeServiceImpl implements com.gooalgene.labtest.service.NoticeSe
 
     @Override
     public News_List findById(Integer nl_id) {
-        return noticeMapper.findById(nl_id);
+        return newsMapper.findById(nl_id);
     }
 
     @Override
-    public void insertNotice(News_List news_list) {
+    public void insertNews(News_List news_list) {
         news_list.setNl_type_id(newsSubTypeMapper.findById(news_list.getNl_subType_id()).getNs_type_id());
         System.out.print(news_list);
-        noticeMapper.addNotice(news_list);
+        newsMapper.addNews(news_list);
     }
 
     @Override
-    public void deleteNotices(Integer nl_id) {
-        noticeMapper.deleteNotices(nl_id);
+    public void deleteNews(Integer nl_id) {
+        newsMapper.deleteNews(nl_id);
     }
 
     @Override
-    public void updateNotice(News_List news_list) {
+    public void updateNews(News_List news_list) {
         news_list.setNl_type_id(newsSubTypeMapper.findById(news_list.getNl_subType_id()).getNs_type_id());
-        noticeMapper.updateNotice(news_list);
+        newsMapper.updateNews(news_list);
     }
 
 

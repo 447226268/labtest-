@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.LabMapper">
+    <insert id="updateLabIntro" parameterType="com.gooalgene.labtest.entity.Lab_intro">
+        insert into lab_intro (li_content, li_footer_first, li_footer_second, li_create_time)
+        values (#{li_content}, #{li_footer_first}, #{li_footer_second}, now())
+    </insert>
+
+    <delete id="deleteLabIntro">
+        delete
+        from lab_intro
+        order by li_id desc
+        limit 1
+    </delete>
+
+    <select id="findAll" resultType="com.gooalgene.labtest.entity.Lab_intro">
+        select *
+        from lab_intro
+    </select>
+
+    <select id="getLabIntro" resultType="com.gooalgene.labtest.entity.Lab_intro">
+        select *
+        from lab_intro
+        order by li_id DESC
+        LIMIT 1
+    </select>
+</mapper>
