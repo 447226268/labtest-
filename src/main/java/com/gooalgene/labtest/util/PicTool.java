@@ -14,7 +14,7 @@ public class PicTool {
                 String newCompanyImageName = file.getOriginalFilename();
                 String ss[] = newCompanyImageName.split("\\.");
                 String newPicName = UUID.randomUUID() + "." + ss[ss.length - 1];
-                String localPath1 = "/pro/a/";
+                String localPath1 = "/static/a/";
                 String dir = System.getProperty("user.dir");
                 String localPath = "\\src\\main\\resources\\static\\pro\\a\\";
                 System.out.println(dir);
