@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-    <div class="show">新闻总览</div>
+    <div class="show">资源总览</div>
     </div>
     <el-button type="primary" style="width : 100px; margin : 10px" @click="tableCreat">新增</el-button>
     <el-table :data="tableData" style="width: 100%">
@@ -44,13 +44,13 @@ export default {
   methods: {
     tableCreat() {
       this.$router.push({
-        path: "/news/edit" + -1
+        path: "/source/edit" + -1
       });
     },
     handleEdit(index, row) {
       this.$router.push({
         path:
-          "/news/edit" +
+          "/source/edit" +
           parseInt(
             this.alltableDate[(this.currentIndex - 1) * 10 + index].nl_id
           )

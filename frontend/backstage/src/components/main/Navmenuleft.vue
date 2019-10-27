@@ -26,12 +26,12 @@
         <i class="el-icon-s-platform"></i>
         <span slot="title">通知公告</span>
       </el-menu-item>
-      <el-menu-item index="5" route="/科研工作">
+      <el-menu-item index="5" route="/scince/article/show">
         <i class="el-icon-s-management"></i>
         <span slot="title">科研工作</span>
       </el-menu-item>
 
-      <el-menu-item index="6" route="/资源发布">
+      <el-menu-item index="6" route="/source/show">
         <i class="el-icon-upload"></i>
         <span slot="title">资源发布</span>
       </el-menu-item>
