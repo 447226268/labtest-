@@ -98,7 +98,11 @@ public class NewsController {
     public BaseResponse<String> upload(@RequestParam(name = "file", required = false) MultipartFile file) {
         BaseResponse<String> response = new BaseResponse<>();
         PicTool pt = new PicTool();
-        response.setResult(pt.uploadFiles(file));
+
+        String s=pt.uploadFiles(file);
+        System.out.println(s);
+        System.out.println("------------------------------");
+        response.setResult(s);
         return response;
     }
 
