@@ -71,6 +71,7 @@ public class NoticeController {
         News_SubType ns = newsSubTypeMapper.findById(news.getNl_subType_id());
         news.setNl_type_id(ns.getNs_type_id());
         System.out.println(news);
+        System.out.println(news.getNl_date());
         noticeService.updateNotice(news);
         response.setResult("更新成功");
         return response;
@@ -82,6 +83,7 @@ public class NoticeController {
         News_SubType ns = newsSubTypeMapper.findById(news.getNl_subType_id());
         news.setNl_type_id(ns.getNs_type_id());
         System.out.println(news);
+        System.out.println(news.getNl_date());
         noticeService.insertNotice(news);
         response.setResult("插入成功");
         return response;
