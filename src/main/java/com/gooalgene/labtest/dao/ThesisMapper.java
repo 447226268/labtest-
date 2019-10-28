@@ -9,11 +9,11 @@ import java.util.List;
 @Repository
 public interface ThesisMapper {
 
-    Thesis_List findById(@Param("nl_id") Integer nl_id);
+    Thesis_List findById(@Param("tl_id") Integer tl_id);
 
     List<Thesis_List> findThesis();
 
-    void deleteThesis(@Param("nl_id") Integer noticeIds);
+    void deleteThesis(@Param("tl_id") Integer thesisIds);
 
     void addThesis(Thesis_List thesis_list);
 
