@@ -77,6 +77,7 @@ public class NewsController {
     @PostMapping("/updateNews")
     public BaseResponse<String> update(@RequestBody News_List news) {
         BaseResponse<String> response = new BaseResponse<>();
+        System.out.println(news.getNl_date());
         News_SubType ns = newsSubTypeMapper.findById(news.getNl_subType_id());
         news.setNl_type_id(ns.getNs_type_id());
         System.out.println(news);
@@ -88,7 +89,7 @@ public class NewsController {
     @PostMapping("/insertNews")
     public BaseResponse<String> Insert(@RequestBody News_List news) {
         BaseResponse<String> response = new BaseResponse<>();
-        newsService.updateNews(news);
+        System.out.println(news.getNl_date());
         newsService.insertNews(news);
         response.setResult("插入成功");
         return response;
