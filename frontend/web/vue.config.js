@@ -17,13 +17,16 @@ module.exports = {
             .set('@utils', resolve('src/layout'))
             .set('@views', resolve('src/base'))
     },
-    // devServer: {
-    //     proxy: {
-    //       '/api': {
-    //         target: 'http://192.168.10.142:8083',
-    //         ws: true,
-    //         changeOrigin: true
-    //       },
-    //     }
-    //   }
+    devServer: {
+        proxy: {
+          '/api': {
+            target: 'http://localhost:8089',
+            changeOrigin: true,
+            ws: true,
+            pathRewrite: {
+                '^/api': ''
+          },
+        }
+      }
+    },
 }

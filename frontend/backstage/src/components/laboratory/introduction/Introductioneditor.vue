@@ -1,36 +1,20 @@
 <template>
   <div>
-    <div class="show">通知编辑</div>
+    <div>
+      <div class="show" style="margin-right:30px">实验室简介</div>
+      <div class="show" style="border-bottom: 0px ; margin-right:30px; cursor:pointer" v-on:click="go2direction">研究方向</div>
+      <div class="show" style="border-bottom: 0px ; margin-right:30px; cursor:pointer" v-on:click="go2team">研究团队</div>
+      <div class="show" style="border-bottom: 0px ; margin-right:30px; cursor:pointer" v-on:click="go2graduates">毕业生</div>
+    </div>
 
     <el-form ref="form" :model="form" label-width="85px" label-position="left" class="postion">
-      <el-form-item label="类型选择:" :required="true">
-        <el-select v-model="form.nl_subType_id">
-          <el-option
-            v-for="(item, i) in form_type"
-            :key="i"
-            :label="item.ns_name"
-            :value="item.ns_id"
-          ></el-option>
-        </el-select>
-      </el-form-item>
 
       <el-form-item label="标题:" :required="true">
         <el-input v-model="form.nl_title"></el-input>
       </el-form-item>
 
-      <el-form-item label="活动时间:" :required="true">
-        <el-date-picker type="date" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
-      </el-form-item>
-
-      <el-radio class="postion" v-model="radio" label="1">自定义编辑</el-radio>
-
       <div id="id1">
         <tinymce ref="editor" v-model="form.nl_content"></tinymce>
-      </div>
-
-      <el-radio class="postion" v-model="radio" label="2">外部链接跳转</el-radio>
-      <div id="id2">
-        <el-input v-model="form.nl_url" placeholder></el-input>
       </div>
 
       <div class="postion">
@@ -54,43 +38,37 @@ import {
 export default {
   data() {
     return {
-      index: 0,
-      radio: "1",
-      form_type: [],
       form: {
-        nl_id: -1,
         nl_state: 0,
-        nl_subType_id: -1,
         nl_title: "",
-        nl_date: "",
         nl_content: "",
-        nl_url: ""
       }
     };
   },
-  watch: {
-    radio: function(val) {
-      if (val == "1") {
-        document.getElementById("id1").style.cssText = "";
-        document.getElementById("id2").style.cssText = "pointer-events: none;";
-        this.form.nl_url = "";
-      } else {
-        document.getElementById("id1").style.cssText = "pointer-events: none;";
-        document.getElementById("id2").style.cssText = "";
-        this.form.nl_content = "";
-      }
-    }
-  },
+  
   components: {
     tinymce
   },
   created() {
-    this.index = this.$route.params.index;
     this.getNotification();
   },
   methods: {
     gobackpage() {
       this.$router.go(-1);
+    },
+    go2direction(){
+      this.$router.push({
+          path: "/laboratory/direction/"
+      });
+    }
+    ,
+    go2team(){
+      this.$router.push({
+          path: "/laboratory/team/"
+      });
+    },
+    go2graduates(){
+
     },
     async updataNoticestate() {
       this.form.nl_state = 1;
@@ -111,7 +89,6 @@ export default {
     },
 
     async getNotification() {
-      let s = { id: this.$route.params.index };
       let a = await getNoticetIndex(url_getNoticetIndex, s);
       if (a.data.result.notice != null) {
         this.form.nl_id = a.data.result.notice.nl_id;
@@ -125,12 +102,6 @@ export default {
           this.radio = "2"
         }
       }
-      for (let i = 0; i < a.data.result.type.length; i++) {
-        this.form_type.push(a.data.result.type[i]);
-      }
-      if(this.form.nl_subType_id == -1){
-        this.form.nl_subType_id = this.form_type[0].ns_id;
-      }
     }
   }
 };
@@ -142,6 +113,7 @@ export default {
   padding-bottom: 10px;
   margin: 5px;
   width: 80px;
+  display: inline-block;
   border-bottom: 2px solid green;
 }
 .postion {

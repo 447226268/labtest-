@@ -6,6 +6,14 @@ import Login from "../views/login.vue";
 import HomepagemanagementPage from "../components/HomepagemanagementPage.vue";
 import Uploadingmap from "../components/Uploadingmap.vue";
 
+//实验室动态 laboratory
+//实验室简介
+import Introductioneditor from "../components/laboratory/introduction/Introductioneditor.vue"
+//研究方向
+import Directioneditor from "../components/laboratory/direction/Directioneditor.vue"
+//研究团队
+import Teamshow from "../components/laboratory/team/Teamshow.vue"
+
 //新闻动态 news
 import Showtable_news from "../components/news/Showtable.vue"
 import Newseditor from "../components/news/Newseditor.vue"
@@ -15,15 +23,15 @@ import Showtable_notice from "../components/notice/Showtable.vue"
 import Notificationeditor from "../components/notice/Notificationeditor.vue"
 
 //科研工作 scince
-//论文分布
+//论文发布
 import Showtable_article from "../components/science/article/Showtable.vue"
 import Articleeditor from "../components/science/article/Articleeditor.vue"
-//论文分布
+//学术发布
 import Showtable_academic from "../components/science/academic/Showtable.vue"
 import Academiceditor from "../components/science/academic/Academiceditor.vue"
 
 //资源发布 source
-//论文分布
+//资源分布
 import Showtable_source from "../components/source/Showtable.vue"
 import Sourceeditor from "../components/source/Sourceeditor.vue"
 
@@ -56,6 +64,28 @@ export default new Router({
         },
       ]
     },
+
+    //实验室动态
+    //实验室简介
+    {
+      path: "/laboratory/introducution/",
+      name: "introductioneditor",
+      component: Introductioneditor,
+    },
+    //研究方向
+    {
+      path: "/laboratory/direction/",
+      name: "directioneditor",
+      component: Directioneditor,
+    },
+    //研究团队
+    {
+      path: "/laboratory/team/",
+      name: "teamshow",
+      component: Teamshow,
+    },
+
+
 
     //新闻动态
     {
