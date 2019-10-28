@@ -17,6 +17,10 @@ import Lab3 from "../views/lab/lab3.vue";
 import Lab4 from "../views/lab/lab4.vue";
 import Lab3Info from "../views/lab/lab3Info.vue";
 import Lab4Info from "../views/lab/lab4Info.vue";
+// import Thesis from "../views/research/thesis.vue";
+// import ThesisInfo from "../views/research/thesisInfo.vue";
+// import Meeting from "../views/research/meeting.vue";
+// import MeetingInfo from "../views/research/meetingInfo.vue";
 
 
 Vue.use(Router);

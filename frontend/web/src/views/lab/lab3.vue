@@ -422,7 +422,7 @@
               console.log(this.currentPage)  //点击第几页
       },
       getData() {
-        Axios.get('http://www.doclever.cn:8090/mock/5da87eb74a9da91cd654df32/5').then(response => {
+        Axios.get('/api/staff/getAllStaff').then(response => {
             this.tableData=response.data.result;
             console.log(this.tableData);
             this.professorlist+="<tr>";

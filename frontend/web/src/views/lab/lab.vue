@@ -86,8 +86,7 @@
             </div>
 
             <div id="licontent" >
-              <h1 style="line-height:200%;">{{tableData.li_overview}}</h1>
-              <h1 v-html = "tableData.li_overview">  </h1>
+              <h1 style="line-height:200%;" v-html = "tableData.li_overview">  </h1>
             </div>
 
           </el-row>

@@ -365,7 +365,7 @@
       getData() {
         this.search=window.location.search.substr(1);
         console.log(this.search);
-        Axios.get('http://www.doclever.cn:8090/mock/5da87eb74a9da91cd654df32/5').then(response => {
+        Axios.get('/api/staff/getAllStaff').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
                 if (this.tableData[i].id==this.search){

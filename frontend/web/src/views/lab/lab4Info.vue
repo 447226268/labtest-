@@ -99,7 +99,6 @@
 
             <div id="licontent" >
               <h1 v-html = "newData.content">  </h1>
-              <h1 >  {{newData.content}}  </h1>
             </div>
 
           </el-row>

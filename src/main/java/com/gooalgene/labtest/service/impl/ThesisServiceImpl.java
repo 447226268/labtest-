@@ -20,7 +20,6 @@ public class ThesisServiceImpl implements com.gooalgene.labtest.service.ThesisSe
         List<Thesis_List> list = thesisMapper.findThesis();
         List<Thesis_List> list1 = new ArrayList<>();
         for (Thesis_List n : list) {
-
             Date time = new Date(n.getTl_date().toString());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             n.setTl_realtime(sdf.format(time));
