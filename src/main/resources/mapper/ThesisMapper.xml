@@ -12,7 +12,7 @@
     </delete>
     <insert id="addThesis" parameterType="com.gooalgene.labtest.entity.Thesis_List">
         insert  into  thesis_list values (
-            null,#{tl_title},#{tl_journal},#{tl_content},#{tl_writer},,#{tl_year},#{tl_date},#{tl_state},#{tl_url}
+            null,#{tl_title},#{tl_journal},#{tl_content},#{tl_writer},#{tl_year},#{tl_date},#{tl_state},#{tl_url}
         )
         </insert>
     <update id="updateThesis">
