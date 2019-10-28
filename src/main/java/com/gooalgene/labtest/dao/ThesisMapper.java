@@ -11,18 +11,8 @@ public interface ThesisMapper {
 
 
     Thesis_List findById(@Param("tl_id") Integer nl_id);
-
-    List<Thesis_List> findThesis();
-
     void deleteThesis(@Param("tl_id") Integer noticeIds);
-
-    Thesis_List findById(@Param("tl_id") Integer tl_id);
-
     List<Thesis_List> findThesis();
-
-    void deleteThesis(@Param("tl_id") Integer thesisIds);
-
-
     void addThesis(Thesis_List thesis_list);
 
     void updateState(Thesis_List thesis_list);
