@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="show" style="margin-right:30px">论文总览</div>
-      <div class="show" style="border-bottom: 0px ; cursor:pointer" v-on:click="go2academic">学术总论</div>
+      <div class="show" style="border-bottom: 0px ; cursor:pointer" v-on:click="go2academic">学术会议</div>
     </div>
     <el-button type="primary" style="width : 100px; margin : 10px" @click="tableCreat">新增</el-button>
     <el-table :data="tableData" style="width: 100%">

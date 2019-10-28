@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { getNewsall, url_deleteNotice, deleteNotice } from "@/api/index.js";
+import { getSourceall, url_deleteSource, deleteSource } from "@/api/index.js";
 export default {
   data() {
     return {
@@ -39,7 +39,7 @@ export default {
     };
   },
   created() {
-    this.getNews();
+    this.getSource();
   },
   methods: {
     tableCreat() {
@@ -57,8 +57,8 @@ export default {
       });
     },
     async handleDelete(index, row) {
-      let a = await deleteNotice(
-        url_deleteNotice,
+      let a = await deleteSource(
+        url_deleteSource,
         {
           id: parseInt(
             this.alltableDate[(this.currentIndex - 1) * 10 + index].nl_id
@@ -68,7 +68,7 @@ export default {
       );
       var arr = [(this.currentIndex - 1) * 10 + index + 1];
       this.alltableDate = [];
-      this.getNews();
+      this.getSource();
       if (this.currentIndex < Math.ceil(this.alltableDate.length() / 10)) {
         this.currentIndex -= 1;
       }
@@ -78,8 +78,8 @@ export default {
       this.currentIndex = index;
       this.tableData = this.alltableDate.slice((index - 1) * 10, index * 10);
     },
-    async getNews() {
-      let a = await getNewsall();
+    async getSource() {
+      let a = await getSourceall();
       this.total = a.data.result.length;
       for (let i = 0; i < a.data.result.length; i++) {
         let s = {};
