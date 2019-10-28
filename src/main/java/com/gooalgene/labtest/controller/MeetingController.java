@@ -5,6 +5,7 @@ import com.gooalgene.labtest.dao.NewsTypeMapper;
 import com.gooalgene.labtest.entity.News_List;
 import com.gooalgene.labtest.entity.News_SubType;
 import com.gooalgene.labtest.response.BaseResponse;
+import com.gooalgene.labtest.service.MeetingService;
 import com.gooalgene.labtest.service.NewsService;
 import com.gooalgene.labtest.util.PicTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,12 @@ public class MeetingController {
     @Autowired
     NewsTypeMapper newsTypeMapper;
     @Autowired
-    private NewsService newsService;
+    private MeetingService meetingService;
 
     @GetMapping("/deleteById/{id}")
     public BaseResponse<String> DeleteNotice1(@RequestParam("id") int id) {
         BaseResponse<String> response = new BaseResponse<>();
-        newsService.deleteNews(id);
+        meetingService.deleteMeeting(id);
         response.setResult("删除成功");
         return response;
     }
@@ -37,7 +38,7 @@ public class MeetingController {
     @GetMapping("/deleteById")
     public BaseResponse<String> DeleteNotice(@RequestParam("id") int id) {
         BaseResponse<String> response = new BaseResponse<>();
-        newsService.deleteNews(id);
+        meetingService.deleteMeeting(id);
         response.setResult("删除成功");
         return response;
     }
@@ -46,8 +47,8 @@ public class MeetingController {
     public BaseResponse<Map> GetNotice(@RequestParam("id") int id) {
         BaseResponse<Map> response = new BaseResponse<Map>();
         Map m = new HashMap();
-        News_List n = newsService.findById(id);
-        m.put("notice", n);
+        News_List n = meetingService.findById(id);
+        m.put("meeting", n);
         m.put("type", newsSubTypeMapper.findByType(newsTypeMapper.findByName("会议").getNt_id()));
         response.setResult(m);
         return response;
@@ -57,8 +58,8 @@ public class MeetingController {
     public BaseResponse<Map> GetNotice2(@RequestParam("id") int id) {
         BaseResponse<Map> response1 = new BaseResponse<Map>();
         Map m = new HashMap();
-        News_List n = newsService.findById(id);
-        m.put("notice", n);
+        News_List n = meetingService.findById(id);
+        m.put("meeting", n);
         m.put("type", newsSubTypeMapper.findByType(newsTypeMapper.findByName("会议").getNt_id()));
         System.out.println(m);
         response1.setResult(m);
@@ -68,7 +69,7 @@ public class MeetingController {
     @GetMapping("/findAll")
     public BaseResponse<List<News_List>> findAll() {
         BaseResponse<List<News_List>> response = new BaseResponse<>();
-        List<News_List> list = newsService.findNews();
+        List<News_List> list = meetingService.findMeeting();
         response.setResult(list);
         return response;
     }
@@ -80,7 +81,7 @@ public class MeetingController {
         News_SubType ns = newsSubTypeMapper.findById(news.getNl_subType_id());
         news.setNl_type_id(ns.getNs_type_id());
         System.out.println(news);
-        newsService.updateNews(news);
+        meetingService.updateMeeting(news);
         response.setResult("更新成功");
         return response;
     }
@@ -89,7 +90,7 @@ public class MeetingController {
     public BaseResponse<String> Insert(@RequestBody News_List news) {
         BaseResponse<String> response = new BaseResponse<>();
         System.out.println(news.getNl_date());
-        newsService.insertNews(news);
+        meetingService.insertMeeting(news);
         response.setResult("插入成功");
         return response;
     }
