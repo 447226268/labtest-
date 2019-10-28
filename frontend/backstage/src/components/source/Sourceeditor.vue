@@ -55,8 +55,8 @@
       </div>
 
       <div class="postion">
-        <el-button type="primary" @click="updataNews" class="width">保存</el-button>
-        <el-button type="primary" @click="updataNewsstate" class="width">发布</el-button>
+        <el-button type="primary" @click="updataSource" class="width">保存</el-button>
+        <el-button type="primary" @click="updataSourcestate" class="width">发布</el-button>
         <el-button type="danger" @click="gobackpage" class="width">取消</el-button>
       </div>
     </el-form>
@@ -65,12 +65,12 @@
 <script>
 import tinymce from "@/components/tinymce.vue";
 import {
-  url_getNewsIndex,
-  getNewsIndex,
-  url_updataNewsIndex,
-  updataNewsIndex,
-  url_insertNews,
-  insertNews,
+  url_getSourceIndex,
+  getSourceIndex,
+  url_updataSourceIndex,
+  updataSourceIndex,
+  url_insertSource,
+  insertSource,
   url_uploadPic
 } from "@/api";
 export default {
@@ -113,7 +113,7 @@ export default {
   },
   created() {
     this.index = this.$route.params.index;
-    this.getNews();
+    this.getSource();
   },
   methods: {
     gobackpage() {
@@ -134,22 +134,22 @@ export default {
     showpic(){
       this.dialogVisible = true;
     },
-    async updataNewsstate() {
+    async updataSourcestate() {
       this.form.nl_state = 1;
-      let a = await updataNewsIndex(url_updataNewsIndex, this.form, "post");
+      let a = await updataSourceIndex(url_updataSourceIndex, this.form, "post");
       this.$router.go(-1);
     },
-    async updataNews() {
+    async updataSource() {
       if (this.index == "-1") {
-        let a = await insertNews(url_insertNews, this.form, "post");
+        let a = await insertSource(url_insertSource, this.form, "post");
       } else {
-        let a = await updataNewsIndex(url_updataNewsIndex, this.form, "post");
+        let a = await updataSourceIndex(url_updataSourceIndex, this.form, "post");
       }
       this.$router.go(-1);
     },
-    async getNews() {
+    async getSource() {
       let s = { id: this.$route.params.index };
-      let a = await getNewsIndex(url_getNewsIndex, s);
+      let a = await getSourceIndex(url_getSourceIndex, s);
       if (a.data.result.notice != null) {
         this.form.nl_id = a.data.result.notice.nl_id;
         this.form.nl_state = a.data.result.notice.nl_state;

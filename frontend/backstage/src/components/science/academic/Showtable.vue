@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="show" style="margin-right:30px;border-bottom: 0px ; cursor:pointer" v-on:click="go2article">论文总览</div>
-      <div class="show">学术总论</div>
+      <div class="show">学术会议</div>
     </div>
     <el-button type="primary" style="width : 100px; margin : 10px" @click="tableCreat">新增</el-button>
     <el-table :data="tableData" style="width: 100%">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { getNoticeall, url_deleteNotice, deleteNotice } from "@/api/index.js";
+import { getAcademicall, url_deleteAcademic, deleteAcademic } from "@/api/index.js";
 export default {
   data() {
     return {
@@ -40,7 +40,7 @@ export default {
     };
   },
   created() {
-    this.getNotice();
+    this.getAcademic();
   },
   methods: {
     go2article() {
@@ -63,8 +63,8 @@ export default {
       });
     },
     async handleDelete(index, row) {
-      let a = await deleteNotice(
-        url_deleteNotice,
+      let a = await deleteAcademic(
+        url_deleteAcademic,
         {
           id: parseInt(
             this.alltableDate[(this.currentIndex - 1) * 10 + index].nl_id
@@ -74,7 +74,7 @@ export default {
       );
       var arr = [(this.currentIndex - 1) * 10 + index + 1];
       this.alltableDate = [];
-      this.getNotice();
+      this.getAcademic();
       if (this.currentIndex < Math.ceil(this.alltableDate.length() / 10)) {
         this.currentIndex -= 1;
       }
@@ -84,8 +84,8 @@ export default {
       this.currentIndex = index;
       this.tableData = this.alltableDate.slice((index - 1) * 10, index * 10);
     },
-    async getNotice() {
-      let a = await getNoticeall();
+    async getAcademic() {
+      let a = await getAcademicall();
       this.total = a.data.result.length;
       for (let i = 0; i < a.data.result.length; i++) {
         let s = {};

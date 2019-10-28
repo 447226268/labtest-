@@ -62,3 +62,35 @@ export const insertArticle = (url_insertArticle, data, type) => ajax(url_insertA
 export const url_deleteArticle = "/thesis/deleteById/"
 export const deleteArticle = (url_deleteArticle, data, type) => ajax(url_deleteArticle, data, "get") 
 
+
+//科研工作——会议
+//获取所有显示在浏览页面上
+export const getAcademicall = () => ajax("/meeting/findAll", {}) 
+//获取细节
+export const url_getAcademicIndex = "/meeting/findById/"
+export const getAcademicIndex = (url_getAcademicIndex, data) => ajax(url_getAcademicIndex, data) 
+//更新
+export const url_updataAcademicIndex = "/meeting/updateMeeting/"
+export const updataAcademicIndex = (url_updataAcademicIndex, data, type) => ajax(url_updataAcademicIndex, data, "post") 
+//插入
+export const url_insertAcademic = "/meeting/insertMeeting/"
+export const insertAcademic = (url_insertAcademic, data, type) => ajax(url_insertAcademic, data, "post") 
+//删除
+export const url_deleteAcademic = "/meeting/deleteById/"
+export const deleteAcademic = (url_deleteAcademic, data, type) => ajax(url_deleteAcademic, data, "get") 
+
+//科研工作——资源
+//获取所有显示在浏览页面上
+export const getSourceall = () => ajax("/staff/findAll", {}) 
+//获取细节
+export const url_getSourceIndex = "/staff/findById/"
+export const getSourceIndex = (url_getSourceIndex, data) => ajax(url_getSourceIndex, data) 
+//更新
+export const url_updataSourceIndex = "/staff/updateStaff/"
+export const updataSourceIndex = (url_updataSourceIndex, data, type) => ajax(url_updataSourceIndex, data, "post") 
+//插入
+export const url_insertSource = "/staff/insertStaff/"
+export const insertSource = (url_insertSource, data, type) => ajax(url_insertSource, data, "post") 
+//删除
+export const url_deleteSource = "/staff/deleteById/"
+export const deleteSource = (url_deleteSource, data, type) => ajax(url_deleteSource, data, "get") 
