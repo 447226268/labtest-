@@ -4,13 +4,23 @@ spring:
       write-dates-as-timestamps: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.168.1.209:33075/labtest?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/labtest?serverTimezone=UTC
     username: root
-    password: Gooalgene@33075
+    password: 123456
     type: com.zaxxer.hikari.HikariDataSource
   http:
     encoding:
       charset: UTF-8
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+
   type-aliases-package: com.gooalgene.labtest.entity
+server:
+  port: 8989
+devtools:
+  restart:
+    enabled: true  #设置开启热部署
+freemarker:
+  cache: false    #页面不加载缓存，修改即时生效
+  type-aliases-package: com.gooalgene.labtest.entity
+
