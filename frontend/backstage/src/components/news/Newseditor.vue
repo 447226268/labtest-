@@ -19,7 +19,7 @@
       </el-form-item>
 
       <el-form-item label="活动时间:" :required="true">
-        <el-date-picker type="date" placeholder="选择日期" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
+        <el-date-picker type="date" placeholder="选择日期"  value-format="yyyy-MM-dd" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
       </el-form-item>
 
       <el-form-item label="封面上传:">
@@ -121,7 +121,7 @@ export default {
     },
     success(res, file){
       this.dialogImageUrl = URL.createObjectURL(file.raw);
-      this.form.nl_graph = URL.createObjectURL(file.raw);
+      this.form.nl_graph = process.env.VUE_APP_BASE_API + res.result;
       let s = {name: file.name, url: URL.createObjectURL(file.raw)};
       this.filelist.push(s);
     },
@@ -155,7 +155,7 @@ export default {
         this.form.nl_state = a.data.result.notice.nl_state;
         this.form.nl_subType_id = parseInt(a.data.result.notice.nl_subType_id);
         this.form.nl_title = a.data.result.notice.nl_title;
-        this.form.nl_date = a.data.result.notice.nl_date;
+        this.form.nl_date = new Date(a.data.result.notice.nl_date);
         this.form.nl_content = a.data.result.notice.nl_content;
         this.form.nl_url = a.data.result.notice.nl_url;
         this.form.nl_graph = a.data.result.notice.nl_graph;

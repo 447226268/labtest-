@@ -1,16 +1,7 @@
 
 <template>
 
-  <div class="newsInfo"> 
-    
-
-    <el-form v-if="seen" label-width="80px" size="medium"
-             class="formWrap">
-      <el-form-item label="主题名称">
-        <span>{{$route.params.themerow.bmtMastrNm}}</span>
-      </el-form-item>
-    </el-form>
-
+  <div class="notice"> 
 
     <el-container>
 
@@ -26,12 +17,12 @@
         
         <el-image class="lablogo"
             style="width: 270px;height: 100px;"
-            :src="require('../assets/images/Group8.png')"
+            :src="require('../../assets/images/Group8.png')"
             :fit="fill">
         </el-image>
 
         <el-menu
-          :default-active="'3'"
+          :default-active="'4'"
           class="navigation"
           mode="horizontal"
           @select="handleSelect"
@@ -40,7 +31,7 @@
           active-text-color="yellow"
           router="true">
           <el-menu-item index="1" route="/">首页</el-menu-item>
-          <el-menu-item index="2" route="/">实验室简介</el-menu-item>
+          <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
           <el-menu-item index="5" route="/">科研工作</el-menu-item>
@@ -58,22 +49,19 @@
           </div>
 
           <el-menu
-            default-active="1"
+            default-active="3"
             class="asidemenu"
             @open="handleOpen"
             @close="handleClose"
             router="true">
-            <el-menu-item index="1" route="/news">
-              <span slot="title">头条新闻</span>
+            <el-menu-item index="1" route="/notice">
+              <span slot="title">规章制度</span>
             </el-menu-item>
-            <el-menu-item index="2" route="/news2">
-              <span slot="title">综合新闻</span>
+            <el-menu-item index="2" route="/notice2">
+              <span slot="title">教育培养</span>
             </el-menu-item>            
-            <el-menu-item index="3" route="/news3">
-              <span slot="title">科研动态</span>
-            </el-menu-item>
-            <el-menu-item index="4" route="/news4">
-              <span slot="title">学术新闻</span>
+            <el-menu-item index="3" route="/notice3">
+              <span slot="title">招聘招生</span>
             </el-menu-item>
           </el-menu>
 
@@ -81,36 +69,50 @@
 
         <el-main width="900px">
 
+          <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">头条新闻</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/notice' }">通知公告</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/notice3' }">招聘招生</el-breadcrumb-item>
           </el-breadcrumb>
-            
-          <el-row class="artical" >
 
-            <div id="nltitle" >
-              <h1>  {{newData.nl_title}}  </h1>
-            </div>
+          <template>
+            <el-table
+              ref="multipleTable"
+              :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+              stripe
+              style="width: 100%" 
+              @selection-change="handleSelectionChange"
+              @row-click="clickTr">
+              <el-table-column
+                prop="nl_title"
+                width="650" 
+               >
+              </el-table-column>
+              <el-table-column
+                prop="realTime"
+                width="150">
+              </el-table-column>
+            </el-table>
+          </template>
 
-            <div id="nldate" >       
-              <h1 >  {{newData.realTime}}  </h1>
-            </div>
+          <!-- 分页 -->
+          <div class="block" v-if="true"  >
+            <el-pagination
+              background 
+              small="true"
+              pager-count="5"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="currentPage"
+              :page-sizes="[10, 20, 30, 40]"
+              :page-size="pagesize"
+              layout="total, prev, pager, next, sizes"
+              :total="totalcount">
+            </el-pagination>
+          </div>
 
-            <div class="nlimage">
-              <div class="block" >
-                <el-image
-                  style="margin:auto 50px auto 50px"
-                  :src="'http://192.168.10.142:8083'+newData.nl_graph"
-                  :fit="contain"></el-image>
-              </div>
-            </div>
 
-            <div id="nlcontent" >
-              <h1 v-html = "newData.nl_content">  </h1>
-            </div>
-
-          </el-row>
 
         </el-main>
 
@@ -123,7 +125,7 @@
 
           <el-image class="lablogo"
               style="width: 70px;height: 70px;top: 75px"
-              :src="require('../assets/images/whutlogo.png')"
+              :src="require('../../assets/images/whutlogo.png')"
               :fit="fill">
           </el-image>
 
@@ -141,6 +143,7 @@
             <p>yuanxiaohui(at)whut.edu.cn</p>
             <p>http://www.wutbiolab.com</p>
             <p>© Copyright 2019 武汉理工智能生物信息实验室</p>
+            <p>{{message}}</p>
           </div>
 
         </el-col>
@@ -155,15 +158,15 @@
 </template>
 
 <style>
-  .newsInfo {
-    background-image:url('../assets/images/banner2.png');
+  .notice {
+    background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
     background-attachment:fixed
   }
 
   .el-header {
-    background-image: url('../assets/images/banner1.png');
+    background-image: url('../../assets/images/banner1.png');
     background-size:1200px 300px;
     background-repeat:no-repeat;
     background-attachment:fill;
@@ -264,48 +267,19 @@
     margin-right: 50px;
   }
 
-  .el-table{
+  .tablerow {
+    box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.1) ;
+    height:40px;
     position: relative;
-    left:20px;
-    bottom: 0px;
+    margin: auto;
+    width:100%;
+    padding: 12px 0;
   }
 
   .block{
     display: flex;
     justify-content: center;
   }
-
-  #nltitle{
-    text-align: center;
-    width: 800px;
-    position: relative;
-    font-size: 20px;
-    color: #333;
-    font-weight: 600;
-    margin-top: 20px;
-  }
-
-  #nldate{
-    text-align: center;
-    width: 400px;
-    position: relative;
-    margin: auto;
-    font-size: 15px;
-    color: #333;
-    font-weight: 400;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  #nicontent{
-    width: 750px;
-    position: relative;
-    font-size: 14px;
-    color: #333;
-    font-weight: 600;
-    margin-left: 30px;
-  }
-
 
   .footer{
     background-color: #398ef3;
@@ -340,44 +314,31 @@
 
 <script >
   import Axios from 'axios'
+  import NoticeInfo from './noticeInfo.vue'
   export default {
-    name: 'noticeInfo',
+    name : 'notice',
+    components:{
+      NoticeInfo
+    },
     data() {
       return {
-        tableData:[],
-        newData:{},
-        // nl_id:0,
-        nl_title:'标题',
-        realTime:'日期',
-        nl_graph:'图片',
-        nl_content:'内容',
-        showtable:true,
-        showtext:false,
+        tableData: [],
+        newData:[],
+        totalcount:0,
+        currentPage:1,
+        pagesize:30,
       };
+ 
     },
-    mounted() {      
+    mounted() {
       this.getData();
-      console.log(this.tableData.length);
+      this.getnewData();
     },    
     methods: {
-      getData() {
-        Axios.get('http://192.168.10.142:8083/news/findAll').then(response => {
-            this.tableData=response.data.result;
-              for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_id==this.$route.query.nl_id){
-                  console.log(this.tableData[i].nl_title);
-                  this.newData=this.tableData[i]
-                  console.log(this.newData);
-
-                }
-              }
-              console.log(this.tableData);
-              console.log(this.tableData.length);
-        }, response => {
-            console.log("error");
-          });
+      clickTr(row, event, column){
+        console.log(row.nl_id);
+        this.$router.push({name:'noticeInfo',query:{nl_id:row.nl_id}})
       },
-    
       handle(row,column,event,cell){
         console.log(row)
         console.log(column)
@@ -393,13 +354,32 @@
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+      handleSizeChange: function (size) {
+              this.pagesize = size;
+              console.log(this.pagesize)  //每页下拉显示数据
       },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+      handleCurrentChange: function(currentPage){
+              this.currentPage = currentPage;
+              console.log(this.currentPage)  //点击第几页
       },
-
+      getData() {
+        Axios.get('/api/notice/findAll').then(response => {
+            this.tableData=response.data.result;
+              for(var i = 0;i<this.tableData.length;i++){
+                if (this.tableData[i].nl_nl_type_name=="公告"&&this.tableData[i].nl_nl_subType_name=="招聘招生"){
+                  console.log(this.tableData[i].nl_title);
+                  this.newData.push(this.tableData[i]);
+                  this.totalcount=this.newData.length;
+                  console.log(this.totalcount);
+                  console.log(this.newData);
+                }
+              }
+              console.log(this.tableData);
+        }, response => {
+            console.log("error");
+          });
+      },
     },
   }
+
 </script>

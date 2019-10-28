@@ -17,7 +17,7 @@
         
         <el-image class="lablogo"
             style="width: 270px;height: 100px;"
-            :src="require('../assets/images/Group8.png')"
+            :src="require('../../assets/images/Group8.png')"
             :fit="fill">
         </el-image>
 
@@ -31,7 +31,7 @@
           active-text-color="yellow"
           router="true">
           <el-menu-item index="1" route="/">首页</el-menu-item>
-          <el-menu-item index="2" route="/">实验室简介</el-menu-item>
+          <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
           <el-menu-item index="5" route="/">科研工作</el-menu-item>
@@ -104,7 +104,7 @@
             <el-pagination
               background 
               small="true"
-              pager-count="3"
+              pager-count="5"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -115,7 +115,6 @@
             </el-pagination>
           </div>
 
-          </el-row>
 
         </el-main>
 
@@ -128,7 +127,7 @@
 
           <el-image class="lablogo"
               style="width: 70px;height: 70px;top: 75px"
-              :src="require('../assets/images/whutlogo.png')"
+              :src="require('../../assets/images/whutlogo.png')"
               :fit="fill">
           </el-image>
 
@@ -162,14 +161,14 @@
 
 <style>
   .news {
-    background-image:url('../assets/images/banner2.png');
+    background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
     background-attachment:fixed
   }
 
   .el-header {
-    background-image: url('../assets/images/banner1.png');
+    background-image: url('../../assets/images/banner1.png');
     background-size:1200px 300px;
     background-repeat:no-repeat;
     background-attachment:fill;
@@ -317,7 +316,7 @@
 
 <script >
   import Axios from 'axios'
-  import  NewsInfo from './newsInfo.vue'
+  import NewsInfo from './newsInfo.vue'
   export default {
     name : 'news',
     components:{
@@ -366,7 +365,7 @@
               console.log(this.currentPage)  //点击第几页
       },
       getData() {
-        Axios.get('http://192.168.10.142:8083/news/findAll').then(response => {
+        Axios.get('/api/news/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
                 if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="头条新闻"){

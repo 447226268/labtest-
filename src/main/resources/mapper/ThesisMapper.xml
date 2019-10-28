@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.ThesisMapper">
+    <select id="findThesis" resultType="com.gooalgene.labtest.entity.Thesis_List">
+        select * from thesis_list
+    </select>
+    <select id="findById" resultType="com.gooalgene.labtest.entity.Thesis_List">
+        select * from thesis_list where tl_id =#{tl_id}
+    </select>
+    <delete id="deleteThesis" parameterType="integer">
+        delete from thesis_list where tl_id=#{tl_id}
+    </delete>
+    <insert id="addThesis" parameterType="com.gooalgene.labtest.entity.Thesis_List">
+        insert  into  thesis_list values (
+            null,#{tl_title},#{tl_journal},#{tl_content},#{tl_writer},#{tl_year},#{tl_date},#{tl_state},#{tl_url}
+        )
+        </insert>
+    <update id="updateThesis">
+        update thesis_list set tl_title = #{tl_title},tl_journal=#{tl_journal},tl_content = #{tl_content},tl_writer=#{tl_writer},tl_year=#{tl_year},tl_date=#{tl_date},tl_state = #{tl_state}, tl_url = #{tl_url} WHERE tl_id = #{tl_id}
+    </update>
+    <insert id="updateState">
+        update thesis_list set nl_state = #{notice.state} where nl_id in =
+        <foreach collection="notice.ids" item="id" separator="," open="(" close=")">#{id}</foreach>
+    </insert>
+</mapper>

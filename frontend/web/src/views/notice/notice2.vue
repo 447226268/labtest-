@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="news"> 
+  <div class="notice"> 
 
     <el-container>
 
@@ -17,12 +17,12 @@
         
         <el-image class="lablogo"
             style="width: 270px;height: 100px;"
-            :src="require('../assets/images/Group8.png')"
+            :src="require('../../assets/images/Group8.png')"
             :fit="fill">
         </el-image>
 
         <el-menu
-          :default-active="'3'"
+          :default-active="'4'"
           class="navigation"
           mode="horizontal"
           @select="handleSelect"
@@ -31,7 +31,7 @@
           active-text-color="yellow"
           router="true">
           <el-menu-item index="1" route="/">首页</el-menu-item>
-          <el-menu-item index="2" route="/">实验室简介</el-menu-item>
+          <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
           <el-menu-item index="5" route="/">科研工作</el-menu-item>
@@ -45,26 +45,23 @@
         <el-aside width="300px" style="background-color: white" >
 
           <div id="asidetitle" >
-              新闻动态
+              通知公告
           </div>
 
           <el-menu
-            default-active="3"
+            default-active="2"
             class="asidemenu"
             @open="handleOpen"
             @close="handleClose"
             router="true">
-            <el-menu-item index="1" route="/news">
-              <span slot="title">头条新闻</span>
+            <el-menu-item index="1" route="/notice">
+              <span slot="title">规章制度</span>
             </el-menu-item>
-            <el-menu-item index="2" route="/news2">
-              <span slot="title">综合新闻</span>
+            <el-menu-item index="2" route="/notice2">
+              <span slot="title">教育培养</span>
             </el-menu-item>            
-            <el-menu-item index="3" route="/news3">
-              <span slot="title">科研动态</span>
-            </el-menu-item>
-            <el-menu-item index="4" route="/news4">
-              <span slot="title">学术新闻</span>
+            <el-menu-item index="3" route="/notice3">
+              <span slot="title">招聘招生</span>
             </el-menu-item>
           </el-menu>
 
@@ -75,8 +72,8 @@
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news3' }">科研动态</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/notice' }">通知公告</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/notice2' }">教育培养</el-breadcrumb-item>
           </el-breadcrumb>
 
           <template>
@@ -104,7 +101,7 @@
             <el-pagination
               background 
               small="true"
-              pager-count="3"
+              pager-count="5"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -115,7 +112,7 @@
             </el-pagination>
           </div>
 
-          </el-row>
+
 
         </el-main>
 
@@ -128,7 +125,7 @@
 
           <el-image class="lablogo"
               style="width: 70px;height: 70px;top: 75px"
-              :src="require('../assets/images/whutlogo.png')"
+              :src="require('../../assets/images/whutlogo.png')"
               :fit="fill">
           </el-image>
 
@@ -161,15 +158,15 @@
 </template>
 
 <style>
-  .news {
-    background-image:url('../assets/images/banner2.png');
+  .notice {
+    background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
     background-attachment:fixed
   }
 
   .el-header {
-    background-image: url('../assets/images/banner1.png');
+    background-image: url('../../assets/images/banner1.png');
     background-size:1200px 300px;
     background-repeat:no-repeat;
     background-attachment:fill;
@@ -317,11 +314,11 @@
 
 <script >
   import Axios from 'axios'
-  import  NewsInfo from './newsInfo.vue'
+  import NoticeInfo from './noticeInfo.vue'
   export default {
-    name : 'news',
+    name : 'notice',
     components:{
-      NewsInfo
+      NoticeInfo
     },
     data() {
       return {
@@ -340,7 +337,7 @@
     methods: {
       clickTr(row, event, column){
         console.log(row.nl_id);
-        this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
+        this.$router.push({name:'noticeInfo',query:{nl_id:row.nl_id}})
       },
       handle(row,column,event,cell){
         console.log(row)
@@ -366,10 +363,10 @@
               console.log(this.currentPage)  //点击第几页
       },
       getData() {
-        Axios.get('http://192.168.10.142:8083/news/findAll').then(response => {
+        Axios.get('/api/notice/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="科研动态"){
+                if (this.tableData[i].nl_nl_type_name=="公告"&&this.tableData[i].nl_nl_subType_name=="教育培养"){
                   console.log(this.tableData[i].nl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;
