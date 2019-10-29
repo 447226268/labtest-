@@ -43,7 +43,7 @@
           <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
-          <el-menu-item index="5" route="/">科研工作</el-menu-item>
+          <el-menu-item index="5" route="/thesis">科研工作</el-menu-item>
           <el-menu-item index="6" route="/">资源发布</el-menu-item>
         </el-menu> 
 
@@ -101,14 +101,13 @@
               <div class="block" >
                 <el-image
                   style="margin:auto 50px auto 50px"
-                  :src="'http://192.168.1.126:8083'+newData.graph"
+                  :src="'http://192.168.1.126:8083'+newData.info.si_graph"
                   :fit="contain"></el-image>
               </div>
             </div>
 
             <div id="licontent" >
-              <h1 v-html = "newData.info">  </h1>
-              <h1 >  {{newData.content}}  </h1>
+              <h1 v-html = "newData.info.si_content">  </h1>
             </div>
 
           </el-row>

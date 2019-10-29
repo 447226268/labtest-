@@ -1,7 +1,16 @@
 
 <template>
 
-  <div class="lab4"> 
+  <div class="meetingInfo"> 
+    
+
+    <el-form v-if="seen" label-width="80px" size="medium"
+             class="formWrap">
+      <el-form-item label="主题名称">
+        <span>{{$route.params.themerow.bmtMastrNm}}</span>
+      </el-form-item>
+    </el-form>
+
 
     <el-container>
 
@@ -22,7 +31,7 @@
         </el-image>
 
         <el-menu
-          :default-active="'2'"
+          :default-active="'5'"
           class="navigation"
           mode="horizontal"
           @select="handleSelect"
@@ -45,81 +54,48 @@
         <el-aside width="300px" style="background-color: white" >
 
           <div id="asidetitle" >
-              实验室简介
+              科研工作
           </div>
 
           <el-menu
-            default-active="4"
+            default-active="2"
             class="asidemenu"
             @open="handleOpen"
             @close="handleClose"
             router="true">
-            <el-menu-item index="1" route="/lab">
-              <span slot="title">机构概况</span>
+            <el-menu-item index="1" route="/thesis">
+              <span slot="title">论文发表</span>
             </el-menu-item>
-            <el-menu-item index="2" route="/lab2">
-              <span slot="title">研究方向</span>
+            <el-menu-item index="2" route="/meeting">
+              <span slot="title">学术会议</span>
             </el-menu-item>            
-            <el-menu-item index="3" route="/lab3">
-              <span slot="title">研究团队</span>
-            </el-menu-item>
-            <el-menu-item index="4" route="/lab4">
-              <span slot="title">毕业生</span>
-            </el-menu-item>
           </el-menu>
 
         </el-aside>
 
         <el-main width="900px">
 
-          <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/lab' }">实验室简介</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/lab4' }">毕业生</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/thesis' }">科研工作</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/meeting' }">学术会议</el-breadcrumb-item>
           </el-breadcrumb>
+            
+          <el-row class="artical" v-if="true">
 
-          <div id="lititle" >
-            <h1>  毕业生  </h1>
-          </div>
+            <div id="nltitle" >
+              <h1>  {{newData.nl_title}}  </h1>
+            </div>
 
-          <template>
-            <el-table
-              ref="multipleTable"
-              :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-              stripe
-              style="width: 100%" 
-              @selection-change="handleSelectionChange"
-              @row-click="clickTr">
-              <el-table-column
-                prop="title"
-                width="650" 
-               >
-              </el-table-column>
-              <el-table-column
-                prop="date"
-                width="150">
-              </el-table-column>
-            </el-table>
-          </template>
+            <div id="nldate" >       
+              <h1 >  {{newData.realTime}}  </h1>
+            </div>
 
-          <!-- 分页 -->
-          <div class="block" v-if="true"  >
-            <el-pagination
-              background 
-              small="true"
-              pager-count="5"
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="[10, 20, 30, 40]"
-              :page-size="pagesize"
-              layout="total, prev, pager, next, sizes"
-              :total="totalcount">
-            </el-pagination>
-          </div>
+            <div id="nlcontent" >
+              <h1 v-html = "newData.nl_content">  </h1>
+            </div>
 
-
+          </el-row>
 
         </el-main>
 
@@ -150,7 +126,6 @@
             <p>yuanxiaohui(at)whut.edu.cn</p>
             <p>http://www.wutbiolab.com</p>
             <p>© Copyright 2019 武汉理工智能生物信息实验室</p>
-            <p>{{message}}</p>
           </div>
 
         </el-col>
@@ -165,7 +140,7 @@
 </template>
 
 <style>
-  .lab4 {
+  .meetingInfo {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
@@ -274,19 +249,37 @@
     margin-right: 50px;
   }
 
-  .tablerow {
-    box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.1) ;
-    height:40px;
+  #nltitle{
+    text-align: center;
+    width: 800px;
     position: relative;
-    margin: auto;
-    width:100%;
-    padding: 12px 0;
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+    margin-top: 20px;
   }
 
-  .block{
-    display: flex;
-    justify-content: center;
+  #nldate{
+    text-align: center;
+    width: 400px;
+    position: relative;
+    margin: auto;
+    font-size: 15px;
+    color: #333;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
+
+  #nicontent{
+    width: 750px;
+    position: relative;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    margin-left: 30px;
+  }
+
 
   .footer{
     background-color: #398ef3;
@@ -310,83 +303,44 @@
     position: relative;
     line-height:2;
   }
-
-  body > .el-container {
-    margin-bottom: 40px;
-    text-align: center;
-    margin: auto;
-  }
   
 </style>
 
 <script >
   import Axios from 'axios'
-  import  Lab4Info from './lab4Info.vue'
   export default {
-    name : 'lab4',
-    components:{
-      Lab4Info
-    },
+    name: 'meetingInfo',
     data() {
       return {
-        tableData: [],
-        newData:[],
-        totalcount:0,
-        currentPage:1,
-        pagesize:30,
+        tableData:[],
+        newData:{},
+        nl_title:'标题',
+        realTime:'日期',
+        nl_content:'内容',
       };
- 
     },
-    mounted() {
+    mounted() {      
       this.getData();
-      this.getnewData();
+      console.log(this.tableData.length);
     },    
     methods: {
-      clickTr(row, event, column){
-        console.log(row.id);
-        this.$router.push({name:'lab4Info',query:{id:row.id}})
-      },
-      handle(row,column,event,cell){
-        console.log(row)
-        console.log(column)
-        console.log(event)
-        console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSizeChange: function (size) {
-              this.pagesize = size;
-              console.log(this.pagesize)  //每页下拉显示数据
-      },
-      handleCurrentChange: function(currentPage){
-              this.currentPage = currentPage;
-              console.log(this.currentPage)  //点击第几页
-      },
       getData() {
-        Axios.get('/api/postgraduate/getAllPostgraduate').then(response => {
+        Axios.get('/api/meeting/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                
-                  console.log(this.tableData[i].title);
-                  this.newData.push(this.tableData[i]);
-                  this.totalcount=this.newData.length;
-                  console.log(this.totalcount);
+                if (this.tableData[i].nl_id==this.$route.query.nl_id){
+                  console.log(this.tableData[i].nl_title);
+                  this.newData=this.tableData[i]
                   console.log(this.newData);
-                
+
+                }
               }
               console.log(this.tableData);
+              console.log(this.tableData.length);
         }, response => {
             console.log("error");
           });
       },
     },
   }
-
 </script>

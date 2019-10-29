@@ -34,7 +34,7 @@
           <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
-          <el-menu-item index="5" route="/">科研工作</el-menu-item>
+          <el-menu-item index="5" route="/thesis">科研工作</el-menu-item>
           <el-menu-item index="6" route="/">资源发布</el-menu-item>
         </el-menu> 
 
@@ -78,6 +78,10 @@
             <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/news3' }">科研动态</el-breadcrumb-item>
           </el-breadcrumb>
+
+          <div id="lititle" >
+            <h1>  科研动态  </h1>
+          </div>
 
           <template>
             <el-table

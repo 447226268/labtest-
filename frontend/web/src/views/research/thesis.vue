@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="lab4"> 
+  <div class="thesis"> 
 
     <el-container>
 
@@ -22,7 +22,7 @@
         </el-image>
 
         <el-menu
-          :default-active="'2'"
+          :default-active="'5'"
           class="navigation"
           mode="horizontal"
           @select="handleSelect"
@@ -45,27 +45,21 @@
         <el-aside width="300px" style="background-color: white" >
 
           <div id="asidetitle" >
-              实验室简介
+              科研工作
           </div>
 
           <el-menu
-            default-active="4"
+            default-active="1"
             class="asidemenu"
             @open="handleOpen"
             @close="handleClose"
             router="true">
-            <el-menu-item index="1" route="/lab">
-              <span slot="title">机构概况</span>
+            <el-menu-item index="1" route="/thesis">
+              <span slot="title">论文发表</span>
             </el-menu-item>
-            <el-menu-item index="2" route="/lab2">
-              <span slot="title">研究方向</span>
+            <el-menu-item index="2" route="/meeting">
+              <span slot="title">学术会议</span>
             </el-menu-item>            
-            <el-menu-item index="3" route="/lab3">
-              <span slot="title">研究团队</span>
-            </el-menu-item>
-            <el-menu-item index="4" route="/lab4">
-              <span slot="title">毕业生</span>
-            </el-menu-item>
           </el-menu>
 
         </el-aside>
@@ -75,31 +69,43 @@
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/lab' }">实验室简介</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/lab4' }">毕业生</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/thesis' }">科研工作</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/thesis' }">论文发表</el-breadcrumb-item>
           </el-breadcrumb>
 
           <div id="lititle" >
-            <h1>  毕业生  </h1>
+            <h1>  论文发表  </h1>
           </div>
 
           <template>
             <el-table
-              ref="multipleTable"
-              :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-              stripe
-              style="width: 100%" 
-              @selection-change="handleSelectionChange"
-              @row-click="clickTr">
-              <el-table-column
-                prop="title"
-                width="650" 
-               >
-              </el-table-column>
-              <el-table-column
-                prop="date"
-                width="150">
-              </el-table-column>
+                ref="multipleTable"
+                :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                stripe
+                style="width: 100%" 
+                @selection-change="handleSelectionChange"
+                @row-click="clickTr">
+                <el-table-column
+                    prop="tl_title"
+                    label="论文题目"
+                    width="300" 
+                >
+                </el-table-column>
+                <el-table-column
+                    prop="tl_journal"
+                    label="刊物名称"
+                    width="200">
+                </el-table-column>
+                <el-table-column
+                    prop="tl_writer"
+                    label="第一作者"
+                    width="150">
+                </el-table-column>
+                <el-table-column
+                    prop="tl_year"
+                    label="发表年度"
+                    width="150">
+                </el-table-column>
             </el-table>
           </template>
 
@@ -165,7 +171,7 @@
 </template>
 
 <style>
-  .lab4 {
+  .thesis {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
@@ -321,11 +327,11 @@
 
 <script >
   import Axios from 'axios'
-  import  Lab4Info from './lab4Info.vue'
+  import ThesisInfo from './thesisInfo.vue'
   export default {
-    name : 'lab4',
+    name : 'thesis',
     components:{
-      Lab4Info
+      ThesisInfo
     },
     data() {
       return {
@@ -343,8 +349,8 @@
     },    
     methods: {
       clickTr(row, event, column){
-        console.log(row.id);
-        this.$router.push({name:'lab4Info',query:{id:row.id}})
+        console.log(row.tl_id);
+        this.$router.push({name:'thesisInfo',query:{tl_id:row.tl_id}})
       },
       handle(row,column,event,cell){
         console.log(row)
@@ -370,11 +376,10 @@
               console.log(this.currentPage)  //点击第几页
       },
       getData() {
-        Axios.get('/api/postgraduate/getAllPostgraduate').then(response => {
+        Axios.get('/api/thesis/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                
-                  console.log(this.tableData[i].title);
+                  console.log(this.tableData[i].tl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;
                   console.log(this.totalcount);
