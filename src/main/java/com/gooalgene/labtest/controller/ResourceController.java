@@ -41,7 +41,7 @@ public class ResourceController {
 
     @GetMapping("/findById")
     public BaseResponse<Map> GetResource(@RequestParam("id") int id){
-        BaseResponse<Map> response = new BaseResponse<Map>();
+        BaseResponse<Map> response = new BaseResponse<>();
         Map m = new HashMap();
         News_List n = resourceService.findById(id);
         m.put("resource",n);
@@ -53,7 +53,7 @@ public class ResourceController {
 
     @GetMapping("/findById/{id}")
     public BaseResponse<Map> GetResource1(@RequestParam("id") int id){
-        BaseResponse<Map> response1 = new BaseResponse<Map>();
+        BaseResponse<Map> response1 = new BaseResponse<>();
         Map m = new HashMap();
         News_List n = resourceService.findById(id);
         m.put("resource",n);
