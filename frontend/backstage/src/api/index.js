@@ -81,16 +81,16 @@ export const deleteAcademic = (url_deleteAcademic, data, type) => ajax(url_delet
 
 //科研工作——资源
 //获取所有显示在浏览页面上
-export const getSourceall = () => ajax("/staff/findAll", {}) 
+export const getSourceall = () => ajax("/resource/findAll", {}) 
 //获取细节
-export const url_getSourceIndex = "/staff/findById/"
+export const url_getSourceIndex = "/resource/findById/"
 export const getSourceIndex = (url_getSourceIndex, data) => ajax(url_getSourceIndex, data) 
 //更新
-export const url_updataSourceIndex = "/staff/updateStaff/"
+export const url_updataSourceIndex = "/resource/updateResource/"
 export const updataSourceIndex = (url_updataSourceIndex, data, type) => ajax(url_updataSourceIndex, data, "post") 
 //插入
-export const url_insertSource = "/staff/insertStaff/"
+export const url_insertSource = "/resource/insertResource/"
 export const insertSource = (url_insertSource, data, type) => ajax(url_insertSource, data, "post") 
 //删除
-export const url_deleteSource = "/staff/deleteById/"
+export const url_deleteSource = "/resource/deleteById/"
 export const deleteSource = (url_deleteSource, data, type) => ajax(url_deleteSource, data, "get") 

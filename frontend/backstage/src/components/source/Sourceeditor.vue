@@ -150,15 +150,15 @@ export default {
     async getSource() {
       let s = { id: this.$route.params.index };
       let a = await getSourceIndex(url_getSourceIndex, s);
-      if (a.data.result.notice != null) {
-        this.form.nl_id = a.data.result.notice.nl_id;
-        this.form.nl_state = a.data.result.notice.nl_state;
-        this.form.nl_subType_id = parseInt(a.data.result.notice.nl_subType_id);
-        this.form.nl_title = a.data.result.notice.nl_title;
-        this.form.nl_date = a.data.result.notice.nl_date;
-        this.form.nl_content = a.data.result.notice.nl_content;
-        this.form.nl_url = a.data.result.notice.nl_url;
-        this.form.nl_graph = a.data.result.notice.nl_graph;
+      if (a.data.result.resource != null) {
+        this.form.nl_id = a.data.result.resource.nl_id;
+        this.form.nl_state = a.data.result.resource.nl_state;
+        this.form.nl_subType_id = parseInt(a.data.result.resource.nl_subType_id);
+        this.form.nl_title = a.data.result.resource.nl_title;
+        this.form.nl_date = a.data.result.resource.nl_date;
+        this.form.nl_content = a.data.result.resource.nl_content;
+        this.form.nl_url = a.data.result.resource.nl_url;
+        this.form.nl_graph = a.data.result.resource.nl_graph;
         if (this.form.nl_content === "") {
           this.radio = "2";
         }
