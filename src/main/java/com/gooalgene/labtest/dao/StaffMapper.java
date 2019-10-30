@@ -38,6 +38,8 @@ public interface StaffMapper {
     void insertStaffInfo();
 
     void deleteStaffInfo(int uid);
+
+    void updateStaffInfo(Staff_info staff_info);
 }
 
 
