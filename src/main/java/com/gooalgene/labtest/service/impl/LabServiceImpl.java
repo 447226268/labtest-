@@ -26,6 +26,8 @@ public class LabServiceImpl implements LabService {
 
     @Override
     public BaseResponse<String> updateLabIntro(Lab_intro lab_intro) {
+        Lab_intro old = labMapper.getLabIntro();
+        lab_intro.update(old);
         labMapper.updateLabIntro(lab_intro);
         return new BaseResponse<>("success!");
     }
