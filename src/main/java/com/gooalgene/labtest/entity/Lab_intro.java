@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class Lab_intro {
     private int li_id;
+    private String li_title;
     private String li_overview;
     private String li_fields;
     private String li_footer_first;
@@ -15,6 +16,7 @@ public class Lab_intro {
 
 
     public void update(Lab_intro lab) {
+        if (li_title == null) li_title = lab.li_title;
         if (li_overview == null) li_overview = lab.li_overview;
         if (li_fields == null) li_fields = lab.li_fields;
         if (li_footer_first == null) li_footer_first = lab.li_footer_first;

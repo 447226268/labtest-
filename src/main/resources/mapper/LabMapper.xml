@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gooalgene.labtest.dao.LabMapper">
     <insert id="updateLabIntro" parameterType="com.gooalgene.labtest.entity.Lab_intro">
-        insert into lab_intro (li_overview, li_fields, li_footer_first, li_footer_second, li_create_time)
-        values (#{li_overview}, #{li_fields}, #{li_footer_first}, #{li_footer_second}, now())
+        insert into lab_intro (li_title, li_overview, li_fields, li_footer_first, li_footer_second, li_create_time)
+        values (#{li_title}, #{li_overview}, #{li_fields}, #{li_footer_first}, #{li_footer_second}, now())
     </insert>
 
     <delete id="deleteLabIntro">
