@@ -1,9 +1,10 @@
 package com.gooalgene.labtest.service.impl;
 
+import com.gooalgene.labtest.dao.NewsMapper;
 import com.gooalgene.labtest.dao.NewsSubTypeMapper;
 import com.gooalgene.labtest.dao.NewsTypeMapper;
-import com.gooalgene.labtest.dao.ResourceMapper;
 import com.gooalgene.labtest.entity.News_List;
+import com.gooalgene.labtest.service.MeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,20 +14,20 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ResourceServiceImpl implements com.gooalgene.labtest.service.ResourceService {
+public class MeetingServiceImpl implements MeetingService {
     @Autowired
-    ResourceMapper resourceMapper;
+    NewsMapper newsMapper;
     @Autowired
     private NewsTypeMapper newsTypeMapper;
     @Autowired
     private NewsSubTypeMapper newsSubTypeMapper;
 
     @Override
-    public List<News_List> findResource(){
-        List<News_List> list = resourceMapper.findResource();
-        List<News_List> list1 =  new ArrayList<>();
+    public List<News_List> findMeeting() {
+        List<News_List> list = newsMapper.findNews();
+        List<News_List> list1 = new ArrayList<News_List>();
         for (News_List n : list) {
-            if (n.getNl_type_id() == newsTypeMapper.findByName("资源").getNt_id()) {
+            if (n.getNl_type_id() == newsTypeMapper.findByName("会议").getNt_id()) {
                 n.setNl_nl_type_name(
                         newsTypeMapper.findById(n.getNl_type_id()).getNt_name());
                 n.setNl_nl_subType_name(newsSubTypeMapper.findById(n.getNl_subType_id()).getNs_name());
@@ -39,26 +40,28 @@ public class ResourceServiceImpl implements com.gooalgene.labtest.service.Resour
         return list1;
     }
 
-
+    @Override
+    public News_List findById(Integer nl_id) {
+        return newsMapper.findById(nl_id);
+    }
 
     @Override
-    public News_List findById(Integer nl_id){ return resourceMapper.findById(nl_id);}
-
-    @Override
-    public void insertResource(News_List news_list){
+    public void insertMeeting(News_List news_list) {
         news_list.setNl_type_id(newsSubTypeMapper.findById(news_list.getNl_subType_id()).getNs_type_id());
-        resourceMapper.addResource(news_list);
+        System.out.print(news_list);
+        newsMapper.addNews(news_list);
     }
 
     @Override
-    public void deleteResource(Integer nl_id) {
-        resourceMapper.deleteResource(nl_id);
+    public void deleteMeeting(Integer nl_id) {
+        newsMapper.deleteNews(nl_id);
     }
 
     @Override
-    public void updateResource(News_List news_list) {
+    public void updateMeeting(News_List news_list) {
         news_list.setNl_type_id(newsSubTypeMapper.findById(news_list.getNl_subType_id()).getNs_type_id());
-        resourceMapper.updateResource(news_list);
+        newsMapper.updateNews(news_list);
     }
+
+
 }
-
