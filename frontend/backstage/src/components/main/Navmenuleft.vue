@@ -12,7 +12,7 @@
         <span slot="title">首页管理</span>
       </el-menu-item>
 
-      <el-menu-item index="2" route="/laboratory/introducution">
+      <el-menu-item index="2" route="/实验室简介">
         <i class="el-icon-setting"></i>
         <span slot="title">实验室简介</span>
       </el-menu-item>

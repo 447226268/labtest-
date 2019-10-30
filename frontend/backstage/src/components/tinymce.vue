@@ -4,8 +4,6 @@
   </div>
 </template>
 <script>
-
-import {url_uploadPic} from "@/api";
 import tinymce from "tinymce/tinymce";
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/themes/silver";
@@ -46,7 +44,7 @@ export default {
         height: 600,
         plugins: this.plugins, // 父组件传入 或者 填写个默认的插件 要选用什么插件都可以 去官网可以查到
         toolbar: this.toolbar, // 工具栏 我用到的也就是lists image media table wordcount 这些 根据需求而定
-        images_upload_url: url_uploadPic, //上传路径
+        images_upload_url: "http://localhost:8989/news/insertNews", //上传路径
         // 此处为图片上传处理函数，这个直接用了base64的图片形式上传图片，
         // 如需ajax上传可参考https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_handler
 
@@ -55,7 +53,7 @@ export default {
           var xhr, formData;
           xhr = new XMLHttpRequest();
           xhr.withCredentials = false;
-          xhr.open("POST", url_uploadPic);
+          xhr.open("POST", "http://localhost:8989/news/uploadPic");
 
           xhr.onload = function() {
             var json;
@@ -70,12 +68,12 @@ export default {
               return;
             }
 
-            success(process.env.VUE_APP_BASE_API + json.result);
+            success(json.result);
           };
-        
+
           formData = new FormData();
           formData.append("file", blobInfo.blob(), blobInfo.filename());
-          
+
           xhr.send(formData);
         }
       },

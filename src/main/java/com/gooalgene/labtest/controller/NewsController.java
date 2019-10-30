@@ -94,15 +94,14 @@ public class NewsController {
         response.setResult("插入成功");
         return response;
     }
-
     @PostMapping("/uploadPic")
     public BaseResponse<String> upload(@RequestParam(name = "file", required = false) MultipartFile file) {
         BaseResponse<String> response = new BaseResponse<>();
         PicTool pt = new PicTool();
-
-        String s=pt.uploadFiles(file);
+        System.out.println("---------------------");
+        String s = pt.uploadFiles(file);
         System.out.println(s);
-        System.out.println("------------------------------");
+        System.out.println("---------------------");
         response.setResult(s);
         return response;
     }

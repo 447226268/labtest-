@@ -6,7 +6,6 @@ import com.gooalgene.labtest.entity.News_List;
 import com.gooalgene.labtest.entity.News_SubType;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.MeetingService;
-import com.gooalgene.labtest.service.NewsService;
 import com.gooalgene.labtest.util.PicTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

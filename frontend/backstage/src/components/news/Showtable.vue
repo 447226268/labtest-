@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { getNewsall, url_deleteNews, deleteNews } from "@/api/index.js";
+import { getNewsall, url_deleteNotice, deleteNotice } from "@/api/index.js";
 export default {
   data() {
     return {
@@ -57,8 +57,8 @@ export default {
       });
     },
     async handleDelete(index, row) {
-      let a = await deleteNews(
-        url_deleteNews,
+      let a = await deleteNotice(
+        url_deleteNotice,
         {
           id: parseInt(
             this.alltableDate[(this.currentIndex - 1) * 10 + index].nl_id

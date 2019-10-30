@@ -34,7 +34,7 @@
           <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
-          <el-menu-item index="5" route="/">科研工作</el-menu-item>
+          <el-menu-item index="5" route="/thesis">科研工作</el-menu-item>
           <el-menu-item index="6" route="/">资源发布</el-menu-item>
         </el-menu> 
 
@@ -422,7 +422,7 @@
               console.log(this.currentPage)  //点击第几页
       },
       getData() {
-        Axios.get('http://www.doclever.cn:8090/mock/5da87eb74a9da91cd654df32/5').then(response => {
+        Axios.get('/api/staff/getAllStaff').then(response => {
             this.tableData=response.data.result;
             console.log(this.tableData);
             this.professorlist+="<tr>";
@@ -458,13 +458,13 @@
                 }
                 else if(this.tableData[i].type=="副教授"){
                   if(this.tableData[i].info!=null){
-                    this.AssProfessorlist+='<td><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
+                    this.AssProfessorlist+='<td sytle="width:90px"><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
                     this.AssProfessorlist+=this.tableData[i].id;
                     this.AssProfessorlist+='">';
                     this.AssProfessorlist+=this.tableData[i].name;
                     this.AssProfessorlist+='</a>';
                   }
-                  else{this.AssProfessorlist+="<td>";
+                  else{this.AssProfessorlist+="<td sytle='width:90px'>";
                   this.AssProfessorlist+=this.tableData[i].name};
                   this.AssProfessorlist+="</td>";
                   count2++;
@@ -486,13 +486,13 @@
                 }
                 else if(this.tableData[i].type=="博士"){
                   if(this.tableData[i].info!=null){
-                    this.Doctorlist+='<td><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
+                    this.Doctorlist+='<td sytle="width:90px"><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
                     this.Doctorlist+=this.tableData[i].id;
                     this.Doctorlist+='">';
                     this.Doctorlist+=this.tableData[i].name;
                     this.Doctorlist+='</a>';
                   }
-                  else{this.Doctorlist+="<td>";
+                  else{this.Doctorlist+="<td sytle='width:90px'>";
                   this.Doctorlist+=this.tableData[i].name};
                   this.Doctorlist+="</td>";
                   count4++;

@@ -18,15 +18,15 @@ public class ResourceServiceImpl implements com.gooalgene.labtest.service.Resour
     ResourceMapper resourceMapper;
     @Autowired
     private NewsTypeMapper newsTypeMapper;
+    @Autowired
     private NewsSubTypeMapper newsSubTypeMapper;
 
     @Override
     public List<News_List> findResource(){
         List<News_List> list = resourceMapper.findResource();
         List<News_List> list1 =  new ArrayList<>();
-        for(News_List n : list){
-
-            if(n.getNl_type_id() == newsTypeMapper.findByName( "资源").getNt_id()){
+        for (News_List n : list) {
+            if (n.getNl_type_id() == newsTypeMapper.findByName("资源").getNt_id()) {
                 n.setNl_nl_type_name(
                         newsTypeMapper.findById(n.getNl_type_id()).getNt_name());
                 n.setNl_nl_subType_name(newsSubTypeMapper.findById(n.getNl_subType_id()).getNs_name());

@@ -6,10 +6,8 @@ import com.gooalgene.labtest.entity.News_List;
 import com.gooalgene.labtest.entity.News_SubType;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.NoticeService;
-import com.gooalgene.labtest.util.PicTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -90,15 +88,6 @@ public class NoticeController {
         response.setResult("插入成功");
         return response;
     }
-
-    @PostMapping("/uploadPic")
-    public BaseResponse<String> upload(@RequestParam(name = "file", required = false) MultipartFile file) {
-        BaseResponse<String> response = new BaseResponse<>();
-        PicTool pt = new PicTool();
-        response.setResult(pt.uploadFiles(file));
-        return response;
-    }
-
 
 
 }

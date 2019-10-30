@@ -20,7 +20,7 @@
       </el-form-item>
 
       <el-form-item label="发布时间:" :required="true">
-        <el-date-picker type="date" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
+        <el-date-picker type="date" placeholder="选择日期" v-model="form.nl_date" style="width: 100%;"></el-date-picker>
       </el-form-item>
 
       <el-radio class="postion" v-model="radio" label="1">自定义编辑</el-radio>
@@ -35,8 +35,8 @@
       </div>
 
       <div class="postion">
-        <el-button type="primary" @click="updataAcademic" class="width">保存</el-button>
-        <el-button type="primary" @click="updataAcademicstate" class="width">发布</el-button>
+        <el-button type="primary" @click="updataNotice" class="width">保存</el-button>
+        <el-button type="primary" @click="updataNoticestate" class="width">发布</el-button>
         <el-button type="danger" @click="gobackpage" class="width">取消</el-button>
       </div>
     </el-form>
@@ -45,12 +45,12 @@
 <script>
 import tinymce from "@/components/tinymce.vue";
 import {
-  url_getAcademicIndex,
-  getAcademicIndex,
-  url_updataAcademicIndex,
-  updataAcademicIndex,
-  url_insertAcademic,
-  insertAcademic
+  url_getNoticetIndex,
+  getNoticetIndex,
+  url_updataNoticeIndex,
+  updataNoticeIndex,
+  url_insertNotice,
+  insertNotice
 } from "@/api";
 export default {
   data() {
@@ -87,23 +87,23 @@ export default {
   },
   created() {
     this.index = this.$route.params.index;
-    this.getAcademic();
+    this.getNotification();
   },
   methods: {
     gobackpage() {
       this.$router.go(-1);
     },
-    async updataAcademicstate() {
+    async updataNoticestate() {
       this.form.nl_state = 1;
-      let a = await updataAcademicIndex(url_updataAcademicIndex, this.form, "post");
+      let a = await updataNoticeIndex(url_updataNoticeIndex, this.form, "post");
       this.$router.go(-1);
     },
-    async updataAcademic() {
+    async updataNotice() {
       if (this.index == "-1") {
-        let a = await insertAcademic(url_insertAcademic, this.form, "post");
+        let a = await insertNotice(url_insertNotice, this.form, "post");
       } else {
-        let a = await updataAcademicIndex(
-          url_updataAcademicIndex,
+        let a = await updataNoticeIndex(
+          url_updataNoticeIndex,
           this.form,
           "post"
         );
@@ -111,17 +111,17 @@ export default {
       this.$router.go(-1);
     },
 
-    async getAcademic() {
+    async getNotification() {
       let s = { id: this.$route.params.index };
-      let a = await getAcademicIndex(url_getAcademicIndex, s);
-      if (a.data.result.meeting != null) {
-        this.form.nl_id = a.data.result.meeting.nl_id;
-        this.form.nl_state = a.data.result.meeting.nl_state;
-        this.form.nl_subType_id = parseInt(a.data.result.meeting.nl_subType_id);
-        this.form.nl_title = a.data.result.meeting.nl_title;
-        this.form.nl_date = new Date(a.data.result.meeting.nl_date);
-        this.form.nl_content = a.data.result.meeting.nl_content;
-        this.form.nl_url = a.data.result.meeting.nl_url;
+      let a = await getNoticetIndex(url_getNoticetIndex, s);
+      if (a.data.result.notice != null) {
+        this.form.nl_id = a.data.result.notice.nl_id;
+        this.form.nl_state = a.data.result.notice.nl_state;
+        this.form.nl_subType_id = parseInt(a.data.result.notice.nl_subType_id);
+        this.form.nl_title = a.data.result.notice.nl_title;
+        this.form.nl_date = a.data.result.notice.nl_date;
+        this.form.nl_content = a.data.result.notice.nl_content;
+        this.form.nl_url = a.data.result.notice.nl_url;
         if (this.form.nl_content === "") {
           this.radio = "2";
         }
