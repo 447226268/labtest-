@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="news"> 
+  <div class="thesis"> 
 
     <el-container>
 
@@ -22,7 +22,7 @@
         </el-image>
 
         <el-menu
-          :default-active="'3'"
+          :default-active="'5'"
           class="navigation"
           mode="horizontal"
           @select="handleSelect"
@@ -45,7 +45,7 @@
         <el-aside width="300px" style="background-color: white" >
 
           <div id="asidetitle" >
-              新闻动态
+              科研工作
           </div>
 
           <el-menu
@@ -54,18 +54,12 @@
             @open="handleOpen"
             @close="handleClose"
             router="true">
-            <el-menu-item index="1" route="/news">
-              <span slot="title">头条新闻</span>
+            <el-menu-item index="1" route="/thesis">
+              <span slot="title">论文发表</span>
             </el-menu-item>
-            <el-menu-item index="2" route="/news2">
-              <span slot="title">综合新闻</span>
+            <el-menu-item index="2" route="/meeting">
+              <span slot="title">学术会议</span>
             </el-menu-item>            
-            <el-menu-item index="3" route="/news3">
-              <span slot="title">科研动态</span>
-            </el-menu-item>
-            <el-menu-item index="4" route="/news4">
-              <span slot="title">学术新闻</span>
-            </el-menu-item>
           </el-menu>
 
         </el-aside>
@@ -75,31 +69,43 @@
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">头条新闻</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/thesis' }">科研工作</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/thesis' }">论文发表</el-breadcrumb-item>
           </el-breadcrumb>
 
-          <div id="nltitle" >
-            <h1>  头条新闻  </h1>
+          <div id="tltitle" >
+            <h1>  论文发表  </h1>
           </div>
 
           <template>
             <el-table
-              ref="multipleTable"
-              :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-              stripe
-              style="width: 100%" 
-              @selection-change="handleSelectionChange"
-              @row-click="clickTr">
-              <el-table-column
-                prop="nl_title"
-                width="650" 
-               >
-              </el-table-column>
-              <el-table-column
-                prop="realTime"
-                width="150">
-              </el-table-column>
+                ref="multipleTable"
+                :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                stripe
+                style="width: 100%" 
+                @selection-change="handleSelectionChange"
+                @row-click="clickTr">
+                <el-table-column
+                    prop="tl_title"
+                    label="论文题目"
+                    width="300" 
+                >
+                </el-table-column>
+                <el-table-column
+                    prop="tl_journal"
+                    label="刊物名称"
+                    width="200">
+                </el-table-column>
+                <el-table-column
+                    prop="tl_writer"
+                    label="第一作者"
+                    width="150">
+                </el-table-column>
+                <el-table-column
+                    prop="tl_year"
+                    label="发表年度"
+                    width="150">
+                </el-table-column>
             </el-table>
           </template>
 
@@ -118,6 +124,7 @@
               :total="totalcount">
             </el-pagination>
           </div>
+
 
 
         </el-main>
@@ -164,7 +171,7 @@
 </template>
 
 <style>
-  .news {
+  .thesis {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
@@ -273,7 +280,7 @@
     margin-right: 50px;
   }
 
-  #nltitle{
+  #tltitle{
     text-align: center;
     width: 750px;
     position: relative;
@@ -330,11 +337,11 @@
 
 <script >
   import Axios from 'axios'
-  import NewsInfo from './newsInfo.vue'
+  import ThesisInfo from './thesisInfo.vue'
   export default {
-    name : 'news',
+    name : 'thesis',
     components:{
-      NewsInfo
+      ThesisInfo
     },
     data() {
       return {
@@ -352,8 +359,8 @@
     },    
     methods: {
       clickTr(row, event, column){
-        console.log(row.nl_id);
-        this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
+        console.log(row.tl_id);
+        this.$router.push({name:'thesisInfo',query:{tl_id:row.tl_id}})
       },
       handle(row,column,event,cell){
         console.log(row)
@@ -379,16 +386,15 @@
               console.log(this.currentPage)  //点击第几页
       },
       getData() {
-        Axios.get('/api/news/findAll').then(response => {
+        Axios.get('/api/thesis/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="头条新闻"){
-                  console.log(this.tableData[i].nl_title);
+                  console.log(this.tableData[i].tl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;
                   console.log(this.totalcount);
                   console.log(this.newData);
-                }
+                
               }
               console.log(this.tableData);
         }, response => {

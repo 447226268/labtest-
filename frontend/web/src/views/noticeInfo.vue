@@ -1,7 +1,16 @@
 
 <template>
 
-  <div class="news"> 
+  <div class="noticeInfo"> 
+    
+
+    <el-form v-if="seen" label-width="80px" size="medium"
+             class="formWrap">
+      <el-form-item label="主题名称">
+        <span>{{$route.params.themerow.bmtMastrNm}}</span>
+      </el-form-item>
+    </el-form>
+
 
     <el-container>
 
@@ -17,12 +26,12 @@
         
         <el-image class="lablogo"
             style="width: 270px;height: 100px;"
-            :src="require('../../assets/images/Group8.png')"
+            :src="require('../assets/images/Group8.png')"
             :fit="fill">
         </el-image>
 
         <el-menu
-          :default-active="'3'"
+          :default-active="'4'"
           class="navigation"
           mode="horizontal"
           @select="handleSelect"
@@ -31,10 +40,10 @@
           active-text-color="yellow"
           router="true">
           <el-menu-item index="1" route="/">首页</el-menu-item>
-          <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
+          <el-menu-item index="2" route="/">实验室简介</el-menu-item>
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
-          <el-menu-item index="5" route="/thesis">科研工作</el-menu-item>
+          <el-menu-item index="5" route="/">科研工作</el-menu-item>
           <el-menu-item index="6" route="/">资源发布</el-menu-item>
         </el-menu> 
 
@@ -45,7 +54,7 @@
         <el-aside width="300px" style="background-color: white" >
 
           <div id="asidetitle" >
-              新闻动态
+              通知公告
           </div>
 
           <el-menu
@@ -54,17 +63,14 @@
             @open="handleOpen"
             @close="handleClose"
             router="true">
-            <el-menu-item index="1" route="/news">
-              <span slot="title">头条新闻</span>
+            <el-menu-item index="1" route="/notice">
+              <span slot="title">规章制度</span>
             </el-menu-item>
-            <el-menu-item index="2" route="/news2">
-              <span slot="title">综合新闻</span>
+            <el-menu-item index="2" route="/notice2">
+              <span slot="title">教育培养</span>
             </el-menu-item>            
-            <el-menu-item index="3" route="/news3">
-              <span slot="title">科研动态</span>
-            </el-menu-item>
-            <el-menu-item index="4" route="/news4">
-              <span slot="title">学术新闻</span>
+            <el-menu-item index="3" route="/notice3">
+              <span slot="title">招聘招生</span>
             </el-menu-item>
           </el-menu>
 
@@ -72,53 +78,52 @@
 
         <el-main width="900px">
 
-          <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">头条新闻</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/notice' }">通知公告</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/notice' }">规章制度</el-breadcrumb-item>
           </el-breadcrumb>
 
-          <div id="nltitle" >
-            <h1>  头条新闻  </h1>
-          </div>
+          <el-table :data="tableData" stripe style="width: 100%" v-if="false" >
+            <el-table-column prop="nl_title" width="600">
+              <template slot-scope="scope">
+                <router-link to="/noticeInfo">{{ scope.row.nl_title}}</router-link>
+              </template>
+            </el-table-column>
 
-          <template>
-            <el-table
-              ref="multipleTable"
-              :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-              stripe
-              style="width: 100%" 
-              @selection-change="handleSelectionChange"
-              @row-click="clickTr">
-              <el-table-column
-                prop="nl_title"
-                width="650" 
-               >
-              </el-table-column>
-              <el-table-column
-                prop="realTime"
-                width="150">
-              </el-table-column>
-            </el-table>
-          </template>
+            <el-table-column prop="nl_id" width="200"></el-table-column>
+          </el-table>
 
-          <!-- 分页 -->
-          <div class="block" v-if="true"  >
+          <div class="block" v-if="false">
             <el-pagination
               background 
               small="true"
-              pager-count="5"
+              pager-count="3"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
-              :current-page="currentPage"
+              :current-page="1"
               :page-sizes="[10, 20, 30, 40]"
-              :page-size="pagesize"
+              :page-size="30"
               layout="total, prev, pager, next, sizes"
-              :total="totalcount">
+              :total="100">
             </el-pagination>
           </div>
+            
+          <el-row class="artical" v-if="true">
 
+            <div id="nltitle" >
+              <h1>  {{newData.nl_title}}  </h1>
+            </div>
+
+            <div id="nldate" >       
+              <h1 >  {{newData.realTime}}  </h1>
+            </div>
+
+            <div id="nlcontent" >
+              <h1 v-html = "newData.nl_content">  </h1>
+            </div>
+
+          </el-row>
 
         </el-main>
 
@@ -131,7 +136,7 @@
 
           <el-image class="lablogo"
               style="width: 70px;height: 70px;top: 75px"
-              :src="require('../../assets/images/whutlogo.png')"
+              :src="require('../assets/images/whutlogo.png')"
               :fit="fill">
           </el-image>
 
@@ -149,7 +154,6 @@
             <p>yuanxiaohui(at)whut.edu.cn</p>
             <p>http://www.wutbiolab.com</p>
             <p>© Copyright 2019 武汉理工智能生物信息实验室</p>
-            <p>{{message}}</p>
           </div>
 
         </el-col>
@@ -164,15 +168,15 @@
 </template>
 
 <style>
-  .news {
-    background-image:url('../../assets/images/banner2.png');
+  .noticeInfo {
+    background-image:url('../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
     background-attachment:fixed
   }
 
   .el-header {
-    background-image: url('../../assets/images/banner1.png');
+    background-image: url('../assets/images/banner1.png');
     background-size:1200px 300px;
     background-repeat:no-repeat;
     background-attachment:fill;
@@ -273,29 +277,48 @@
     margin-right: 50px;
   }
 
-  #nltitle{
-    text-align: center;
-    width: 750px;
+  .el-table{
     position: relative;
-    font-size: 30px;
-    color:rgb(57, 142, 243);
-    font-weight: 600;
-    margin: 20px;
-  }
-
-  .tablerow {
-    box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.1) ;
-    height:40px;
-    position: relative;
-    margin: auto;
-    width:100%;
-    padding: 12px 0;
+    left:20px;
+    bottom: 0px;
   }
 
   .block{
     display: flex;
     justify-content: center;
   }
+
+  #nltitle{
+    text-align: center;
+    width: 800px;
+    position: relative;
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+
+  #nldate{
+    text-align: center;
+    width: 400px;
+    position: relative;
+    margin: auto;
+    font-size: 15px;
+    color: #333;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #nicontent{
+    width: 750px;
+    position: relative;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    margin-left: 30px;
+  }
+
 
   .footer{
     background-color: #398ef3;
@@ -330,31 +353,43 @@
 
 <script >
   import Axios from 'axios'
-  import NewsInfo from './newsInfo.vue'
   export default {
-    name : 'news',
-    components:{
-      NewsInfo
-    },
+    name: 'noticeInfo',
     data() {
       return {
-        tableData: [],
-        newData:[],
-        totalcount:0,
-        currentPage:1,
-        pagesize:30,
+        tableData:[],
+        newData:{},
+        // nl_id:0,
+        nl_title:'标题',
+        realTime:'日期',
+        nl_content:'内容',
+        showtable:true,
+        showtext:false,
       };
- 
     },
-    mounted() {
+    mounted() {      
       this.getData();
-      this.getnewData();
+      console.log(this.tableData.length);
     },    
     methods: {
-      clickTr(row, event, column){
-        console.log(row.nl_id);
-        this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
+      getData() {
+        Axios.get('http://192.168.10.142:8083/notice/findAll').then(response => {
+            this.tableData=response.data.result;
+              for(var i = 0;i<this.tableData.length;i++){
+                if (this.tableData[i].nl_id==this.$route.query.nl_id){
+                  console.log(this.tableData[i].nl_title);
+                  this.newData=this.tableData[i]
+                  console.log(this.newData);
+
+                }
+              }
+              console.log(this.tableData);
+              console.log(this.tableData.length);
+        }, response => {
+            console.log("error");
+          });
       },
+    
       handle(row,column,event,cell){
         console.log(row)
         console.log(column)
@@ -370,32 +405,13 @@
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
-      handleSizeChange: function (size) {
-              this.pagesize = size;
-              console.log(this.pagesize)  //每页下拉显示数据
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
       },
-      handleCurrentChange: function(currentPage){
-              this.currentPage = currentPage;
-              console.log(this.currentPage)  //点击第几页
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
       },
-      getData() {
-        Axios.get('/api/news/findAll').then(response => {
-            this.tableData=response.data.result;
-              for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="头条新闻"){
-                  console.log(this.tableData[i].nl_title);
-                  this.newData.push(this.tableData[i]);
-                  this.totalcount=this.newData.length;
-                  console.log(this.totalcount);
-                  console.log(this.newData);
-                }
-              }
-              console.log(this.tableData);
-        }, response => {
-            console.log("error");
-          });
-      },
+
     },
   }
-
 </script>

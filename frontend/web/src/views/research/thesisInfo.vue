@@ -1,7 +1,16 @@
 
 <template>
 
-  <div class="news"> 
+  <div class="thesisInfo"> 
+    
+
+    <el-form v-if="seen" label-width="80px" size="medium"
+             class="formWrap">
+      <el-form-item label="主题名称">
+        <span>{{$route.params.themerow.bmtMastrNm}}</span>
+      </el-form-item>
+    </el-form>
+
 
     <el-container>
 
@@ -22,7 +31,7 @@
         </el-image>
 
         <el-menu
-          :default-active="'3'"
+          :default-active="'5'"
           class="navigation"
           mode="horizontal"
           @select="handleSelect"
@@ -45,7 +54,7 @@
         <el-aside width="300px" style="background-color: white" >
 
           <div id="asidetitle" >
-              新闻动态
+              科研工作
           </div>
 
           <el-menu
@@ -54,71 +63,39 @@
             @open="handleOpen"
             @close="handleClose"
             router="true">
-            <el-menu-item index="1" route="/news">
-              <span slot="title">头条新闻</span>
+            <el-menu-item index="1" route="/thesis">
+              <span slot="title">论文发表</span>
             </el-menu-item>
-            <el-menu-item index="2" route="/news2">
-              <span slot="title">综合新闻</span>
+            <el-menu-item index="2" route="/meeting">
+              <span slot="title">学术会议</span>
             </el-menu-item>            
-            <el-menu-item index="3" route="/news3">
-              <span slot="title">科研动态</span>
-            </el-menu-item>
-            <el-menu-item index="4" route="/news4">
-              <span slot="title">学术新闻</span>
-            </el-menu-item>
           </el-menu>
 
         </el-aside>
 
         <el-main width="900px">
 
-          <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">头条新闻</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/thesis' }">科研工作</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/thesis' }">论文发表</el-breadcrumb-item>
           </el-breadcrumb>
+            
+          <el-row class="artical" v-if="true">
 
-          <div id="nltitle" >
-            <h1>  头条新闻  </h1>
-          </div>
+            <div id="tltitle" >
+              <h1>  {{newData.tl_title}}  </h1>
+            </div>
 
-          <template>
-            <el-table
-              ref="multipleTable"
-              :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-              stripe
-              style="width: 100%" 
-              @selection-change="handleSelectionChange"
-              @row-click="clickTr">
-              <el-table-column
-                prop="nl_title"
-                width="650" 
-               >
-              </el-table-column>
-              <el-table-column
-                prop="realTime"
-                width="150">
-              </el-table-column>
-            </el-table>
-          </template>
+            <div id="tldate" >       
+              <h1 >  {{newData.tl_realtime}}  </h1>
+            </div>
 
-          <!-- 分页 -->
-          <div class="block" v-if="true"  >
-            <el-pagination
-              background 
-              small="true"
-              pager-count="5"
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="[10, 20, 30, 40]"
-              :page-size="pagesize"
-              layout="total, prev, pager, next, sizes"
-              :total="totalcount">
-            </el-pagination>
-          </div>
+            <div id="tlcontent" >
+              <h1 v-html = "newData.tl_content">  </h1>
+            </div>
 
+          </el-row>
 
         </el-main>
 
@@ -149,7 +126,6 @@
             <p>yuanxiaohui(at)whut.edu.cn</p>
             <p>http://www.wutbiolab.com</p>
             <p>© Copyright 2019 武汉理工智能生物信息实验室</p>
-            <p>{{message}}</p>
           </div>
 
         </el-col>
@@ -164,7 +140,7 @@
 </template>
 
 <style>
-  .news {
+  .thesisInfo {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
@@ -273,29 +249,37 @@
     margin-right: 50px;
   }
 
-  #nltitle{
+  #tltitle{
     text-align: center;
-    width: 750px;
+    width: 800px;
     position: relative;
-    font-size: 30px;
-    color:rgb(57, 142, 243);
+    font-size: 20px;
+    color: #333;
     font-weight: 600;
-    margin: 20px;
+    margin-top: 20px;
   }
 
-  .tablerow {
-    box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.1) ;
-    height:40px;
+  #tldate{
+    text-align: center;
+    width: 400px;
     position: relative;
     margin: auto;
-    width:100%;
-    padding: 12px 0;
+    font-size: 15px;
+    color: #333;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
-  .block{
-    display: flex;
-    justify-content: center;
+  #nicontent{
+    width: 750px;
+    position: relative;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    margin-left: 30px;
   }
+
 
   .footer{
     background-color: #398ef3;
@@ -319,83 +303,44 @@
     position: relative;
     line-height:2;
   }
-
-  body > .el-container {
-    margin-bottom: 40px;
-    text-align: center;
-    margin: auto;
-  }
   
 </style>
 
 <script >
   import Axios from 'axios'
-  import NewsInfo from './newsInfo.vue'
   export default {
-    name : 'news',
-    components:{
-      NewsInfo
-    },
+    name: 'thesisInfo',
     data() {
       return {
-        tableData: [],
-        newData:[],
-        totalcount:0,
-        currentPage:1,
-        pagesize:30,
+        tableData:[],
+        newData:{},
+        tl_title:'标题',
+        realTime:'日期',
+        tl_content:'内容',
       };
- 
     },
-    mounted() {
+    mounted() {      
       this.getData();
-      this.getnewData();
+      console.log(this.tableData.length);
     },    
     methods: {
-      clickTr(row, event, column){
-        console.log(row.nl_id);
-        this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
-      },
-      handle(row,column,event,cell){
-        console.log(row)
-        console.log(column)
-        console.log(event)
-        console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSizeChange: function (size) {
-              this.pagesize = size;
-              console.log(this.pagesize)  //每页下拉显示数据
-      },
-      handleCurrentChange: function(currentPage){
-              this.currentPage = currentPage;
-              console.log(this.currentPage)  //点击第几页
-      },
       getData() {
-        Axios.get('/api/news/findAll').then(response => {
+        Axios.get('/api/thesis/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="头条新闻"){
-                  console.log(this.tableData[i].nl_title);
-                  this.newData.push(this.tableData[i]);
-                  this.totalcount=this.newData.length;
-                  console.log(this.totalcount);
+                if (this.tableData[i].tl_id==this.$route.query.tl_id){
+                  console.log(this.tableData[i].tl_title);
+                  this.newData=this.tableData[i]
                   console.log(this.newData);
+
                 }
               }
               console.log(this.tableData);
+              console.log(this.tableData.length);
         }, response => {
             console.log("error");
           });
       },
     },
   }
-
 </script>

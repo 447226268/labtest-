@@ -20,8 +20,7 @@ public class StaffServiceImpl implements StaffService {
     public Staff Sel(int id) {
         Staff_list staff_list = staffMapper.Sel(id);
         String staff_type = staffMapper.SearchType(staff_list.getSl_type_id());
-        Staff_info staff_info = staffMapper.getStaffInfo(staff_list.getSl_id());
-        Staff ret = new Staff(staff_list, staff_type, staff_info);
+        Staff ret = new Staff(staff_list, staff_type);
         return ret;
     }
 
@@ -31,8 +30,7 @@ public class StaffServiceImpl implements StaffService {
         List<Staff> ret = new ArrayList<>();
         for (Staff_list staff_list : list) {
             String staff_type = staffMapper.SearchType(staff_list.getSl_type_id());
-            Staff_info staff_info = staffMapper.getStaffInfo(staff_list.getSl_id());
-            Staff staff = new Staff(staff_list, staff_type, staff_info);
+            Staff staff = new Staff(staff_list, staff_type);
             ret.add(staff);
         }
         return ret;

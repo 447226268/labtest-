@@ -18,6 +18,9 @@ public class ResourceServiceImpl implements com.gooalgene.labtest.service.Resour
     ResourceMapper resourceMapper;
     @Autowired
     private NewsTypeMapper newsTypeMapper;
+
+    @Autowired
+
     private NewsSubTypeMapper newsSubTypeMapper;
 
     @Override

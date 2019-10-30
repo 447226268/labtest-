@@ -17,7 +17,7 @@
         
         <el-image class="lablogo"
             style="width: 270px;height: 100px;"
-            :src="require('../../assets/images/Group8.png')"
+            :src="require('../assets/images/Group8.png')"
             :fit="fill">
         </el-image>
 
@@ -31,10 +31,10 @@
           active-text-color="yellow"
           router="true">
           <el-menu-item index="1" route="/">首页</el-menu-item>
-          <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
+          <el-menu-item index="2" route="/">实验室简介</el-menu-item>
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
-          <el-menu-item index="5" route="/thesis">科研工作</el-menu-item>
+          <el-menu-item index="5" route="/">科研工作</el-menu-item>
           <el-menu-item index="6" route="/">资源发布</el-menu-item>
         </el-menu> 
 
@@ -49,7 +49,7 @@
           </div>
 
           <el-menu
-            default-active="1"
+            default-active="2"
             class="asidemenu"
             @open="handleOpen"
             @close="handleClose"
@@ -76,12 +76,8 @@
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">头条新闻</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/news2' }">综合新闻</el-breadcrumb-item>
           </el-breadcrumb>
-
-          <div id="nltitle" >
-            <h1>  头条新闻  </h1>
-          </div>
 
           <template>
             <el-table
@@ -108,7 +104,7 @@
             <el-pagination
               background 
               small="true"
-              pager-count="5"
+              pager-count="3"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -119,6 +115,7 @@
             </el-pagination>
           </div>
 
+          </el-row>
 
         </el-main>
 
@@ -131,7 +128,7 @@
 
           <el-image class="lablogo"
               style="width: 70px;height: 70px;top: 75px"
-              :src="require('../../assets/images/whutlogo.png')"
+              :src="require('../assets/images/whutlogo.png')"
               :fit="fill">
           </el-image>
 
@@ -165,14 +162,14 @@
 
 <style>
   .news {
-    background-image:url('../../assets/images/banner2.png');
+    background-image:url('../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
     background-attachment:fixed
   }
 
   .el-header {
-    background-image: url('../../assets/images/banner1.png');
+    background-image: url('../assets/images/banner1.png');
     background-size:1200px 300px;
     background-repeat:no-repeat;
     background-attachment:fill;
@@ -273,16 +270,6 @@
     margin-right: 50px;
   }
 
-  #nltitle{
-    text-align: center;
-    width: 750px;
-    position: relative;
-    font-size: 30px;
-    color:rgb(57, 142, 243);
-    font-weight: 600;
-    margin: 20px;
-  }
-
   .tablerow {
     box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.1) ;
     height:40px;
@@ -330,7 +317,7 @@
 
 <script >
   import Axios from 'axios'
-  import NewsInfo from './newsInfo.vue'
+  import  NewsInfo from './newsInfo.vue'
   export default {
     name : 'news',
     components:{
@@ -379,10 +366,10 @@
               console.log(this.currentPage)  //点击第几页
       },
       getData() {
-        Axios.get('/api/news/findAll').then(response => {
+        Axios.get('http://192.168.10.142:8083/news/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="头条新闻"){
+                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="综合新闻"){
                   console.log(this.tableData[i].nl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;
