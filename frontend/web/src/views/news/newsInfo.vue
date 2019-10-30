@@ -110,6 +110,12 @@
               <h1 v-html = "newData.nl_content">  </h1>
             </div>
 
+            <div id="nlcontent" >
+              <h1 >{{lastpaper}}  {{lastData.nl_title}}</h1>
+              <h1 >{{nextpaper}}  {{nextData.nl_title}}</h1>
+            </div>
+
+
           </el-row>
 
         </el-main>
@@ -346,6 +352,11 @@
       return {
         tableData:[],
         newData:{},
+        lastData:{},
+        nextData:{},
+        thispapernum:null,
+        lastpaper:"",
+        nextpaper:"",
         // nl_id:0,
         nl_title:'标题',
         realTime:'日期',
@@ -366,11 +377,22 @@
               for(var i = 0;i<this.tableData.length;i++){
                 if (this.tableData[i].nl_id==this.$route.query.nl_id){
                   console.log(this.tableData[i].nl_title);
-                  this.newData=this.tableData[i]
+                  this.newData=this.tableData[i];
                   console.log(this.newData);
-
+                  this.thispapernum=i;
+                  console.log(this.thispapernum);
                 }
-              }
+              };
+              for(var j = 0;j<this.thispapernum;j++){            
+                  this.lastData=this.tableData[j];
+                  if(this.lastData!={}){this.lastpaper="<<上一篇："};
+                  console.log(this.lastData);
+              };
+              for(var k = 0;k<this.thispapernum;l++){            
+                  this.nextData=this.tableData[k];
+                  if(this.nextData!={}){this.nextpaper=">>下一篇："};
+                  console.log(this.nextData);
+              };
               console.log(this.tableData);
               console.log(this.tableData.length);
         }, response => {

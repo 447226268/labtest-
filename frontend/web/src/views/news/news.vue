@@ -79,7 +79,7 @@
             <el-breadcrumb-item :to="{ path: '/news' }">头条新闻</el-breadcrumb-item>
           </el-breadcrumb>
 
-          <div id="lititle" >
+          <div id="nltitle" >
             <h1>  头条新闻  </h1>
           </div>
 
@@ -271,6 +271,16 @@
   .el-main {
     position: relative;
     margin-right: 50px;
+  }
+
+  #nltitle{
+    text-align: center;
+    width: 750px;
+    position: relative;
+    font-size: 30px;
+    color:rgb(57, 142, 243);
+    font-weight: 600;
+    margin: 20px;
   }
 
   .tablerow {

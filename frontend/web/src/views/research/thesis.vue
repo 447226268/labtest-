@@ -73,7 +73,7 @@
             <el-breadcrumb-item :to="{ path: '/thesis' }">论文发表</el-breadcrumb-item>
           </el-breadcrumb>
 
-          <div id="lititle" >
+          <div id="tltitle" >
             <h1>  论文发表  </h1>
           </div>
 
@@ -278,6 +278,16 @@
   .el-main {
     position: relative;
     margin-right: 50px;
+  }
+
+  #tltitle{
+    text-align: center;
+    width: 750px;
+    position: relative;
+    font-size: 30px;
+    color:rgb(57, 142, 243);
+    font-weight: 600;
+    margin: 20px;
   }
 
   .tablerow {

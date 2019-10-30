@@ -274,6 +274,16 @@
     margin-right: 50px;
   }
 
+  #lititle{
+    text-align: center;
+    width: 750px;
+    position: relative;
+    font-size: 30px;
+    color:rgb(57, 142, 243);
+    font-weight: 600;
+    margin: 20px;
+  }
+
   .tablerow {
     box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.1) ;
     height:40px;
