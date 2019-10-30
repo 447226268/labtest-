@@ -13,6 +13,10 @@ import Introductioneditor from "../components/laboratory/introduction/Introducti
 import Directioneditor from "../components/laboratory/direction/Directioneditor.vue"
 //研究团队
 import Teamshow from "../components/laboratory/team/Teamshow.vue"
+//毕业生
+import Graduatesshow from "../components/laboratory/graduates/Showtable.vue"
+import Graduateseditor from "../components/laboratory/graduates/Graduateseditor.vue"
+
 
 //新闻动态 news
 import Showtable_news from "../components/news/Showtable.vue"
@@ -83,6 +87,19 @@ export default new Router({
       path: "/laboratory/team/",
       name: "teamshow",
       component: Teamshow,
+    },
+    //毕业生
+    //显示
+    {
+      path: "/laboratory/graduates/",
+      name: "graduatesshow",
+      component: Graduatesshow,
+    },
+    //编辑
+    {
+      path: "/laboratory/graduates/edit:index",
+      name: "graduateseditor",
+      component: Graduateseditor,
     },
 
 

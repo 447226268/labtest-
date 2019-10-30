@@ -57,7 +57,11 @@ export default {
           path: "/laboratory/direction/"
       });
     },
-    go2graduates() {},
+    go2graduates() {
+      this.$router.push({
+          path: "/laboratory/graduates/"
+      });
+    },
   }
 };
 </script>

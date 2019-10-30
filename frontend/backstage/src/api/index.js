@@ -14,6 +14,28 @@ export const test = () => ajax("/", {}) //测试
 //图片插入
 export const url_uploadPic = process.env.VUE_APP_BASE_API + "/news/uploadPic"
 
+//实验室信息（实验室简介、研究方向）
+export const getLabIntroduction = () => ajax("/lab/getLabIntro", {}) 
+//更新
+export const url_updataIntroduction = "/lab/updateLabIntro/"
+export const updataIntroduction = (url_updataIntroduction, data, type) => ajax(url_updataIntroduction, data, "post") 
+
+//毕业生
+//获取所有显示在浏览页面上
+export const getGraduateall = () => ajax("/postgraduate/getAllPostgraduate", {}) 
+//获取细节
+export const url_getGraduateIndex = "/postgraduate/getPostgraduate/"
+export const getGraduateIndex = (url_getGraduateIndex, data) => ajax(url_getGraduateIndex, data) 
+//更新
+export const url_updataGraduateIndex = "/postgraduate/getPostgraduate/"
+export const updataGraduateIndex = (url_updataGraduateIndex, data, type) => ajax(url_updataGraduateIndex, data, "post") 
+//插入
+export const url_insertGraduate = "/postgraduate/insertPostgraduate/"
+export const insertGraduate = (url_insertGraduate, data, type) => ajax(url_insertGraduate, data, "post") 
+//删除
+export const url_deleteGraduate = "/postgraduate/deletePostgraduate/"
+export const deleteGraduate = (url_deleteGraduate, data, type) => ajax(url_deleteGraduate, data, "get") 
+
 //新闻发布
 //获取所有显示在浏览页面上
 export const getNewsall = () => ajax("/news/findAll", {}) 

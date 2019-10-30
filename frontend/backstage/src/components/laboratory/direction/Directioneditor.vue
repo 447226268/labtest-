@@ -9,16 +9,16 @@
 
     <el-form ref="form" :model="form" label-width="85px" label-position="left" class="postion">
       <el-form-item label="标题:" :required="true">
-        <el-input v-model="form.nl_title"></el-input>
+        <el-input v-model="form.li_fields_title"></el-input>
       </el-form-item>
 
       <div id="id1">
-        <tinymce ref="editor" v-model="form.nl_content"></tinymce>
+        <tinymce ref="editor" v-model="form.li_fields"></tinymce>
       </div>
 
       <div class="postion">
-        <el-button type="primary" @click="updataNotice" class="width">保存</el-button>
-        <el-button type="primary" @click="updataNoticestate" class="width">发布</el-button>
+        <el-button type="primary" @click="updataIntro" class="width">保存</el-button>
+        <el-button type="primary" @click="updataIntro" class="width">发布</el-button>
         <el-button type="danger" @click="gobackpage" class="width">取消</el-button>
       </div>
     </el-form>
@@ -27,20 +27,17 @@
 <script>
 import tinymce from "@/components/tinymce.vue";
 import {
-  url_getNoticetIndex,
-  getNoticetIndex,
-  url_updataNoticeIndex,
-  updataNoticeIndex,
-  url_insertNotice,
-  insertNotice
+  getLabIntroduction,
+  url_updataIntroduction,
+  updataIntroduction,
 } from "@/api";
 export default {
   data() {
     return {
       form: {
-        nl_state: 0,
-        nl_title: "",
-        nl_content: ""
+        li_id: 0,
+        li_fields: "",
+        li_fields_title: ""
       }
     };
   },
@@ -49,7 +46,7 @@ export default {
     tinymce
   },
   created() {
-    this.getNotification();
+    this.getIntroduction();
   },
   methods: {
     gobackpage() {
@@ -65,38 +62,26 @@ export default {
           path: "/laboratory/team/"
       });
     },
-    go2graduates() {},
-    async updataNoticestate() {
-      this.form.nl_state = 1;
-      let a = await updataNoticeIndex(url_updataNoticeIndex, this.form, "post");
-      this.$router.go(-1);
+    go2graduates() {
+       this.$router.push({
+          path: "/laboratory/graduates/"
+      });
     },
-    async updataNotice() {
-      if (this.index == "-1") {
-        let a = await insertNotice(url_insertNotice, this.form, "post");
-      } else {
-        let a = await updataNoticeIndex(
-          url_updataNoticeIndex,
-          this.form,
-          "post"
+    async updataIntro() {
+      let a = await updataIntroduction(
+        url_updataIntroduction,
+        this.form,
+        "post"
         );
-      }
-      this.$router.go(-1);
+      this.$router.go(0);
     },
 
-    async getNotification() {
-      let a = await getNoticetIndex(url_getNoticetIndex, s);
-      if (a.data.result.notice != null) {
-        this.form.nl_id = a.data.result.notice.nl_id;
-        this.form.nl_state = a.data.result.notice.nl_state;
-        this.form.nl_subType_id = parseInt(a.data.result.notice.nl_subType_id);
-        this.form.nl_title = a.data.result.notice.nl_title;
-        this.form.nl_date = new Date(a.data.result.notice.nl_date);
-        this.form.nl_content = a.data.result.notice.nl_content;
-        this.form.nl_url = a.data.result.notice.nl_url;
-        if (this.form.nl_content === "") {
-          this.radio = "2";
-        }
+    async getIntroduction() {
+      let a = await getLabIntroduction();
+      if (a.data.result != null) {
+        this.form.li_id = a.data.result.li_id;
+        this.form.li_fields_title = a.data.result.li_fields_title;
+        this.form.li_fields = a.data.result.li_fields;
       }
     }
   }
