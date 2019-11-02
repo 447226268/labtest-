@@ -20,6 +20,18 @@ export const getLabIntroduction = () => ajax("/lab/getLabIntro", {})
 export const url_updataIntroduction = "/lab/updateLabIntro/"
 export const updataIntroduction = (url_updataIntroduction, data, type) => ajax(url_updataIntroduction, data, "post") 
 
+//研究团队
+//获取所有信息
+export const getStaffall = () => ajax("/staff/getAllStaff", {}) 
+//获取所有类型
+export const getAllType = () => ajax("/staff/getAllType", {}) 
+//获取个人信息
+export const url_getStaffIndex = "/staff/getStaffInfo"
+export const getStaffIndex = (url_getStaffIndex, data) => ajax(url_getStaffIndex, data) 
+//更新个人信息
+export const url_updataStaffIntroIndex = "/staff/updateStaffInfo"
+export const updataStaffIntroIndex = (url_updataStaffIntroIndex, data, type) => ajax(url_updataStaffIntroIndex, data, "post")
+
 //毕业生
 //获取所有显示在浏览页面上
 export const getGraduateall = () => ajax("/postgraduate/getAllPostgraduate", {}) 
