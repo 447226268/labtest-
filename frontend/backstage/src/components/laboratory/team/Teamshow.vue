@@ -73,28 +73,55 @@
         </el-col>
         </el-row>
         </div>
+        <el-button icon="el-icon-plus" style="margin-top:10px" circle @click="staffadd"></el-button>
+        <div style="float:right; margin-top:80px">
+          <el-button type="primary" @click="updatastafftype">保 存</el-button>
+        </div>
       </el-tab-pane>
 
-      <el-tab-pane label="新增人员名单" name="2">配置管理</el-tab-pane>
 
+
+
+      <el-tab-pane label="新增人员名单" name="2">
+
+      <el-form ref="form" :model="staffinsert" label-width="80px">
+
+        <el-form-item label="类型选择:">
+            <el-select v-model="staffinsert.type">
+              <div v-for="(item, i) in type_string" :key="i">
+                <el-option :label= "item.name" :value="item.name"></el-option>
+              </div>
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="人员名单:">
+            <el-input v-model="staffinsert.name"></el-input>
+          </el-form-item>
+        </el-form>
+
+        <div style="float:right; margin-top:80px">
+          <el-button type="primary" @click="insertstaff">保 存</el-button>
+        </div>
+      </el-tab-pane>
+       
   </el-tabs>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-    </div>
   </el-dialog>
   </div>
 
 </template>
 <script>
 import tinymce from "@/components/tinymce.vue";
-import { getStaffall, getAllType} from "@/api";
+import { getStaffall, getAllType, url_insertStaff, insertStaff} from "@/api";
 export default {
   data() {
     return {
       dialogFormVisible: false,
-      type_string: [],
+      staffinsert:{
+        type: "",
+        name: "",
+      },
       type_string_edit: [],
+      type_string: [],
       allstaff: [],
       input: "123",
       
@@ -129,7 +156,21 @@ export default {
     staffremove(tabindex){
       this.type_string_edit.splice(tabindex, 1);
     },
-    
+    staffadd(){
+      let s = {};
+      s.name = "";
+      s.flag = true;
+      this.type_string_edit.push(s);
+    },
+    updatastafftype(){
+      alert("123")
+    },
+    async insertstaff(){
+      if(this.staffinsert.type !== "" && this.staffinsert.name !== ""){
+        let a = await insertStaff(url_insertStaff, this.staffinsert,"post");
+      }
+      
+    },
     handleEdit(index, row){
       this.$router.push({
           path: "/laboratory/team/staffedit"  + parseInt(row.id)

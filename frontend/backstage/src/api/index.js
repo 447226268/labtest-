@@ -31,6 +31,10 @@ export const getStaffIndex = (url_getStaffIndex, data) => ajax(url_getStaffIndex
 //更新个人信息
 export const url_updataStaffIntroIndex = "/staff/updateStaffInfo"
 export const updataStaffIntroIndex = (url_updataStaffIntroIndex, data, type) => ajax(url_updataStaffIntroIndex, data, "post")
+//插入新的人员
+export const url_insertStaff = "/staff/insertStaff"
+export const insertStaff = (url_insertStaff, data, type) => ajax(url_insertStaff, data, "post")
+
 
 //毕业生
 //获取所有显示在浏览页面上

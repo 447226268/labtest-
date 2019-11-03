@@ -3,8 +3,8 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
 
-import HomepagemanagementPage from "../components/HomepagemanagementPage.vue";
-import Uploadingmap from "../components/Uploadingmap.vue";
+//首页管理
+import Homeedit from "../components/home/Homeedit.vue"
 
 //实验室动态 laboratory
 //实验室简介
@@ -57,17 +57,11 @@ export default new Router({
       component: Login
     },
 
+    //首页管理
     {
-      path: "/首页管理",
-      name: "homepagemanagementPage",
-      component: HomepagemanagementPage,
-      children :[
-        {
-          path: "/首页管理/配图上传",
-          name: "uploadingmap",
-          component: Uploadingmap
-        },
-      ]
+      path: "/home",
+      name: "homeedit",
+      component: Homeedit,
     },
 
     //实验室动态

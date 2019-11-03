@@ -7,7 +7,7 @@
       active-text-color="#ffd04b"
       router='true'
     >
-      <el-menu-item index="1" route="/首页管理">
+      <el-menu-item index="1" route="/home">
         <i class="el-icon-menu"></i>
         <span slot="title">首页管理</span>
       </el-menu-item>
