@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gooalgene.labtest.dao.NewsMapper">
     <select id="findNews" resultType="com.gooalgene.labtest.entity.News_List">
-        select * from news_list
+        select * from news_list order by nl_date
     </select>
     <select id="findById" resultType="com.gooalgene.labtest.entity.News_List">
         select * from news_list where nl_id =#{nl_id}
@@ -18,8 +18,4 @@
     <update id="updateNews">
         update news_list set nl_state = #{nl_state},nl_content = #{nl_content},nl_title = #{nl_title},nl_type_id = #{nl_type_id},nl_subType_id = #{nl_subType_id},nl_graph=#{nl_graph}, nl_date=#{nl_date},nl_url = #{nl_url} WHERE nl_id = #{nl_id}
     </update>
-    <insert id="updateState">
-        update news_list set nl_state = #{notice.state} where nl_id in =
-        <foreach collection="notice.ids" item="id" separator="," open="(" close=")">#{id}</foreach>
-    </insert>
 </mapper>

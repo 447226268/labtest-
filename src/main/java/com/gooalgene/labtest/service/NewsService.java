@@ -11,7 +11,6 @@ public interface NewsService {
 
     void insertNews(News_List news_list);
 
-
     void deleteNews(Integer noticeIds);
 
     void updateNews(News_List news_list);

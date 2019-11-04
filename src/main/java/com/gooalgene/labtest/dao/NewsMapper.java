@@ -18,8 +18,6 @@ public interface NewsMapper {
 
     void addNews(News_List news_list);
 
-    void updateState(News_List news_list);
-
     void updateNews(News_List news_list);
 
 }
