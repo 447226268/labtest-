@@ -1,16 +1,37 @@
 import Vue from "vue";
+
 import Router from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
-import Notice from "../views/notice.vue";
-import Notice2 from "../views/notice2.vue";
-import Notice3 from "../views/notice3.vue";
-import NoticeInfo from "../views/noticeInfo.vue";
-import News from "../views/news.vue";
-import News2 from "../views/news2.vue";
-import News3 from "../views/news3.vue";
-import News4 from "../views/news4.vue";
-import NewsInfo from "../views/newsInfo.vue";
+
+import Lab from "../views/lab/lab.vue";
+import Lab2 from "../views/lab/lab2.vue";
+import Lab3 from "../views/lab/lab3.vue";
+import Lab3Info from "../views/lab/lab3Info.vue";
+import Lab4 from "../views/lab/lab4.vue";
+import Lab4Info from "../views/lab/lab4Info.vue";
+
+import News from "../views/news/news.vue";
+import News2 from "../views/news/news2.vue";
+import News3 from "../views/news/news3.vue";
+import News4 from "../views/news/news4.vue";
+import NewsInfo from "../views/news/newsInfo.vue";
+
+import Notice from "../views/notice/notice.vue";
+import Notice2 from "../views/notice/notice2.vue";
+import Notice3 from "../views/notice/notice3.vue";
+import NoticeInfo from "../views/notice/noticeInfo.vue";
+
+import Thesis from "../views/research/thesis.vue";
+import ThesisInfo from "../views/research/thesisInfo.vue";
+import Meeting from "../views/research/meeting.vue";
+import MeetingInfo from "../views/research/meetingInfo.vue";
+
+import Resource from "../views/resource/resource.vue";
+import Resource2 from "../views/resource/resource2.vue";
+import Resource3 from "../views/resource/resource3.vue";
+import ResourceInfo from "../views/resource/resourceInfo.vue";
+
 
 Vue.use(Router);
 
@@ -28,26 +49,38 @@ export default new Router({
       name: "login",
       component: Login
     },
+
     {
-      path: "/notice",
-      name: "notice",
-      component: Notice
+      path: "/lab",
+      name: "lab",
+      component: Lab
     },
     {
-      path: "/notice2",
-      name: "notice2",
-      component: Notice2
+      path: "/lab2",
+      name: "lab2",
+      component: Lab2
     },
     {
-      path: "/notice3",
-      name: "notice3",
-      component: Notice3
+      path: "/lab3",
+      name: "lab3",
+      component: Lab3
     },
     {
-      path: "/noticeInfo",
-      name: "noticeInfo",
-      component:  NoticeInfo
+      path: "/lab3Info",
+      name: "lab3Info",
+      component:  Lab3Info
     },
+    {
+      path: "/lab4",
+      name: "lab4",
+      component: Lab4
+    },
+    {
+      path: "/lab4Info",
+      name: "lab4Info",
+      component:  Lab4Info
+    },
+
     {
       path: "/news",
       name: "news",
@@ -73,6 +106,71 @@ export default new Router({
       name: "newsInfo",
       component:  NewsInfo
     },
+
+    {
+      path: "/notice",
+      name: "notice",
+      component: Notice
+    },
+    {
+      path: "/notice2",
+      name: "notice2",
+      component: Notice2
+    },
+    {
+      path: "/notice3",
+      name: "notice3",
+      component: Notice3
+    },
+    {
+      path: "/noticeInfo",
+      name: "noticeInfo",
+      component:  NoticeInfo
+    },
+
+    {
+      path: "/thesis",
+      name: "thesis",
+      component: Thesis
+    },
+    {
+      path: "/thesisInfo",
+      name: "thesisInfo",
+      component:  ThesisInfo
+    },
+    {
+      path: "/meeting",
+      name: "meeting",
+      component: Meeting
+    },
+    {
+      path: "/meetingInfo",
+      name: "meetingInfo",
+      component:  MeetingInfo
+    },
+
+    {
+      path: "/resource",
+      name: "resource",
+      component: Resource
+    },
+    {
+      path: "/resource2",
+      name: "resource2",
+      component: Resource2
+    },
+    {
+      path: "/resource3",
+      name: "resource3",
+      component: Resource3
+    },
+    {
+      path: "/resourceInfo",
+      name: "resourceInfo",
+      component:  ResourceInfo
+    },
+    
+    
 
     
   ]

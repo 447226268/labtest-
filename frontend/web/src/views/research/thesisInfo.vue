@@ -44,7 +44,7 @@
           <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
           <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
           <el-menu-item index="5" route="/thesis">科研工作</el-menu-item>
-          <el-menu-item index="6" route="/">资源发布</el-menu-item>
+          <el-menu-item index="6" route="/resource">资源发布</el-menu-item>
         </el-menu> 
 
       </el-header>
