@@ -25,7 +25,6 @@ public class ThesisServiceImpl implements com.gooalgene.labtest.service.ThesisSe
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             n.setTl_realtime(sdf.format(time));
             list1.add(n);
-
         }
         return list1;
     }
@@ -37,8 +36,6 @@ public class ThesisServiceImpl implements com.gooalgene.labtest.service.ThesisSe
 
     @Override
     public void insertThesis(Thesis_List thesis_list) {
-
-        System.out.print(thesis_list);
         thesisMapper.addThesis(thesis_list);
     }
 
@@ -49,7 +46,6 @@ public class ThesisServiceImpl implements com.gooalgene.labtest.service.ThesisSe
 
     @Override
     public void updateThesis(Thesis_List thesis_list) {
-
         thesisMapper.updateThesis(thesis_list);
     }
 

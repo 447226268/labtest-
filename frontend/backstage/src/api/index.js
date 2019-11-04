@@ -14,6 +14,44 @@ export const test = () => ajax("/", {}) //测试
 //图片插入
 export const url_uploadPic = process.env.VUE_APP_BASE_API + "/news/uploadPic"
 
+//实验室信息（实验室简介、研究方向）
+export const getLabIntroduction = () => ajax("/lab/getLabIntro", {}) 
+//更新
+export const url_updataIntroduction = "/lab/updateLabIntro/"
+export const updataIntroduction = (url_updataIntroduction, data, type) => ajax(url_updataIntroduction, data, "post") 
+
+//研究团队
+//获取所有信息
+export const getStaffall = () => ajax("/staff/getAllStaff", {}) 
+//获取所有类型
+export const getAllType = () => ajax("/staff/getAllType", {}) 
+//获取个人信息
+export const url_getStaffIndex = "/staff/getStaffInfo"
+export const getStaffIndex = (url_getStaffIndex, data) => ajax(url_getStaffIndex, data) 
+//更新个人信息
+export const url_updataStaffIntroIndex = "/staff/updateStaffInfo"
+export const updataStaffIntroIndex = (url_updataStaffIntroIndex, data, type) => ajax(url_updataStaffIntroIndex, data, "post")
+//插入新的人员
+export const url_insertStaff = "/staff/insertStaff"
+export const insertStaff = (url_insertStaff, data, type) => ajax(url_insertStaff, data, "post")
+
+
+//毕业生
+//获取所有显示在浏览页面上
+export const getGraduateall = () => ajax("/postgraduate/getAllPostgraduate", {}) 
+//获取细节
+export const url_getGraduateIndex = "/postgraduate/getPostgraduate/"
+export const getGraduateIndex = (url_getGraduateIndex, data) => ajax(url_getGraduateIndex, data) 
+//更新
+export const url_updataGraduateIndex = "/postgraduate/getPostgraduate/"
+export const updataGraduateIndex = (url_updataGraduateIndex, data, type) => ajax(url_updataGraduateIndex, data, "post") 
+//插入
+export const url_insertGraduate = "/postgraduate/insertPostgraduate/"
+export const insertGraduate = (url_insertGraduate, data, type) => ajax(url_insertGraduate, data, "post") 
+//删除
+export const url_deleteGraduate = "/postgraduate/deletePostgraduate/"
+export const deleteGraduate = (url_deleteGraduate, data, type) => ajax(url_deleteGraduate, data, "get") 
+
 //新闻发布
 //获取所有显示在浏览页面上
 export const getNewsall = () => ajax("/news/findAll", {}) 

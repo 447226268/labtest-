@@ -10,5 +10,8 @@
     <select id="findByType" resultType="com.gooalgene.labtest.entity.News_SubType">
         select * from news_subType where ns_type_id=#{ns_type_id}
     </select>
+    <insert id="insertSubType" parameterType="com.gooalgene.labtest.entity.News_SubType">
+        insert into news_subType values(null,#{ns_name},#{ns_type_id} )
+    </insert>
 
 </mapper>

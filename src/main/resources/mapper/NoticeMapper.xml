@@ -7,7 +7,7 @@
     <select id="findById" resultType="com.gooalgene.labtest.entity.News_List">
         select * from news_list where nl_id =#{nl_id} order by nl_date desc
     </select>
-    <delete id="deleteNotices" parameterType="integer">
+    <delete id="deleteNotices" parameterType="java.lang.Integer">
         delete from news_list where nl_id=#{nl_id} order by nl_date desc
     </delete>
     <insert id="addNotice" parameterType="com.gooalgene.labtest.entity.News_List">
@@ -15,11 +15,8 @@
             null,#{nl_title},#{nl_content},#{nl_date},#{nl_graph},#{nl_type_id},#{nl_subType_id},#{nl_state},#{nl_url}
         )
         </insert>
-    <update id="updateNotice">
+    <update id="updateNotice" parameterType="com.gooalgene.labtest.entity.News_List">
         update news_list set nl_state = #{nl_state},nl_content = #{nl_content},nl_title = #{nl_title},nl_type_id = #{nl_type_id},nl_subType_id = #{nl_subType_id}, nl_url = #{nl_url},nl_date=#{nl_date} WHERE nl_id = #{nl_id}
     </update>
-    <insert id="updateState">
-        update news_list set nl_state = #{notice.state} where nl_id in =
-        <foreach collection="notice.ids" item="id" separator="," open="(" close=")">#{id}</foreach>
-    </insert>
+
 </mapper>

@@ -48,7 +48,6 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void insertNews(News_List news_list) {
         news_list.setNl_type_id(newsSubTypeMapper.findById(news_list.getNl_subType_id()).getNs_type_id());
-        System.out.print(news_list);
         newsMapper.addNews(news_list);
     }
 

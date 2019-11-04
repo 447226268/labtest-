@@ -3,8 +3,21 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
 
-import HomepagemanagementPage from "../components/HomepagemanagementPage.vue";
-import Uploadingmap from "../components/Uploadingmap.vue";
+//首页管理
+import Homeedit from "../components/home/Homeedit.vue"
+
+//实验室动态 laboratory
+//实验室简介
+import Introductioneditor from "../components/laboratory/introduction/Introductioneditor.vue"
+//研究方向
+import Directioneditor from "../components/laboratory/direction/Directioneditor.vue"
+//研究团队
+import Teamshow from "../components/laboratory/team/Teamshow.vue"
+import Staffedit from "../components/laboratory/team/staffeditor.vue"
+//毕业生
+import Graduatesshow from "../components/laboratory/graduates/Showtable.vue"
+import Graduateseditor from "../components/laboratory/graduates/Graduateseditor.vue"
+
 
 //实验室动态 laboratory
 //实验室简介
@@ -52,18 +65,54 @@ export default new Router({
       component: Login
     },
 
+    //首页管理
     {
-      path: "/首页管理",
-      name: "homepagemanagementPage",
-      component: HomepagemanagementPage,
-      children :[
-        {
-          path: "/首页管理/配图上传",
-          name: "uploadingmap",
-          component: Uploadingmap
-        },
-      ]
+      path: "/home",
+      name: "homeedit",
+      component: Homeedit,
     },
+
+    //实验室动态
+    //实验室简介
+    {
+      path: "/laboratory/introducution/",
+      name: "introductioneditor",
+      component: Introductioneditor,
+    },
+    //研究方向
+    {
+      path: "/laboratory/direction/",
+      name: "directioneditor",
+      component: Directioneditor,
+    },
+    //研究团队
+    {
+      path: "/laboratory/team/",
+      name: "teamshow",
+      component: Teamshow,
+    },
+    //个人信息修改
+    {
+      path: "/laboratory/team/staffedit:index",
+      name: "staffedit",
+      component: Staffedit,
+    },
+
+    //毕业生
+    //显示
+    {
+      path: "/laboratory/graduates/",
+      name: "graduatesshow",
+      component: Graduatesshow,
+    },
+    //编辑
+    {
+      path: "/laboratory/graduates/edit:index",
+      name: "graduateseditor",
+      component: Graduateseditor,
+    },
+
+
 
     //实验室动态
     //实验室简介
