@@ -18,15 +18,6 @@ import Staffedit from "../components/laboratory/team/staffeditor.vue"
 import Graduatesshow from "../components/laboratory/graduates/Showtable.vue"
 import Graduateseditor from "../components/laboratory/graduates/Graduateseditor.vue"
 
-
-//实验室动态 laboratory
-//实验室简介
-import Introductioneditor from "../components/laboratory/introduction/Introductioneditor.vue"
-//研究方向
-import Directioneditor from "../components/laboratory/direction/Directioneditor.vue"
-//研究团队
-import Teamshow from "../components/laboratory/team/Teamshow.vue"
-
 //新闻动态 news
 import Showtable_news from "../components/news/Showtable.vue"
 import Newseditor from "../components/news/Newseditor.vue"
