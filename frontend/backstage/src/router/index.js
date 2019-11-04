@@ -57,142 +57,122 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      redirect: "/login",
+      children:[
+        //首页管理
+        {
+          path: "/home",
+          name: "homeedit",
+          component: Homeedit,
+        },
+
+        //实验室动态
+        //实验室简介
+        {
+          path: "/laboratory/introducution/",
+          name: "introductioneditor",
+          component: Introductioneditor,
+        },
+        //研究方向
+        {
+          path: "/laboratory/direction/",
+          name: "directioneditor",
+          component: Directioneditor,
+        },
+        //研究团队
+        {
+          path: "/laboratory/team/",
+          name: "teamshow",
+          component: Teamshow,
+        },
+        //个人信息修改
+        {
+          path: "/laboratory/team/staffedit:index",
+          name: "staffedit",
+          component: Staffedit,
+        },
+
+        //毕业生
+        //显示
+        {
+          path: "/laboratory/graduates/",
+          name: "graduatesshow",
+          component: Graduatesshow,
+        },
+        //编辑
+        {
+          path: "/laboratory/graduates/edit:index",
+          name: "graduateseditor",
+          component: Graduateseditor,
+        },
+
+
+
+        //新闻动态
+        {
+          path: "/news/show",
+          name: "showtable_news",
+          component: Showtable_news,
+        },
+        {
+          path: "/news/edit:index",
+          name: "newseditor",
+          component: Newseditor,
+        },
+
+        //通知公告
+        {
+          path: "/notice/show",
+          name: "showtable_notice",
+          component: Showtable_notice,
+        },
+        {
+          path: "/notice/edit:index",
+          name: "notificationeditor",
+          component: Notificationeditor,
+        },
+
+        //科研工作
+        {
+          path: "/scince/article/show",
+          name: "showtable_article",
+          component: Showtable_article,
+        },
+        {
+          path: "/scince/article/edit:index",
+          name: "articleeditor",
+          component: Articleeditor,
+        },
+        {
+          path: "/scince/academic/show",
+          name: "showtable_academic",
+          component: Showtable_academic,
+        },
+        {
+          path: "/scince/academic/edit:index",
+          name: "academiceditor",
+          component: Academiceditor,
+        },
+
+        //资源发布
+        {
+          path: "/source/show",
+          name: "showtable_source",
+          component: Showtable_source,
+        },
+        {
+          path: "/source/edit:index",
+          name: "sourceeditor",
+          component: Sourceeditor,
+        },
+      ]
     },
+
     {
       path: "/login",
       name: "login",
       component: Login
     },
-
-    //首页管理
-    {
-      path: "/home",
-      name: "homeedit",
-      component: Homeedit,
-    },
-
-    //实验室动态
-    //实验室简介
-    {
-      path: "/laboratory/introducution/",
-      name: "introductioneditor",
-      component: Introductioneditor,
-    },
-    //研究方向
-    {
-      path: "/laboratory/direction/",
-      name: "directioneditor",
-      component: Directioneditor,
-    },
-    //研究团队
-    {
-      path: "/laboratory/team/",
-      name: "teamshow",
-      component: Teamshow,
-    },
-    //个人信息修改
-    {
-      path: "/laboratory/team/staffedit:index",
-      name: "staffedit",
-      component: Staffedit,
-    },
-
-    //毕业生
-    //显示
-    {
-      path: "/laboratory/graduates/",
-      name: "graduatesshow",
-      component: Graduatesshow,
-    },
-    //编辑
-    {
-      path: "/laboratory/graduates/edit:index",
-      name: "graduateseditor",
-      component: Graduateseditor,
-    },
-
-
-
-    //实验室动态
-    //实验室简介
-    {
-      path: "/laboratory/introducution/",
-      name: "introductioneditor",
-      component: Introductioneditor,
-    },
-    //研究方向
-    {
-      path: "/laboratory/direction/",
-      name: "directioneditor",
-      component: Directioneditor,
-    },
-    //研究团队
-    {
-      path: "/laboratory/team/",
-      name: "teamshow",
-      component: Teamshow,
-    },
-
-
-
-    //新闻动态
-    {
-      path: "/news/show",
-      name: "showtable_news",
-      component: Showtable_news,
-    },
-    {
-      path: "/news/edit:index",
-      name: "newseditor",
-      component: Newseditor,
-    },
-
-    //通知公告
-    {
-      path: "/notice/show",
-      name: "showtable_notice",
-      component: Showtable_notice,
-    },
-    {
-      path: "/notice/edit:index",
-      name: "notificationeditor",
-      component: Notificationeditor,
-    },
-
-    //科研工作
-    {
-      path: "/scince/article/show",
-      name: "showtable_article",
-      component: Showtable_article,
-    },
-    {
-      path: "/scince/article/edit:index",
-      name: "articleeditor",
-      component: Articleeditor,
-    },
-    {
-      path: "/scince/academic/show",
-      name: "showtable_academic",
-      component: Showtable_academic,
-    },
-    {
-      path: "/scince/academic/edit:index",
-      name: "academiceditor",
-      component: Academiceditor,
-    },
-
-    //资源发布
-    {
-      path: "/source/show",
-      name: "showtable_source",
-      component: Showtable_source,
-    },
-    {
-      path: "/source/edit:index",
-      name: "sourceeditor",
-      component: Sourceeditor,
-    },
-    
   ]
 });

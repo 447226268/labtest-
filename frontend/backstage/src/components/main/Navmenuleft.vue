@@ -2,10 +2,10 @@
   <el-col>
     <el-menu
       default-active="1"
-      class=""
+      class
       background-color="#F0FFFF"
       active-text-color="#ffd04b"
-      router='true'
+      router="true"
     >
       <el-menu-item index="1" route="/home">
         <i class="el-icon-menu"></i>
@@ -35,8 +35,9 @@
         <i class="el-icon-upload"></i>
         <span slot="title">资源发布</span>
       </el-menu-item>
-
-      <el-menu-item index="7" route="/退出登陆">
+    </el-menu>
+    <el-menu class background-color="#F0FFFF" active-text-color="#ffd04b">
+      <el-menu-item  @click="exit">
         <i class="el-icon-user-solid"></i>
         <span slot="title">退出登陆</span>
       </el-menu-item>
@@ -45,14 +46,29 @@
 </template>
 
 <style>
-.el-menu{
-    width: 300px;
-    height: 100%;
+.el-menu {
+  width: 300px;
+  height: 100%;
 }
 </style>
 
-<<script>
+<script>
 export default {
-    
-}
+  methods: {
+    exit() {
+      this.$confirm("是否退出管理后台?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.$router.push({path:"/"});
+        }).catch(() => {
+          this.$message({
+            type: "info",
+            message: "退出取消",
+          });
+        });  
+    }
+  }
+};
 </script>
