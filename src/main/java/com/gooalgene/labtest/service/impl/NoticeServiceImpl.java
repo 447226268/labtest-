@@ -46,7 +46,6 @@ public class NoticeServiceImpl implements com.gooalgene.labtest.service.NoticeSe
     @Override
     public void insertNotice(News_List news_list) {
         news_list.setNl_type_id(newsSubTypeMapper.findById(news_list.getNl_subType_id()).getNs_type_id());
-        System.out.print(news_list);
         noticeMapper.addNotice(news_list);
     }
 
