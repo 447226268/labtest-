@@ -17,13 +17,16 @@ module.exports = {
             .set('@utils', resolve('src/layout'))
             .set('@views', resolve('src/base'))
     },
-    // devServer: {
-    //     proxy: {
-    //       '/api': {
-    //         target: 'http://192.168.10.142:8083',
-    //         ws: true,
-    //         changeOrigin: true
-    //       },
-    //     }
-    //   }
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8080', // 填写后台接口
+                ws: true,
+                changOrigin: true, //允许跨域
+                pathRewrite: {
+                    '^/api': '' //请求的时候使用这个api就可以
+                }
+            }
+        } 
+    }
 }
