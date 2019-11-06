@@ -37,6 +37,16 @@
     <delete id="deleteType">
         delete from staff_type where st_id = #{st_id}
     </delete>
+    <select id="getNewestId" resultType="Integer">
+        select st_id
+        from staff_type
+        order by st_id DESC
+        limit 0,1;
+    </select>
+    <insert id="addType" parameterType="com.gooalgene.labtest.entity.Staff_type">
+        insert into staff_type (st_id, st_name)
+        values (#{st_id}, #{st_name})
+    </insert>
     <!--  Staff_info表  <>-->
     <select id="getStaffInfo" resultType="com.gooalgene.labtest.entity.Staff_info">
         select * from staff_info where si_uid = #{si_uid}

@@ -24,4 +24,6 @@ public interface StaffService {
 
     String updateStaffInfo(Staff staff);
 
+    String addType(String name);
+
 }

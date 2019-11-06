@@ -4,6 +4,7 @@ import com.gooalgene.labtest.dao.StaffMapper;
 import com.gooalgene.labtest.dto.Staff;
 import com.gooalgene.labtest.entity.Staff_info;
 import com.gooalgene.labtest.entity.Staff_list;
+import com.gooalgene.labtest.entity.Staff_type;
 import com.gooalgene.labtest.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,6 +103,14 @@ public class StaffServiceImpl implements StaffService {
                 return "insertion success!";
             }
         }
+    }
+
+    @Override
+    public String addType(String name) {
+        Integer id = staffMapper.getNewestId() + 1;
+        Staff_type staff_type = new Staff_type(id, name);
+        staffMapper.addType(staff_type);
+        return "addition success";
     }
 
 }

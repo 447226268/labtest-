@@ -57,6 +57,12 @@ public class StaffController {
         return new BaseResponse<>(ret);
     }
 
+    @PostMapping("/addType/{name}")
+    public BaseResponse<String> AddType(@PathVariable String name) {
+        String ret = staffServiceImpl.addType(name);
+        return new BaseResponse<>(ret);
+    }
+
     @GetMapping("/getStaffInfo/{sl_id}")
     public BaseResponse<Staff> GetStaffInfo(@PathVariable int sl_id) {
         Staff ret = staffServiceImpl.getStaffInfo(sl_id);
