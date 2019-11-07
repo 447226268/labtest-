@@ -30,10 +30,11 @@ public interface StaffMapper {
 
     Integer TypeToId(String st_name);
 
-    void deleteType(int id);
+    void deleteType(String name);
 
     void addType(Staff_type staff_type);
 
+    Integer countType(String name);
 //  staff_info表
 
     Staff_info getStaffInfo(int uid);

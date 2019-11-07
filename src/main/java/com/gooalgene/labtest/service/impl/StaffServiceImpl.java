@@ -71,8 +71,13 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public String deleteType(int id) {
-        staffMapper.deleteType(id);
+    public String deleteType(String name) {
+        Integer id = staffMapper.TypeToId(name);
+        List<Staff_list> list = staffMapper.findAll();
+        for (Staff_list staff_list : list) {
+            if (staff_list.getSl_type_id().equals(id)) return "delete failed!";
+        }
+        staffMapper.deleteType(name);
         return "success!";
     }
 
@@ -107,10 +112,27 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public String addType(String name) {
-        Integer id = staffMapper.getNewestId() + 1;
-        Staff_type staff_type = new Staff_type(id, name);
-        staffMapper.addType(staff_type);
-        return "addition success";
+        if (staffMapper.countType(name) != 0) {
+            return "this type exist already!";
+        } else {
+            Integer id = staffMapper.getNewestId() + 1;
+            Staff_type staff_type = new Staff_type(id, name);
+            staffMapper.addType(staff_type);
+            return "addition success!";
+        }
+    }
+
+    @Override
+    public String updateType(List<String> list) {
+        for (String name : list) {
+            if (staffMapper.countType(name) == 0) {
+                Integer id = staffMapper.getNewestId() + 1;
+                Staff_type staff_type = new Staff_type(id, name);
+                staffMapper.addType(staff_type);
+                return "addition success!";
+            }
+        }
+        return "update success!";
     }
 
 }

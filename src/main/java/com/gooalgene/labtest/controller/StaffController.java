@@ -1,5 +1,6 @@
 package com.gooalgene.labtest.controller;
 
+import com.gooalgene.labtest.dto.BaseRequest;
 import com.gooalgene.labtest.dto.Staff;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.impl.StaffServiceImpl;
@@ -51,15 +52,23 @@ public class StaffController {
         return new BaseResponse<>(list);
     }
 
-    @DeleteMapping("/deleteType/{id}")
-    public BaseResponse<String> DeleteType(@PathVariable int id) {
-        String ret = staffServiceImpl.deleteType(id);
+    @DeleteMapping("/deleteType")
+    public BaseResponse<String> DeleteType(@RequestBody BaseRequest<String> res) {
+        String name = res.getRequestment();
+        String ret = staffServiceImpl.deleteType(name);
         return new BaseResponse<>(ret);
     }
 
-    @PostMapping("/addType/{name}")
-    public BaseResponse<String> AddType(@PathVariable String name) {
+    @PostMapping("/addType")
+    public BaseResponse<String> AddType(@RequestBody BaseRequest<String> res) {
+        String name = res.getRequestment();
         String ret = staffServiceImpl.addType(name);
+        return new BaseResponse<>(ret);
+    }
+
+    @PostMapping("/updateType")
+    public BaseResponse<String> UpdateType(@RequestBody BaseRequest<List<String>> res) {
+        String ret = staffServiceImpl.updateType(res.getRequestment());
         return new BaseResponse<>(ret);
     }
 
