@@ -2,9 +2,9 @@
   <div class="home">
     <v-header :activeIndex='activeIndex+""'></v-header>
 
-    <el-container>
+    <el-container style="background-color:white" >
       <!-- 左上图 -->
-      <div style="background-color:white">
+      <div >
         <div class="homepictures" >
           <el-carousel >
             <el-carousel-item v-for="item in news1Data" :key="item.nl_id">
@@ -25,7 +25,7 @@
 
       <!-- 右上科研动态 -->
       <div class="news3home">
-        <div class="news3title" style="margin:0 50px; height:50px">
+        <div class="news3title" style="margin:0 50px; height:50px;">
           <p width="400px" style="float: left;margin:0px 390px 0 0; font-size: 30px; font-weight: 600; color:#386CCA ">{{newsData[1].nl_nl_subType_name}}</p>
           <router-link to="/news3" width="200px" height="50px"  style="margin-top:10px;font-size: 20px; font-weight: 400;  color:#386CCA "> 更多 >></router-link>
         </div>
@@ -48,7 +48,7 @@
       </div>
     </el-container>
 
-    <el-container>
+    <el-container style="background-color:white">
       <!-- 左中综合新闻 -->
       <div class="news2home">
         <div class="news2title" style="margin:0 50px; height:50px">
@@ -98,7 +98,7 @@
       </div>
     </el-container>
 
-    <el-container>
+    <el-container style="background-color:white">
       <!-- 左下学术动态 -->
       <div class="news4home">
         <div class="news4title" style="margin:0 50px; height:50px">
@@ -148,8 +148,8 @@
       </div>
     </el-container>
   
-    <el-container>
-      <div class="resourcehome" width="1200px" style="background-color:white">
+    <el-container style="background-color:white">
+      <div class="resourcehome" width="1200px" >
         
         <el-container>
           <div v-for="item in resource1Data" :key="nl_id">
@@ -223,8 +223,8 @@
 
   /* 右上角科研动态 */
   .news3home{
-    background-color: white;
     width:700px;
+    min-height: 200px;
     margin: 0;
   }
 
@@ -235,8 +235,8 @@
 
   /* 中左头条 */
   .news2home{
-    background-color: white;
     width:600px;
+    min-height: 200px;
     margin: 0;
   }
 
@@ -247,8 +247,9 @@
 
     /* 中右公告 */
   .notice2home{
-    background-color: white;
+
     width:600px;
+    min-height: 200px;
     margin: 0;
   }
 
@@ -259,8 +260,8 @@
 
     /* 左下学术 */
   .news4home{
-    background-color: white;
     width:600px;
+    min-height: 200px;
     margin: 0;
   }
 
@@ -271,8 +272,8 @@
 
     /* 右下招聘 */
   .notice3home{
-    background-color: white;
     width:600px;
+    min-height: 200px;
     margin: 0;
   }
 
@@ -282,7 +283,6 @@
   }
 
   .resourcehome{
-    background-color: white;
     width:1200px;
     margin: 0;
   }
@@ -296,8 +296,8 @@
 }
 
 .linkitem {
-  width: 350px;
-  margin:10px 0 10px 50px;
+  width: 380px;
+  margin:10px 0 10px 20px;
 }
 
 
@@ -359,16 +359,16 @@
             this.newsData=response.data.result;
               for(var i = 0;i<this.newsData.length;i++){
                 if (this.newsData[i].nl_nl_subType_name=="头条新闻"){
-                  if(this.news1Data.length<6){this.news1Data.push(this.newsData[i])}
+                  if(this.news1Data.length<5){this.news1Data.push(this.newsData[i])}
                 }
                 else if (this.newsData[i].nl_nl_subType_name=="综合新闻"){
-                  if(this.news2Data.length<6){this.news2Data.push(this.newsData[i])}
+                  if(this.news2Data.length<5){this.news2Data.push(this.newsData[i])}
                 }
                 else if (this.newsData[i].nl_nl_subType_name=="科研动态"){
-                  if(this.news3Data.length<6){this.news3Data.push(this.newsData[i])}
+                  if(this.news3Data.length<5){this.news3Data.push(this.newsData[i])}
                 }
                 else if (this.newsData[i].nl_nl_subType_name=="学术活动"){
-                  if(this.news4Data.length<6){this.news4Data.push(this.newsData[i])}
+                  if(this.news4Data.length<5){this.news4Data.push(this.newsData[i])}
                 }
               }
               console.log("newsData");
@@ -381,10 +381,10 @@
             this.noticeData=response.data.result;
               for(var i = 0;i<this.noticeData.length;i++){
                 if (this.noticeData[i].nl_nl_subType_name=="教育培养"){
-                  if(this.notice2Data.length<6){this.notice2Data.push(this.noticeData[i])}
+                  if(this.notice2Data.length<5){this.notice2Data.push(this.noticeData[i])}
                 }
                 else if (this.noticeData[i].nl_nl_subType_name=="招聘招生"){
-                  if(this.notice3Data.length<6){this.notice3Data.push(this.noticeData[i])}
+                  if(this.notice3Data.length<5){this.notice3Data.push(this.noticeData[i])}
                 }
               }
               console.log("noticeData");
@@ -396,7 +396,7 @@
             this.resourceData=response.data.result;
               for(var i = 0;i<this.resourceData.length;i++){
                 if (this.resourceData[i].nl_nl_type_name=="资源"){
-                  if(this.resource1Data.length<6){this.resource1Data.push(this.resourceData[i])}
+                  if(this.resource1Data.length<5){this.resource1Data.push(this.resourceData[i])}
                 }
               }
               console.log("resourceData");
