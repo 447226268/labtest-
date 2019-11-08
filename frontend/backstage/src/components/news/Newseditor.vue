@@ -164,7 +164,7 @@ export default {
         }
         if(this.form.nl_graph !== ""){
           this.dialogImageUrl = this.form.nl_graph;
-          let s = {name: this.form.nl_graph, url: this.form.nl_graph};
+          let s = {name: "图片", url: this.form.nl_graph};
           this.filelist.push(s);
         }
       }

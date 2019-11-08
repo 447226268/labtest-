@@ -121,7 +121,7 @@ export default {
     },
     success(res, file){
       this.dialogImageUrl = URL.createObjectURL(file.raw);
-      this.form.nl_graph = URL.createObjectURL(file.raw);
+      this.form.nl_graph = process.env.VUE_APP_BASE_API + res.result;;
       let s = {name: file.name, url: URL.createObjectURL(file.raw)};
       this.filelist.push(s);
     },
@@ -164,7 +164,7 @@ export default {
         }
         if(this.form.nl_graph !== ""){
           this.dialogImageUrl = this.form.nl_graph;
-          let s = {name: this.form.nl_graph, url: this.form.nl_graph};
+          let s = {name: "图片", url: this.form.nl_graph};
           this.filelist.push(s);
         }
       }

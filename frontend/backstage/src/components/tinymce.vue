@@ -48,35 +48,35 @@ export default {
         toolbar: this.toolbar, // 工具栏 我用到的也就是lists image media table wordcount 这些 根据需求而定
         images_upload_url: url_uploadPic, //上传路径
         // 此处为图片上传处理函数，这个直接用了base64的图片形式上传图片，
-        // 如需ajax上传可参考https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_handler
-
-        // 官网抄的图片上传 项目如果用了vue-resource可以用$http 因为比较懒就没改
-        images_upload_handler: (blobInfo, success, failure) => {
-          var xhr, formData;
-          xhr = new XMLHttpRequest();
-          xhr.withCredentials = false;
-          xhr.open("POST", url_uploadPic);
-
-          xhr.onload = function() {
-            var json;
-            if (xhr.status != 200) {
-              failure("HTTP Error: " + xhr.status);
-              return;
-            }
-            json = JSON.parse(xhr.responseText);
-            
-            if (!json || typeof json.result != 'string') {
-              failure('Invalid JSON: ' + xhr.responseText);
-              return;
-            }
-
-            success(process.env.VUE_APP_BASE_API + json.result);
-          };
         
-          formData = new FormData();
-          formData.append("file", blobInfo.blob(), blobInfo.filename());
+        images_upload_handler: (blobInfo, success, failure) => {
+
+          success("data:image/png;base64," + blobInfo.base64());
+
+          // var xhr, formData;
+          // xhr = new XMLHttpRequest();
+          // xhr.withCredentials = false;
+          // xhr.open("POST", url_uploadPic);
+
+          // xhr.onload = function() {
+          //   var json;
+          //   if (xhr.status != 200) {
+          //     failure("HTTP Error: " + xhr.status);
+          //     return;
+          //   }
+          //   json = JSON.parse(xhr.responseText);
+            
+          //   if (!json || typeof json.result != 'string') {
+          //     failure('Invalid JSON: ' + xhr.responseText);
+          //     return;
+          //   }
+          //   success("data:image/png;base64," + blobInfo.base64());
+          // }
+
+          // formData = new FormData();
+          // formData.append("file", blobInfo.blob(), blobInfo.filename());
           
-          xhr.send(formData);
+          // xhr.send(formData);
         }
       },
       myValue: this.value

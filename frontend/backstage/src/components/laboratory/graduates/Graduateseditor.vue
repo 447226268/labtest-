@@ -46,6 +46,8 @@ import tinymce from "@/components/tinymce.vue";
 import {
   url_getGraduateIndex,
   getGraduateIndex,
+  url_getGraduateType,
+  getGraduateType,
   url_updataGraduateIndex,
   updataGraduateIndex,
   url_insertGraduate,
@@ -87,6 +89,7 @@ export default {
   },
   created() {
     this.index = this.$route.params.index;
+    this.getAllType();
     this.getGraduate();
   },
   methods: {
@@ -111,25 +114,31 @@ export default {
       this.$router.go(-1);
     },
 
+    async getAllType(){
+      let a = await getGraduateType(url_getGraduateType, {});
+      for (let i = 0; i < a.data.result.type.length; i++) {
+          this.form_type.push(a.data.result.type[i]);
+        }
+    },
+
     async getGraduate() {
-      let s = { id: this.$route.params.index };
-      let a = await getGraduateIndex(url_getGraduateIndex, s);
-      if (a.data.result.postgraduate != null) {
-        this.form.id = a.data.result.postgraduate.id;
-        this.form.state = a.data.result.postgraduate.state;
-        this.form.nl_subType_id = parseInt(a.data.result.notice.nl_subType_id);
-        this.form.title = a.data.result.postgraduate.title;
-        this.form.date = new Date(a.data.result.postgraduate.date);
-        this.form.content = a.data.result.postgraduate.content;
-        this.form.url = a.data.result.postgraduate.url;
+      let a = await getGraduateIndex(url_getGraduateIndex + "/" + this.index, {});
+      if (a.data.result != null) {
+        this.form.id = a.data.result.id;
+        this.form.state = a.data.result.state;
+        this.form.name = a.data.result.name;
+        this.form.title = a.data.result.title;
+        this.form.date = new Date(a.data.result.date);
+        this.form.typeId = parseInt(a.data.result.typeId);
+        this.form.type = a.data.result.type;      
+        this.form.url = a.data.result.url;
+        this.form.content = a.data.result.content;
+
         if(this.form.content === ""){
           this.radio = "2"
         }
-        for (let i = 0; i < a.data.result.type.length; i++) {
-          this.form_type.push(a.data.result.type[i]);
-        }
-        if(this.form.type_id == -1){
-          this.form.type_id = this.form_type[0].id;
+        if(this.form.typeId == -1){
+          this.form.typeId = this.form_type[0].id;
         }
       }
     }

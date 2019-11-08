@@ -125,7 +125,7 @@ export default {
       this.dialogVisible = true;
     },
     async updataStaffstate() {
-      if(this.form.info.si_id !== -1)
+      if(this.form.id !== -1)
       {
         this.form.info.si_state = 1;
         let a = await updataStaffIntroIndex(url_updataStaffIntroIndex, this.form, "post");
@@ -133,7 +133,7 @@ export default {
       }
     },
     async updataStaff() {
-      if(this.form.info.si_id !== -1)
+      if(this.form.id !== -1)
       {
         let a = await updataStaffIntroIndex(url_updataStaffIntroIndex, this.form, "post");
         this.$router.go(-1);

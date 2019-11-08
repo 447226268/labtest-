@@ -39,6 +39,9 @@ export const insertStaff = (url_insertStaff, data, type) => ajax(url_insertStaff
 //毕业生
 //获取所有显示在浏览页面上
 export const getGraduateall = () => ajax("/postgraduate/getAllPostgraduate", {}) 
+//获取毕业生的类型
+export const url_getGraduateType = "/postgraduate/getAllType/"
+export const getGraduateType = (url_getGraduateType, data) => ajax(url_getGraduateType, data) 
 //获取细节
 export const url_getGraduateIndex = "/postgraduate/getPostgraduate/"
 export const getGraduateIndex = (url_getGraduateIndex, data) => ajax(url_getGraduateIndex, data) 
