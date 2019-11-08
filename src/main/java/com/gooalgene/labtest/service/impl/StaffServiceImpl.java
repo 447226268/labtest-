@@ -4,6 +4,7 @@ import com.gooalgene.labtest.dao.StaffMapper;
 import com.gooalgene.labtest.dto.Staff;
 import com.gooalgene.labtest.entity.Staff_info;
 import com.gooalgene.labtest.entity.Staff_list;
+import com.gooalgene.labtest.entity.Staff_type;
 import com.gooalgene.labtest.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,8 +71,13 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public String deleteType(int id) {
-        staffMapper.deleteType(id);
+    public String deleteType(String name) {
+        Integer id = staffMapper.TypeToId(name);
+        List<Staff_list> list = staffMapper.findAll();
+        for (Staff_list staff_list : list) {
+            if (staff_list.getSl_type_id().equals(id)) return "delete failed!";
+        }
+        staffMapper.deleteType(name);
         return "success!";
     }
 
@@ -102,6 +108,31 @@ public class StaffServiceImpl implements StaffService {
                 return "insertion success!";
             }
         }
+    }
+
+    @Override
+    public String addType(String name) {
+        if (staffMapper.countType(name) != 0) {
+            return "this type exist already!";
+        } else {
+            Integer id = staffMapper.getNewestId() + 1;
+            Staff_type staff_type = new Staff_type(id, name);
+            staffMapper.addType(staff_type);
+            return "addition success!";
+        }
+    }
+
+    @Override
+    public String updateType(List<String> list) {
+        for (String name : list) {
+            if (staffMapper.countType(name) == 0) {
+                Integer id = staffMapper.getNewestId() + 1;
+                Staff_type staff_type = new Staff_type(id, name);
+                staffMapper.addType(staff_type);
+                return "addition success!";
+            }
+        }
+        return "update success!";
     }
 
 }

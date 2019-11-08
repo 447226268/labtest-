@@ -12,7 +12,7 @@ public class PicTool {
                 String newCompanyImageName = file.getOriginalFilename();
                 String ss[] = newCompanyImageName.split("\\.");
                 String newPicName = UUID.randomUUID() + "." + ss[ss.length - 1];
-                String localPath1 = "/pro/a/";
+                String localPath1 = "/pic/";
                 String dir = System.getProperty("user.dir");
                 String localPath = "\\src\\main\\resources\\static\\pic";
                 File newFile = new File(dir + localPath + newPicName);
@@ -24,6 +24,7 @@ public class PicTool {
                 out.write(file.getBytes());
                 System.out.print(localPath + newPicName);
                 out.flush();
+
                 out.close();
                 return localPath1 + newPicName;
             } catch (FileNotFoundException e) {
