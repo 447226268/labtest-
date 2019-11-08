@@ -3,42 +3,9 @@
 
   <div class="news"> 
 
-    <el-container>
 
-      <el-header height ="350px">
 
-        <div id="labname" >
-            武汉理工大学智能生物信息实验室
-        </div>
-
-        <div id="WUTBIOLAB" >
-            <span style="color:yellow;">W</span>UTBIOLAB
-        </div>
-        
-        <el-image class="lablogo"
-            style="width: 270px;height: 100px;"
-            :src="require('../../assets/images/Group8.png')"
-            :fit="fill">
-        </el-image>
-
-        <el-menu
-          :default-active="'3'"
-          class="navigation"
-          mode="horizontal"
-          @select="handleSelect"
-          background-color="#398ef3"
-          text-color="#fff"
-          active-text-color="yellow"
-          router="true">
-          <el-menu-item index="1" route="/">首页</el-menu-item>
-          <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
-          <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
-          <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
-          <el-menu-item index="5" route="/thesis">科研工作</el-menu-item>
-          <el-menu-item index="6" route="/resource">资源发布</el-menu-item>
-        </el-menu> 
-
-      </el-header>
+      <v-header :activeIndex='activeIndex+""'></v-header>
 
       <el-container class="mid" justify="center">
 
@@ -64,7 +31,7 @@
               <span slot="title">科研动态</span>
             </el-menu-item>
             <el-menu-item index="4" route="/news4">
-              <span slot="title">学术新闻</span>
+              <span slot="title">学术活动</span>
             </el-menu-item>
           </el-menu>
 
@@ -76,11 +43,11 @@
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news4' }">学术新闻</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/news4' }">学术活动</el-breadcrumb-item>
           </el-breadcrumb>
 
           <div id="nltitle" >
-            <h1>  学术新闻  </h1>
+            <h1>  学术活动  </h1>
           </div>
 
           <template>
@@ -125,40 +92,10 @@
 
       </el-container>
 
-
-      <el-container class="footer">  
-
-        <el-col class="logoandname" width="600px" >
-
-          <el-image class="lablogo"
-              style="width: 70px;height: 70px;top: 75px"
-              :src="require('../../assets/images/whutlogo.png')"
-              :fit="fill">
-          </el-image>
-
-          <div id="whutname" >
-            <p>武汉理工大学</p>
-            <p>计算机科学与技术学院</p>
-          </div>
-
-        </el-col>
-
-        <el-col class="foottest" width="600px" >
-
-          <div id="address" style="top:50px">
-            <p>武汉理工大学鉴湖第四教学楼14层</p>
-            <p>yuanxiaohui(at)whut.edu.cn</p>
-            <p>http://www.wutbiolab.com</p>
-            <p>© Copyright 2019 武汉理工智能生物信息实验室</p>
-            <p>{{message}}</p>
-          </div>
-
-        </el-col>
-
-      </el-container>
+      <v-footer></v-footer>
 
 
-    </el-container>
+
 
   </div>  
 
@@ -172,52 +109,7 @@
     background-attachment:fixed
   }
 
-  .el-header {
-    background-image: url('../../assets/images/banner1.png');
-    background-size:1200px 300px;
-    background-repeat:no-repeat;
-    background-attachment:fill;
-    width: 1200px;
-    position: relative;
-    margin: auto;
-  }
-
-  #labname {
-    width:800px;
-    position: relative;
-    left: 280px;
-    top: 170px;
-    height: 40px;
-    font-size: 40px;
-    font-weight: 400;
-    color: white;
-  }
-
-  #WUTBIOLAB {
-    width:400px;
-    position: relative;
-    left: 280px;
-    top: 100px;
-    height: 40px;
-    font-size: 40px;
-    font-weight: 400;
-    color:white;
-    white-space:nowrap; 
-    font-family:"华文琥珀"
-  }
-
-  .lablogo {
-    position: relative;
-    left:10px;
-    top: 50px;
-  }
-  
-  .navigation{
-    position:relative;
-    width:1200px;
-    left: -20px;
-    top:110px;
-  } 
+   
 
   .el-menu-item{
     position:relative;
@@ -298,47 +190,25 @@
     justify-content: center;
   }
 
-  .footer{
-    background-color: #398ef3;
-    width: 1200px;
-    height: 220px;
-    position: relative;
-    margin: auto;
-  }
   
-  #whutname{
-    color: white;
-    font-size: 30px;
-    position: relative;
-    left: 100px;
-  }
-
-
-  #address{
-    color: white;
-    font-size: 16px;
-    position: relative;
-    line-height:2;
-  }
-
-  body > .el-container {
-    margin-bottom: 40px;
-    text-align: center;
-    margin: auto;
-  }
   
 </style>
 
 <script >
   import Axios from 'axios'
   import  NewsInfo from './newsInfo.vue'
+  import header from "../header.vue";
+  import footer from "../footer.vue";
   export default {
     name : 'news',
-    components:{
+    components:{    
+      'v-header':header,
+      'v-footer':footer,
       NewsInfo
     },
     data() {
       return {
+        activeIndex:3,
         tableData: [],
         newData:[],
         totalcount:0,
@@ -383,7 +253,7 @@
         Axios.get('/api/news/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="学术新闻"){
+                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="学术活动"){
                   console.log(this.tableData[i].nl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;
