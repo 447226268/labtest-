@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.FigureMapper">
+    <insert id="insertNewsFigure" parameterType="com.gooalgene.labtest.entity.Home_Figure">
+        update homepage_newsFigure set hn_graph = #{hn_graph},hn_state = #{hn_state},hn_type=#{hn_type} WHERE hn_id = 1
+    </insert>
+    <insert id="insertAcaFigure" parameterType="com.gooalgene.labtest.entity.Home_Figure">
+        update homepage_newsFigure set hn_graph = #{hn_graph},hn_state = #{hn_state},hn_type=#{hn_type} WHERE hn_id = 2
+    </insert>
+    <select id="findFigures" parameterType="integer" resultType="com.gooalgene.labtest.entity.Home_Figure">
+        select * from homepage_newsFigure where hn_id=#{hn_id}
+    </select>
+</mapper>
