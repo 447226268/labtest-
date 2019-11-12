@@ -3,7 +3,7 @@
         <el-col :span="4">
             <el-image :src="header_image_whut" class="header-image-whut" :fit="contain"></el-image> 
         </el-col>
-        <el-col :span="16" class="header-whut-Bioinformatics-Laboratory">武汉理工大学生物信息实验室</el-col>
+        <el-col :span="16" class="header-whut-Bioinformatics-Laboratory" style="padding-left: 50px">武汉理工大学生物信息实验室</el-col>
         <el-col :span="4" class="header-out "><el-link :underline="false" style="color : black">退出</el-link></el-col>
     </el-row>
 </template>
@@ -26,9 +26,11 @@
 }
 .header-whut-Bioinformatics-Laboratory{
     font-size: 30px;
+    letter-spacing: 15px;
+    font-weight: 550;
     height: 60px;
-    padding: 8px 0;
-    font-family: "微软雅黑"
+    padding: 8px 0 0 50px;
+    font-family: "Microsoft Yahei";
 }
 .header-out{
     padding-left: 13% !important;

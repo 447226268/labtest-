@@ -14,6 +14,13 @@ export const test = () => ajax("/", {}) //测试
 //图片插入
 export const url_uploadPic = process.env.VUE_APP_BASE_API + "/news/uploadPic"
 
+//首页管理
+//新闻动态配图和学术活动配图获取
+export const getHomeFigure = () => ajax("/figure/getFigure/", {}) 
+//新闻动态配图和学术活动配图上传
+export const url_insertHomeFigure = "/figure/insertFigure/"
+export const insertHomeFigure = (url_insertHomeFigure, data, type) => ajax(url_insertHomeFigure, data, "post") 
+
 //实验室信息（实验室简介、研究方向）
 export const getLabIntroduction = () => ajax("/lab/getLabIntro", {}) 
 //更新
