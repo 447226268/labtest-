@@ -26,7 +26,9 @@ public interface StaffMapper {
 
     String SearchType(int id);
 
-    List<String> getAllType();
+    List<Staff_type> getAllType();
+
+    List<String> getAllTypeName();
 
     Integer TypeToId(String st_name);
 

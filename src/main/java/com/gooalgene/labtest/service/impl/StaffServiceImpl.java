@@ -66,8 +66,20 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public List<String> getAllType() {
+    public List<Staff_type> getAllType() {
         return staffMapper.getAllType();
+    }
+
+    @Override
+    public String setAllType(List<String> list) {
+        List<String> typename = staffMapper.getAllTypeName();
+        for (String type : list) {
+            addType(type);
+        }
+        for (String type : typename) {
+            if (!list.contains(type)) deleteType(type);
+        }
+        return "success!";
     }
 
     @Override
