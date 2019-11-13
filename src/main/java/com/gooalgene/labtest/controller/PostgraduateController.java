@@ -1,6 +1,7 @@
 package com.gooalgene.labtest.controller;
 
 import com.gooalgene.labtest.dto.Postgraduate;
+import com.gooalgene.labtest.entity.Postgradudate_type;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.impl.PostgraduateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,17 @@ public class PostgraduateController {
     }
 
     @GetMapping("/getAllType")
-    public BaseResponse<List<String>> getAllType() {
+    public BaseResponse<List<Postgradudate_type>> getAllType() {
         return postgraduateService.getAllType();
+    }
+
+    @PostMapping("/addType/{name}")
+    public BaseResponse<String> addType(@PathVariable String name) {
+        return postgraduateService.addType(name);
+    }
+
+    @DeleteMapping("/deleteType/{id}")
+    public BaseResponse<String> deleteType(@PathVariable Integer id) {
+        return postgraduateService.deleteType(id);
     }
 }
