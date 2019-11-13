@@ -23,7 +23,7 @@ public class LinkController {
     }
 
     @PostMapping("/insertLink")
-    public BaseResponse<String> insertLink(@RequestParam List<Homepage_links> homepage_links) {
+    public BaseResponse<String> insertLink(@RequestBody List<Homepage_links> homepage_links) {
         BaseResponse<String> response = new BaseResponse<>();
         List<Homepage_links> list = linksService.findAll();
         for (int i = 0; i < list.size(); i++) {
@@ -36,19 +36,5 @@ public class LinkController {
         return response;
     }
 
-    @GetMapping("/deleteLink")
-    public BaseResponse<String> deleteLink(@RequestParam("id") int id) {
-        BaseResponse<String> response = new BaseResponse<>();
-        linksService.deleteLink(id);
-        response.setResult("删除成功");
-        return response;
-    }
 
-    @PostMapping("/updateLink")
-    public BaseResponse<String> updateLink(@RequestParam Homepage_links homepage_links) {
-        BaseResponse<String> response = new BaseResponse<>();
-        linksService.updateLink(homepage_links);
-        response.setResult("更改成功");
-        return response;
-    }
 }

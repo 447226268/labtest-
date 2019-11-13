@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.FootersMapper">
+    <delete id="deleteById" parameterType="integer">
+        delete from homepage_footer where hf_id=#{hf_id}
+    </delete>
+    <insert id="insertFooter" parameterType="com.gooalgene.labtest.entity.Homepage_footer">
+        insert into homepage_footer values (null,#{hf_first},#{hf_second})
+    </insert>
+    <select id="findFooters" resultType="com.gooalgene.labtest.entity.Homepage_footer">
+        select * from homepage_footer order by hf_id desc
+    </select>
+
+</mapper>
