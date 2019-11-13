@@ -1,6 +1,7 @@
 package com.gooalgene.labtest.dao;
 
 import com.gooalgene.labtest.entity.Postgraduate_list;
+import com.gooalgene.labtest.entity.Postgradudate_type;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,10 +20,14 @@ public interface PostgraduateMapper {
     void deletePostgraduate(int id);
 
     //    postgraduate_type表
-    List<String> getAlltype();
+    List<Postgradudate_type> getAlltype();
+
+    void addType(Postgradudate_type postgradudate_type);
 
     String getType(int id);
 
     void deleteType(int id);
+
+    Integer typeToId(String name);
 
 }

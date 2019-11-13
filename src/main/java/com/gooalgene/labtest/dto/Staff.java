@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Staff {
     private Integer id;
     private String name;
-    private Integer type_id;
+    private Integer type_id = 0;
     private String type;
     private Staff_info info;
 

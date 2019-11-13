@@ -5,10 +5,7 @@ import com.gooalgene.labtest.entity.Homepage_links;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.LinksService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,9 +22,13 @@ public class LinkController {
         return response;
     }
 
-    @GetMapping("/insertLink")
-    public BaseResponse<String> insertLink(@RequestParam List<Homepage_links> homepage_links) {
+    @PostMapping("/insertLink")
+    public BaseResponse<String> insertLink(@RequestBody List<Homepage_links> homepage_links) {
         BaseResponse<String> response = new BaseResponse<>();
+        List<Homepage_links> list = linksService.findAll();
+        for (int i = 0; i < list.size(); i++) {
+            linksService.deleteLink(list.get(i).getHl_id());
+        }
         for (int i = 0; i < homepage_links.size(); i++) {
             linksService.insertLink(homepage_links.get(i));
         }
@@ -35,19 +36,5 @@ public class LinkController {
         return response;
     }
 
-    @GetMapping("/deleteLink")
-    public BaseResponse<String> deleteLink(@RequestParam("id") int id) {
-        BaseResponse<String> response = new BaseResponse<>();
-        linksService.deleteLink(id);
-        response.setResult("删除成功");
-        return response;
-    }
 
-    @GetMapping("/updateLink")
-    public BaseResponse<String> updateLink(@RequestParam Homepage_links homepage_links) {
-        BaseResponse<String> response = new BaseResponse<>();
-        linksService.updateLink(homepage_links);
-        response.setResult("更改成功");
-        return response;
-    }
 }

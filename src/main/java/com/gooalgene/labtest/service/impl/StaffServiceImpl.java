@@ -53,6 +53,9 @@ public class StaffServiceImpl implements StaffService {
         if (staff.getId() != null) {
             staff.setId(null);
         }
+        if (staff.getType_id().equals(0)) {
+            staff.setType_id(staffMapper.TypeToId(staff.getType()));
+        }
         Staff_list staff_list = new Staff_list(staff);
         staffMapper.Insert(staff_list);
         return "success!";
@@ -60,14 +63,29 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public String Update(Staff staff) {
+        if (staff.getType_id().equals(0)) {
+            staff.setType_id(staffMapper.TypeToId(staff.getType()));
+        }
         Staff_list staff_list = new Staff_list(staff);
         staffMapper.Update(staff_list);
         return "success!";
     }
 
     @Override
-    public List<String> getAllType() {
+    public List<Staff_type> getAllType() {
         return staffMapper.getAllType();
+    }
+
+    @Override
+    public String setAllType(List<String> list) {
+        List<String> typename = staffMapper.getAllTypeName();
+        for (String type : list) {
+            addType(type);
+        }
+        for (String type : typename) {
+            if (!list.contains(type)) deleteType(type);
+        }
+        return "success!";
     }
 
     @Override
@@ -92,6 +110,9 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public String updateStaffInfo(Staff staff) {
+        if (staff.getType_id().equals(0)) {
+            staff.setType_id(staffMapper.TypeToId(staff.getType()));
+        }
         Integer id = staff.getId();
         Staff_list staff_list = staffMapper.Sel(id);
         if (staff_list == null)

@@ -3,6 +3,7 @@ package com.gooalgene.labtest.service.impl;
 import com.gooalgene.labtest.dao.PostgraduateMapper;
 import com.gooalgene.labtest.dto.Postgraduate;
 import com.gooalgene.labtest.entity.Postgraduate_list;
+import com.gooalgene.labtest.entity.Postgradudate_type;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.PostgraduateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,30 @@ public class PostgraduateServiceImpl implements PostgraduateService {
     }
 
     @Override
-    public BaseResponse<List<String>> getAllType() {
+    public BaseResponse<List<Postgradudate_type>> getAllType() {
         return new BaseResponse<>(postgraduateMapper.getAlltype());
+    }
+
+    @Override
+    public BaseResponse<String> addType(String type) {
+        List<Postgradudate_type> list = postgraduateMapper.getAlltype();
+        int count = 1;
+        for (Postgradudate_type post : list) {
+            if (post.getPt_name().equals(type)) return new BaseResponse<>("this type is already exist!");
+            count++;
+        }
+        Postgradudate_type postgradudate_type = new Postgradudate_type(count, type);
+        postgraduateMapper.addType(postgradudate_type);
+        return new BaseResponse<>("success!");
+    }
+
+    @Override
+    public BaseResponse<String> deleteType(Integer id) {
+        List<Postgraduate_list> list = postgraduateMapper.findAll();
+        for (Postgraduate_list post : list) {
+            if (post.getPl_type_id().equals(id)) return new BaseResponse<>("delete failed!");
+        }
+        postgraduateMapper.deleteType(id);
+        return new BaseResponse<>("success!");
     }
 }

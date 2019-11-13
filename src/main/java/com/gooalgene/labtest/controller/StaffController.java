@@ -2,6 +2,7 @@ package com.gooalgene.labtest.controller;
 
 import com.gooalgene.labtest.dto.BaseRequest;
 import com.gooalgene.labtest.dto.Staff;
+import com.gooalgene.labtest.entity.Staff_type;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.impl.StaffServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +48,15 @@ public class StaffController {
     }
 
     @GetMapping("/getAllType")
-    public BaseResponse<List<String>> GetAllType() {
-        List<String> list = staffServiceImpl.getAllType();
+    public BaseResponse<List<Staff_type>> GetAllType() {
+        List<Staff_type> list = staffServiceImpl.getAllType();
         return new BaseResponse<>(list);
+    }
+
+    @PostMapping("/setAllType")
+    public BaseResponse<String> SetAllType(@RequestBody BaseRequest<List<String>> res) {
+        String ret = staffServiceImpl.setAllType(res.getRequestment());
+        return new BaseResponse<>(ret);
     }
 
     @DeleteMapping("/deleteType")

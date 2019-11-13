@@ -7,13 +7,8 @@
     <insert id="insertLink" parameterType="com.gooalgene.labtest.entity.Homepage_links">
         insert into homepage_links values (null,#{hl_text},#{hl_url})
     </insert>
-    <update id="updateLink" parameterType="com.gooalgene.labtest.entity.Homepage_links">
-        update homepage_links set hl_text = #{hl_text},hl_url = #{hl_url}  WHERE hl_id = #{hl_id}
-    </update>
     <select id="findLinks" resultType="com.gooalgene.labtest.entity.Homepage_links">
         select * from homepage_links order by hl_id desc
     </select>
-    <select id="findById" parameterType="integer" resultType="com.gooalgene.labtest.entity.Homepage_links">
-        select * from homepage_links where hl_id = #{hl_id}
-    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.gooalgene.labtest.service;
 
 import com.gooalgene.labtest.dto.Staff;
+import com.gooalgene.labtest.entity.Staff_type;
 
 import java.util.List;
 
@@ -16,7 +17,9 @@ public interface StaffService {
 
     String Update(Staff staff);
 
-    List<String> getAllType();
+    List<Staff_type> getAllType();
+
+    String setAllType(List<String> type);
 
     String deleteType(String name);
 

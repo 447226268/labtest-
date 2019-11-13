@@ -56,10 +56,15 @@
     </select>
 
     <!--  Postgraduate_type表  <>-->
-    <select id="getAlltype" resultType="String">
-        select pt_name
+    <select id="getAlltype" resultType="com.gooalgene.labtest.entity.Postgradudate_type">
+        select *
         from postgraduate_type
     </select>
+
+    <insert id="addType" parameterType="com.gooalgene.labtest.entity.Postgradudate_type">
+        insert into postgraduate_type (pt_id, pt_name)
+        values (#{pt_id}, #{pt_name})
+    </insert>
 
     <select id="getType" resultType="String">
         select pt_name
@@ -67,11 +72,17 @@
         where pt_id = #{pt_id}
     </select>
 
-    <delete id="deleteType">
+    <delete id="deleteType" parameterType="Integer">
         delete
         from postgraduate_type
         where pt_id = #{pt_id}
     </delete>
+
+    <select id="typeToId" parameterType="String" resultType="Integer">
+        select pt_id
+        from postgraduate_type
+        where pt_name = #{name}
+    </select>
 
 
 </mapper>

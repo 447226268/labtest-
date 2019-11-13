@@ -7,9 +7,7 @@ import java.util.List;
 public interface LinksService {
     List<Homepage_links> findAll();
 
-    Homepage_links findById(Integer hl_id);
 
-    void updateLink(Homepage_links homepage_links);
 
     void deleteLink(Integer hl_id);
 

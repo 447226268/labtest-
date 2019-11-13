@@ -19,16 +19,6 @@ public class LinksServiceImpl implements LinksService {
     }
 
     @Override
-    public Homepage_links findById(Integer hl_id) {
-        return linksMapper.findById(hl_id);
-    }
-
-    @Override
-    public void updateLink(Homepage_links homepage_links) {
-        linksMapper.updateLink(homepage_links);
-    }
-
-    @Override
     public void deleteLink(Integer hl_id) {
         linksMapper.deleteById(hl_id);
     }

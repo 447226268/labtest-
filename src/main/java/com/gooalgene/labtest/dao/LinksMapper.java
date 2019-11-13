@@ -11,9 +11,5 @@ public interface LinksMapper {
 
     void insertLink(Homepage_links homepage_links);
 
-    void updateLink(Homepage_links homepage_links);
-
     List<Homepage_links> findLinks();
-
-    Homepage_links findById(Integer hl_id);
 }

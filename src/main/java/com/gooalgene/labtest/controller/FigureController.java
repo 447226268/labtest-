@@ -4,10 +4,7 @@ import com.gooalgene.labtest.entity.Home_Figure;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.HomeFigureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,11 +14,9 @@ public class FigureController {
     @Autowired
     private HomeFigureService homeFigureService;
 
-    @GetMapping("/insertFigure")
-    public BaseResponse<String> insertAcaFigure(@RequestParam("list") List<Home_Figure> home_figure) {
+    @PostMapping("/insertFigure")
+    public BaseResponse<String> insertAcaFigure(@RequestBody List<Home_Figure> home_figure) {
         BaseResponse<String> response = new BaseResponse<>();
-//        homeFigureService.insertFigure(home_figure.get(0));
-//        homeFigureService.insertFigure(home_figure.get(1));
         for (int i = 0; i < home_figure.size(); i++) {
             homeFigureService.insertFigure(home_figure.get(i));
         }
