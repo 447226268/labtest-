@@ -50,49 +50,30 @@
             <h1>  研究团队  </h1>
           </div>
 
-          <div class="namelist">
-            <div>
-              <table border="1" class="nametable">
-                  <thead><tr><th colspan="8">教授</th></tr></thead>
-                  <tbody id="professor" v-html= "professorlist"></tbody>
-              </table>
-            </div>
+          <div class="namelist" >
 
-            <div>
-              <table border="1" class="nametable">
-                  <thead><tr><th colspan="8">副教授</th></tr></thead>
-                  <tbody id="AssProfessor" v-html= "AssProfessorlist"></tbody>
-              </table>
-            </div>
+            <table class="nametable" border="1" v-for="item in typelist" :key="item.type_id">
+              <thead>
+                <tr >
+                  <th class="nametitle" colspan="8">{{item.type}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="name8" >
+                  <div v-for="staff in tableData" :key="staff.type">
+                    <td class="namecontent"  v-if="staff.type==item.type&&staff.info==null">{{staff.name}}</td>
 
-            <div >
-              <table border="1" class="nametable">
-                  <thead><tr><th colspan="8">博士后</th></tr></thead>
-                  <tbody id="Postdoctoral" v-html= "Postdoctorallist"></tbody>
-              </table>
-            </div>
-
-            <div>
-              <table border="1" class="nametable">
-                  <thead><tr><th colspan="8">博士</th></tr>
-                  </thead><tbody id="Doctor" v-html= "Doctorlist"></tbody>
-              </table>
-            </div>
-
-            <div>
-              <table border="1" class="nametable">
-                  <thead><tr><th colspan="8">硕士</th></tr></thead>
-                  <tbody id="Master" v-html= "Masterlist"></tbody>
-              </table>
-            </div>
-
-            <div>
-              <table border="1" class="nametable">
-                  <thead><tr><th colspan="8">其他</th></tr></thead>
-                  <tbody id="Other" v-html= "Otherlist"></tbody>
-              </table>
-            </div>
+                    <td class="namecontent"  v-if="staff.type==item.type&&staff.info!=null">
+                      <a :href="'lab3Info?'+staff.id" style="text-decoration:none">{{staff.name}}</a>
+                    </td>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
           </div>
+
+
+
           
 
 
@@ -109,7 +90,7 @@
 
 </template>
 
-<style scoped>
+<style>
   .lab3 {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
@@ -185,37 +166,23 @@
   }
 
   .namelist{
-    text-align: center;
     width: 720px;
-    position: relative;
-    font-size: 14px;
-    color: #333;
-    font-weight: 500;
-    margin-left: 30px;
+    margin: auto;
   }
 
   .nametable{
     border: 1px solid #cad9ea;
-    text-align: center;
     width: 720px;
     position: relative;
     font-size: 20px;
     color: #333;
     font-weight: 500;
-    margin: 50px 25px 50px 20px;
+    margin: 20px 0 ;
   }
 
-  #professorlist,#AssProfessorlist,#Postdoctorallist,#Doctorlist,#Masterlist,#Otherlist{
-    text-align: center;
-    width: 90px;
-    position: relative;
-    font-size: 20px;
-    color: #333;
-    font-weight: 500;
-    margin: 50px 25px 50px 20px;
-  }
 
-  th{
+
+  .nametitle{
     background-color: rgb(57, 142, 243);
     text-align: center;
     width: 720px;
@@ -223,19 +190,25 @@
     font-size: 20px;
     color: #333;
     font-weight: 600;
-    margin: 50px 25px 50px 20px;
   }
 
-  td{
-    background-color: rgb(57, 142, 243);
+  .name8{
+    width: 720px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .namecontent{
     text-align: center;
     width: 90px;
     position: relative;
     font-size: 20px;
     color: #333;
-    font-weight: 600;
-    margin: 50px 25px 50px 20px;
+    font-weight: 500;
   }
+
 
    
 
@@ -264,21 +237,26 @@
         totalcount:0,
         currentPage:1,
         pagesize:30,
-        professorlist:"" ,
-        AssProfessorlist:"",
-        Postdoctorallist:"",
-        Doctorlist:"",
-        Masterlist:"",
-        Otherlist:"",
-
-
-
+        professorlist:[],
+        AssProfessorlist:[],
+        Postdoctorallist:[],
+        Doctorlist:[],
+        Masterlist:[],
+        Otherlist:[],
+        typelist:[],
+        typeobj:{},
       };
  
     },
+    computed: {
+      namegroup: function () {
+        return this.users.filter(function (user) {
+          return user.isActive
+        })
+      }
+    },
     mounted() {
       this.getData();
-      this.getnewData();
     },    
     methods: {
       
@@ -312,124 +290,31 @@
       getData() {
         Axios.get('/api/staff/getAllStaff').then(response => {
             this.tableData=response.data.result;
-            console.log(this.tableData);
-            this.professorlist+="<tr>";
-            this.AssProfessorlist+="<tr>";
-            this.Postdoctorallist+="<tr>";
-            this.Doctorlist+="<tr>";
-            this.Masterlist+="<tr>";
-            this.Otherlist+="<tr >";
-            console.log(this.professorlist);
-            var count1 = 0;
-            var count2 = 0;
-            var count3 = 0;
-            var count4 = 0;
-            var count5 = 0;
-            var count6 = 0;
-            
             for(var i = 0;i<this.tableData.length;i++){
-              console.log(this.tableData[i].type);
-              console.log(this.tableData[i]);
-                if(this.tableData[i].type=="教授"){
-                  if(this.tableData[i].info!=null){
-                    this.professorlist+='<td><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
-                    this.professorlist+=this.tableData[i].id;
-                    this.professorlist+='">';
-                    this.professorlist+=this.tableData[i].name;
-                    this.professorlist+='</a>';
-                  }
-                  else{this.professorlist+="<td>";
-                  this.professorlist+=this.tableData[i].name};
-                  this.professorlist+="</td>";
-                  count1++;
-                  if(count1==8){count1=0;this.professorlist+="</tr><tr>"}
-                }
-                else if(this.tableData[i].type=="副教授"){
-                  if(this.tableData[i].info!=null){
-                    this.AssProfessorlist+='<td sytle="width:90px"><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
-                    this.AssProfessorlist+=this.tableData[i].id;
-                    this.AssProfessorlist+='">';
-                    this.AssProfessorlist+=this.tableData[i].name;
-                    this.AssProfessorlist+='</a>';
-                  }
-                  else{this.AssProfessorlist+="<td sytle='width:90px'>";
-                  this.AssProfessorlist+=this.tableData[i].name};
-                  this.AssProfessorlist+="</td>";
-                  count2++;
-                  if(count2==8){this.AssProfessorlist+="</tr><tr>"}
-                }
-                else if(this.tableData[i].type=="博士后"){
-                  if(this.tableData[i].info!=null){
-                    this.Postdoctorallist+='<td><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
-                    this.Postdoctorallist+=this.tableData[i].id;
-                    this.Postdoctorallist+='">';
-                    this.Postdoctorallist+=this.tableData[i].name;
-                    this.Postdoctorallist+='</a>';
-                  }
-                  else{this.Postdoctorallist+="<td>";
-                  this.Postdoctorallist+=this.tableData[i].name};
-                  this.Postdoctorallist+="</td>";
-                  count3++;
-                  if(count3==8){this.Postdoctorallist+="</tr><tr>"}
-                }
-                else if(this.tableData[i].type=="博士"){
-                  if(this.tableData[i].info!=null){
-                    this.Doctorlist+='<td sytle="width:90px"><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
-                    this.Doctorlist+=this.tableData[i].id;
-                    this.Doctorlist+='">';
-                    this.Doctorlist+=this.tableData[i].name;
-                    this.Doctorlist+='</a>';
-                  }
-                  else{this.Doctorlist+="<td sytle='width:90px'>";
-                  this.Doctorlist+=this.tableData[i].name};
-                  this.Doctorlist+="</td>";
-                  count4++;
-                  if(count4==8){this.Doctorlist+="</tr><tr>"}
-                }
-                else if(this.tableData[i].type=="硕士"){
-                  if(this.tableData[i].info!=null){
-                    this.Masterlist+='<td><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
-                    this.Masterlist+=this.tableData[i].id;
-                    this.Masterlist+='">';
-                    this.Masterlist+=this.tableData[i].name;
-                    this.Masterlist+='</a>';
-                  }
-                  else{this.Masterlist+="<td>";
-                  this.Masterlist+=this.tableData[i].name};
-                  this.Masterlist+="</td>";
-                  count5++;
-                  if(count5==8){this.Masterlist+="</tr><tr>"}
-                }
-                else{
-                  if(this.tableData[i].info!=null){
-                    this.Otherlist+='<td><a style="color:rgb(57, 142, 243)" href="/lab3Info?'
-                    this.Otherlist+=this.tableData[i].id;
-                    this.Otherlist+='">';
-                    this.Otherlist+=this.tableData[i].name;
-                    this.Otherlist+='</a>';
-                  }
-                  else{this.Otherlist+="<td>";
-                  this.Otherlist+=this.tableData[i].name};
-                  this.Otherlist+="</td>";
-                  count6++;
-                  if(count6==8){this.Otherlist+="</tr><td>"}
-                }
-                
-            };
-            this.professorlist+=new Array(9-count1).join("<td></td>")+"</tr>";
-            this.AssProfessorlist+=new Array(9-count2).join("<td></td>")+"</tr>";
-            this.Postdoctorallist+=new Array(9-count3).join("<td></td>")+"</tr>";
-            this.Doctorlist+=new Array(9-count4).join("<td></td>")+"</tr>";
-            this.Masterlist+=new Array(9-count5).join("<td></td>")+"</tr>";
-            this.Otherlist+=new Array(9-count6).join("<td></td>")+"</tr>";
+              var typeobj={type:this.tableData[i].type,type_id:this.tableData[i].type_id}
+              console.log(typeobj);
+              console.log(this.typelist);
+              var flag = true;
+              for(var j=0;j<this.typelist.length;j++){
+                if(this.typelist[j].type == typeobj.type){
+                  flag = false;
+                };
+              }; 　　
+              if(flag){this.typelist.push(typeobj);};
+                console.log(typeobj);
+                console.log(this.typelist);
+                console.log(this.typelist.indexOf(typeobj));
 
-            console.log(this.professorlist);
-            console.log(this.AssProfessorlist);
-              
+
+
+            };
+
+
+            console.log(this.typelist);
+            console.log(this.tableData);
         }, response => {
             console.log("error");
           });
-        // professorlist:"<tr ><td>单元格1</td><td> 单元格2</td><td> 单元格3</td><td>单元格4</td><td> 单元格5</td><td> 单元格6</td><td>单元格7</td><td> 单元格8</td></td>"      ,
       },
 
     },
