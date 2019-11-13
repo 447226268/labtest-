@@ -5,7 +5,7 @@
         delete from homepage_footer where hf_id=#{hf_id}
     </delete>
     <insert id="insertFooter" parameterType="com.gooalgene.labtest.entity.Homepage_footer">
-        insert into homepage_footer values (null,#{hf_first},#{hf_second})
+        insert into homepage_footer values (null,#{hf_text})
     </insert>
     <select id="findFooters" resultType="com.gooalgene.labtest.entity.Homepage_footer">
         select * from homepage_footer order by hf_id desc
