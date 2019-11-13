@@ -52,18 +52,19 @@
     <div name="友情链接" class="link_main">
       <div class="show">友情链接</div>
 
-      <el-form ref="form" :model="form_links" label-width="80px">
-        <div class="link_input">
-          <el-input v-model="form_links.name" style="width:300px; float:left"></el-input>
-          <el-input v-model="form_links.name" style="width:500px; margin-left:200px"></el-input>
+      <el-form ref="form" label-width="80px">
+        <div class="link_input" v-for="(items, i) in links_form" :key="i">
+          <el-input v-model="items.hl_text" style="width:300px; float:left"></el-input>
+          <el-input v-model="items.hl_url" style="width:500px; margin-left:200px"></el-input>
+          <el-button type="danger" icon="el-icon-delete" style="margin-left:40px" circle  @click="deleteLink(i)"></el-button>
         </div>
-        <el-button icon="el-icon-plus" class="link_input_ico" circle></el-button>
+        <el-button icon="el-icon-plus" class="link_input_ico" circle @click="addLink"></el-button>
       </el-form>
 
       <div class="postion">
-        <el-button type="primary" @click="updataNotice" class="width">保存</el-button>
-        <el-button type="primary" @click="updataNoticestate" class="width">发布</el-button>
-        <el-button type="danger" @click="gobackpage" class="width">取消</el-button>
+        <el-button type="primary" @click="updataLink" class="width">保存</el-button>
+        <el-button type="primary" @click="updataLink" class="width">发布</el-button>
+        <el-button type="danger" @click="pagereflsh" class="width">取消</el-button>
       </div>
 
     </div>
@@ -71,19 +72,20 @@
     <div name="页脚设置" class="link_main">
       <div class="show">页脚设置</div>
 
-      <el-form ref="form" :model="form_footer" label-width="80px">
+      <el-form ref="form" label-width="80px">
         <div class="link_input">
-          <el-form-item label="输入框1：">
-            <el-input style="width: 700px;" v-model="form_footer.url"></el-input>
+          <el-form-item label="输入框：" v-for="(items, i) in footer_form" :key="i">
+            <el-input style="width: 700px;" v-model="items.hf_text"></el-input>
+            <el-button type="danger" icon="el-icon-delete" style="margin-left:40px" circle  @click="deleteFooter(i)"></el-button>
         </el-form-item>
         </div>
-        <el-button icon="el-icon-plus" class="link_input_ico" circle></el-button>
+        <el-button icon="el-icon-plus" class="link_input_ico" circle @click="addFooter"></el-button>
       </el-form>
 
       <div class="postion">
-        <el-button type="primary" @click="updataNotice" class="width">保存</el-button>
-        <el-button type="primary" @click="updataNoticestate" class="width">发布</el-button>
-        <el-button type="danger" @click="gobackpage" class="width">取消</el-button>
+        <el-button type="primary" @click="updataFooterall" class="width">保存</el-button>
+        <el-button type="primary" @click="updataFooterall" class="width">发布</el-button>
+        <el-button type="danger" @click="pagereflsh" class="width">取消</el-button>
       </div>
 
     </div>
@@ -96,7 +98,13 @@
 import {
   getHomeFigure,
   url_insertHomeFigure,
-  insertHomeFigure
+  insertHomeFigure,
+  getLinkall,
+  url_updataLink,
+  updataLink,
+  getFooterall,
+  url_updataFooter,
+  updataFooter,
 } from "@/api/index.js";
 export default {
   data() {
@@ -113,26 +121,18 @@ export default {
           hn_state: 0,
         }
       ],
-      news_list:[
-      
-      ],
-      meeting_list:[
-  
-      ],
-      newsImageUrl: "",
+      news_list:[],
+      meeting_list:[],
       newsVisible: false,
-      meetingImageUrl: "",
       meetingVisible: false,
-      form_links: {
-        name: "www.baidu.com"
-      },
-      form_footer: {
-        url: "武汉理工大学"
-      }
+      links_form:[],
+      footer_form:[],
     };
   },
   created() {
     this.getAllFigure();
+    this.getAllLink();
+    this.getAllFooter();
   },
   methods: {
     pagereflsh(){
@@ -215,6 +215,79 @@ export default {
             this.meeting_list.push({url : a.data.result[i].hn_graph})
           }
         }
+      }
+    },
+    async getAllLink(){
+      let a = await getLinkall();
+      for(let i = 0; i < a.data.result.length; i++){
+        let s = {};
+        s.hl_id = a.data.result[i].hl_id;
+        s.hl_text = a.data.result[i].hl_text;
+        s.hl_url = a.data.result[i].hl_url;
+        this.links_form.push(s);
+      }
+    },
+    addLink(){
+      let s ={};
+      s.hl_id = -1;
+      s.hl_text = "";
+      s.hl_url = "";
+      this.links_form.push(s);
+    },
+    deleteLink(i){
+      this.links_form.splice(i, 1);
+    },
+    async updataLink(){
+
+      let a = await updataLink(url_updataLink, this.links_form, "post");
+      console.log(a);
+      if(a.data.result === "插入成功"){
+        this.$message({
+          message: '恭喜你，链接设置成功!',
+          type: 'success'
+          });
+          //this.$router.go(0);
+      }
+      else{
+        this.$message.error('链接设置失败!');
+        this.$router.go(0); 
+      }
+    },
+    async getAllFooter(){
+      let a = await getFooterall();
+      for(let i = 0; i < a.data.result.length; i++){
+        let s ={};
+        s.hf_id = a.data.result[i].hf_id;
+        s.hf_text = a.data.result[i].hf_text;
+        this.footer_form.push(s);
+      }
+    },
+    addFooter(){
+      if(this.footer_form.length < 5)
+      {
+        let s = {};
+        s.hf_id = -1;
+        s.hf_text = "";
+        this.footer_form.push(s);  
+      }
+      else{
+        this.$message.error("最多添加5条页脚！");
+      } 
+    },
+    deleteFooter(i){
+      this.footer_form.splice(i, 1);
+    },
+    async updataFooterall(){
+      let a = await updataFooter(url_updataFooter, this.footer_form, "post");
+      if(a.data.result === "插入成功"){
+        this.$message({
+          message: "恭喜你，插入成功!",
+          type: "success"
+        });
+      }
+      else{
+        this.$message.error("插入失败！");
+        this.$router.go(0);
       }
     },
   }

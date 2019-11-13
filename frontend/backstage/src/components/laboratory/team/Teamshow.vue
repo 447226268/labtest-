@@ -34,10 +34,14 @@
           </el-table-column>
           <el-table-column label="操作" >
           <template slot-scope="scope">
+            <div style="float:right">
             <el-button
               size="mini"
-              style="float:right"
               @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button
+              size="mini"
+              @click="handleDelete(scope.$index, scope.row, index)">删除</el-button>
+          </div>
           </template>
           </el-table-column>
           <el-table-column
@@ -88,7 +92,7 @@
 
         <el-form-item label="类型选择:">
             <el-select v-model="staffinsert.type">
-              <div v-for="(item, i) in type_string" :key="i">
+              <div v-for="(item, i) in type_string_edit" :key="i">
                 <el-option :label= "item.name" :value="item.name"></el-option>
               </div>
             </el-select>
@@ -111,7 +115,7 @@
 </template>
 <script>
 import tinymce from "@/components/tinymce.vue";
-import { getStaffall, getAllType, url_insertStaff, insertStaff} from "@/api";
+import { getStaffall, getAllType, url_updataStaffType, updataStaffType, url_insertStaff, insertStaff, url_deletestaffIndex, deletestaffIndex} from "@/api";
 export default {
   data() {
     return {
@@ -121,10 +125,7 @@ export default {
         name: "",
       },
       type_string_edit: [],
-      type_string: [],
       allstaff: [],
-      input: "123",
-      
     };
   },
   
@@ -133,6 +134,22 @@ export default {
   },
   created() {
     this.getStaff();
+  },
+  watch: {
+    dialogFormVisible: function(newD, oldD){
+      if(newD === false){
+        this.staffinsert = {
+        type: "",
+        name: "",
+      };
+      this.type_string_edit=[];
+      this.allstaff= [];
+      this.getStaff();
+      for(let i = 0; i < this.type_string_edit.length; i++){
+        this.type_string_edit[i].flag = true;
+      }
+      }
+    }
   },
   methods: {
     go2introduction() {
@@ -154,7 +171,17 @@ export default {
       this.type_string_edit[tabindex].flag = false;
     },
     staffremove(tabindex){
+      for(let i = 0; i < this.allstaff.length; i++){
+        if(this.allstaff[i].type === this.type_string_edit[tabindex].name){
+          this.$message.error("无法删除该条目!");
+          return;
+        }
+      }
       this.type_string_edit.splice(tabindex, 1);
+    },
+    startSet(){
+      this.type_string_edit = [];
+      this.allstaff = [];
     },
     staffadd(){
       let s = {};
@@ -162,12 +189,36 @@ export default {
       s.flag = true;
       this.type_string_edit.push(s);
     },
-    updatastafftype(){
-      alert("123")
+    async updatastafftype(){
+      let s = [];
+      for(let i = 0; i < this.type_string_edit.length; i++){
+        s.push(this.type_string_edit[i].name);
+      }
+      let a = await updataStaffType(url_updataStaffType, {requestment: s}, "post");
+      if(a.data.result === "success!"){
+        this.$message({
+          message: "更新成功！",
+          type: "success"
+        });
+      }
+      else{
+        this.$message.error("更新失败!");
+      }
     },
     async insertstaff(){
       if(this.staffinsert.type !== "" && this.staffinsert.name !== ""){
         let a = await insertStaff(url_insertStaff, this.staffinsert,"post");
+        if(a.data.result === "success!"){
+          this.$message({
+            message: "上传成功!",
+            type: "success",
+          });
+          this.startSet();
+          this.getStaff();
+        }
+        else{
+          this.$message.error("上传失败!");
+        }
       }
       
     },
@@ -176,15 +227,22 @@ export default {
           path: "/laboratory/team/staffedit"  + parseInt(row.id)
       });
     },
+    async handleDelete(index, row, i){
+      let a = await deletestaffIndex(url_deletestaffIndex + row.id, {}, "delete");
+      if(a.data.result === "success!"){
+        this.allstaff[i].item.splice(index, 1);
+        if(this.allstaff[i].item.length === 0){
+          this.allstaff.splice(i, 1);
+        }
+      }
+    },
     async getStaff(){
       let t = await getAllType();
       for(let i = 0; i < t.data.result.length; i++){
-        let s1 = {}, s2 = {};
-        s1.name = t.data.result[i];
-        s2.name = t.data.result[i];
-        s2.flag = true;
-        this.type_string.push(s1);
-        this.type_string_edit.push(s2);
+        let s = {};
+        s.name = t.data.result[i].st_name;
+        s.flag = true;
+        this.type_string_edit.push(s);
       }
 
       let a = await getStaffall();

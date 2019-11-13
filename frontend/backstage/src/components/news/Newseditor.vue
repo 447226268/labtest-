@@ -27,11 +27,12 @@
           class="upload"
           :action="url"
           :multiple="false"
+          :auto-upload="false"
           name="file"
           ref="upload"
           :limit="1"
           :file-list="filelist"
-          :on-success="success"
+          :on-change="on_change"
           :on-remove="removeimg"
         >
           <i class="el-icon-plus plus"></i>
@@ -78,7 +79,7 @@ export default {
     return {
       index: 0,
       radio: "1",
-      url: url_uploadPic,
+      url: "",
       filelist:[],
       dialogImageUrl:"",
       dialogVisible: false,
@@ -119,11 +120,15 @@ export default {
     gobackpage() {
       this.$router.go(-1);
     },
-    success(res, file){
-      this.dialogImageUrl = URL.createObjectURL(file.raw);
-      this.form.nl_graph = process.env.VUE_APP_BASE_API + res.result;
-      let s = {name: file.name, url: URL.createObjectURL(file.raw)};
-      this.filelist.push(s);
+    on_change(file){
+       var reader = new FileReader()
+      reader.readAsDataURL(file.raw)
+      reader.onload = () => {
+        this.form.nl_graph = reader.result;
+        let s = {name: file.name, url: reader.result};
+        this.filelist.push(s);
+        this.dialogImageUrl = reader.result;
+      }
     },
     removeimg(){
       this.dialogImageUrl = "";

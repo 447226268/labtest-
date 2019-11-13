@@ -20,6 +20,16 @@ export const getHomeFigure = () => ajax("/figure/getFigure/", {})
 //新闻动态配图和学术活动配图上传
 export const url_insertHomeFigure = "/figure/insertFigure/"
 export const insertHomeFigure = (url_insertHomeFigure, data, type) => ajax(url_insertHomeFigure, data, "post") 
+//友情链接获取
+export const getLinkall = () => ajax("/link/getLinks/", {})
+//友情链接更新
+export const url_updataLink = "/link/insertLink/"
+export const updataLink = (url_updataLink, data, type) => ajax(url_updataLink, data, "post")
+//页脚设置获取
+export const getFooterall = () => ajax("/footer/getFooters/", {})
+//页脚设置更新
+export const url_updataFooter = "/footer/insertFooter/"
+export const updataFooter = (url_updataFooter, data, type) => ajax(url_updataFooter, data, "post")
 
 //实验室信息（实验室简介、研究方向）
 export const getLabIntroduction = () => ajax("/lab/getLabIntro", {}) 
@@ -35,9 +45,15 @@ export const getAllType = () => ajax("/staff/getAllType", {})
 //获取个人信息
 export const url_getStaffIndex = "/staff/getStaffInfo"
 export const getStaffIndex = (url_getStaffIndex, data) => ajax(url_getStaffIndex, data) 
+//删除某人
+export const url_deletestaffIndex = "/staff/del/"
+export const deletestaffIndex = (url_deletestaffIndex, {}) => ajax(url_deletestaffIndex, {}, "delete") 
 //更新个人信息
 export const url_updataStaffIntroIndex = "/staff/updateStaffInfo"
 export const updataStaffIntroIndex = (url_updataStaffIntroIndex, data, type) => ajax(url_updataStaffIntroIndex, data, "post")
+//更新人员类别
+export const url_updataStaffType = "/staff/setAllType"
+export const updataStaffType = (url_updataStaffType, data, type) => ajax(url_updataStaffType, data, "post")
 //插入新的人员
 export const url_insertStaff = "/staff/insertStaff"
 export const insertStaff = (url_insertStaff, data, type) => ajax(url_insertStaff, data, "post")
