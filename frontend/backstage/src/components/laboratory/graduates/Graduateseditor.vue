@@ -4,12 +4,12 @@
       
       <el-form ref="form" :model="form" label-width="85px" label-position="left" class="postion">
         <el-form-item label="类型选择:" :required="true">
-          <el-select v-model="form.type_id">
+          <el-select v-model="form.type">
             <el-option
               v-for="(item, i) in form_type"
               :key="i"
-              :label="item.name"
-              :value="item.id"
+              :label="item"
+              :value="item"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -19,7 +19,7 @@
       </el-form-item>
 
       <el-form-item label="活动时间:" :required="true">
-        <el-date-picker type="date" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="form.date" style="width: 100%;"></el-date-picker>
+        <el-date-picker type="date" placeholder="选择日期"  value-format="yyyy-MM-dd" v-model="form.date" style="width: 100%;"></el-date-picker>
       </el-form-item>
 
       <el-radio class="postion" v-model="radio" label="1">自定义编辑</el-radio>
@@ -116,8 +116,8 @@ export default {
 
     async getAllType(){
       let a = await getGraduateType(url_getGraduateType, {});
-      for (let i = 0; i < a.data.result.type.length; i++) {
-          this.form_type.push(a.data.result.type[i]);
+      for (let i = 0; i < a.data.result.length; i++) {
+          this.form_type.push(a.data.result[i].pt_name);
         }
     },
 

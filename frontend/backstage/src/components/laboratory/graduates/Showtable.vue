@@ -77,15 +77,7 @@ export default {
       });
     },
     async handleDelete(index, row) {
-      let a = await deleteGraduate(
-        url_deleteGraduate,
-        {
-          id: parseInt(
-            this.alltableDate[(this.currentIndex - 1) * 10 + index].id
-          )
-        },
-        "get"
-      );
+      let a = await deleteGraduate(url_deleteGraduate + "/" + this.alltableDate[(this.currentIndex - 1) * 10 + index].id, {}, "delete");
       var arr = [(this.currentIndex - 1) * 10 + index + 1];
       this.alltableDate = [];
       this.getGraduate();
@@ -98,6 +90,16 @@ export default {
       this.currentIndex = index;
       this.tableData = this.alltableDate.slice((index - 1) * 10, index * 10);
     },
+    timestampToTime(timestamp) {
+	    var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+	    var Y = date.getFullYear() + '-';
+	    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+	    var D = date.getDate() + ' ';
+	    var h = date.getHours() + ':';
+	    var m = date.getMinutes() + ':';
+	    var s = date.getSeconds();
+	    return Y + M + D;
+	  },
     async getGraduate() {
       let a = await getGraduateall();
       this.total = a.data.result.length;
@@ -105,7 +107,7 @@ export default {
         let s = {};
         s.id = a.data.result[i].id;
         s.state = this.state_string[a.data.result[1].state];
-        s.date = a.data.result[i].date;
+        s.date = this.timestampToTime(a.data.result[i].date).toString();
         s.type = a.data.result[i].type;
         s.title = a.data.result[i].title;
         this.alltableDate.push(s);

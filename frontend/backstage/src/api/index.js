@@ -20,6 +20,11 @@ export const getHomeFigure = () => ajax("/figure/getFigure/", {})
 //新闻动态配图和学术活动配图上传
 export const url_insertHomeFigure = "/figure/insertFigure/"
 export const insertHomeFigure = (url_insertHomeFigure, data, type) => ajax(url_insertHomeFigure, data, "post") 
+//轮播图
+export const getheadlineNewsFigure = () => ajax("/headlineNews/getFigure/", {}) 
+//友情链接更新
+export const url_updataheadlineNewsFigure = "/headlineNews/insertHeadlineNews/"
+export const updataheadlineNewsFigure = (url_updataheadlineNewsFigure, data, type) => ajax(url_updataheadlineNewsFigure, data, "post")
 //友情链接获取
 export const getLinkall = () => ajax("/link/getLinks/", {})
 //友情链接更新
@@ -69,14 +74,14 @@ export const getGraduateType = (url_getGraduateType, data) => ajax(url_getGradua
 export const url_getGraduateIndex = "/postgraduate/getPostgraduate/"
 export const getGraduateIndex = (url_getGraduateIndex, data) => ajax(url_getGraduateIndex, data) 
 //更新
-export const url_updataGraduateIndex = "/postgraduate/getPostgraduate/"
+export const url_updataGraduateIndex = "/postgraduate/insertPostgraduate/"
 export const updataGraduateIndex = (url_updataGraduateIndex, data, type) => ajax(url_updataGraduateIndex, data, "post") 
 //插入
 export const url_insertGraduate = "/postgraduate/insertPostgraduate/"
 export const insertGraduate = (url_insertGraduate, data, type) => ajax(url_insertGraduate, data, "post") 
 //删除
 export const url_deleteGraduate = "/postgraduate/deletePostgraduate/"
-export const deleteGraduate = (url_deleteGraduate, data, type) => ajax(url_deleteGraduate, data, "get") 
+export const deleteGraduate = (url_deleteGraduate, data, type) => ajax(url_deleteGraduate, data, "delete") 
 
 //新闻发布
 //获取所有显示在浏览页面上

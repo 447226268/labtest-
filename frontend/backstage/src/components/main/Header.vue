@@ -1,7 +1,7 @@
 <template>
     <el-row :gutter="20">
         <el-col :span="4">
-            <el-image :src="header_image_whut" class="header-image-whut" :fit="contain"></el-image> 
+            <el-image :src="header_image_whut" class="header-image-whut" ></el-image> 
         </el-col>
         <el-col :span="16" class="header-whut-Bioinformatics-Laboratory" style="padding-left: 50px">武汉理工大学生物信息实验室</el-col>
         <el-col :span="4" class="header-out "><el-link :underline="false" style="color : black">退出</el-link></el-col>
