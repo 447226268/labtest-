@@ -13,6 +13,7 @@ import "tinymce/plugins/image"; // 插入上传图片插件
 import "tinymce/plugins/media"; // 插入视频插件
 import "tinymce/plugins/table"; // 插入表格插件
 import "tinymce/plugins/lists"; // 列表插件
+import "tinymce/plugins/link"; // 链接插件
 import "tinymce/plugins/wordcount"; // 字数统计插件
 export default {
   components: {
@@ -29,12 +30,13 @@ export default {
     },
     plugins: {
       type: [String, Array],
-      default: "lists image media table wordcount"
+      default: "lists image media table wordcount link"
     },
     toolbar: {
       type: [String, Array],
       default:
-        "undo redo |  formatselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | lists image media table | removeformat"
+        "undo redo |  formatselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | lists image media table | removeformat | link" ,
+      
     }
   },
   data() {
@@ -47,8 +49,8 @@ export default {
         plugins: this.plugins, // 父组件传入 或者 填写个默认的插件 要选用什么插件都可以 去官网可以查到
         toolbar: this.toolbar, // 工具栏 我用到的也就是lists image media table wordcount 这些 根据需求而定
         images_upload_url: url_uploadPic, //上传路径
-        // 此处为图片上传处理函数，这个直接用了base64的图片形式上传图片，
         
+        // 此处为图片上传处理函数，这个直接用了base64的图片形式上传图片，
         images_upload_handler: (blobInfo, success, failure) => {
 
           success("data:image/png;base64," + blobInfo.base64());
@@ -85,7 +87,12 @@ export default {
   mounted() {
     tinymce.init({});
   },
-  methods: {},
+  methods: {
+
+    s(){
+      alert("123")
+    }
+  },
   watch: {
     value(newValue) {
       this.myValue = newValue;
