@@ -16,7 +16,7 @@
         )
         </insert>
     <update id="updateResource">
-        update news_list set nl_state = #{nl_state},nl_content = #{nl_content},nl_title = #{nl_title},nl_type_id = #{nl_type_id},nl_subType_id = #{nl_subType_id}, nl_url = #{nl_url} WHERE nl_id = #{nl_id}
+        update news_list set nl_state = #{nl_state},nl_graph = #{nl_graph},nl_content = #{nl_content},nl_title = #{nl_title},nl_type_id = #{nl_type_id},nl_subType_id = #{nl_subType_id}, nl_url = #{nl_url} WHERE nl_id = #{nl_id}
     </update>
     <insert id="updateState">
         update news_list set nl_state = #{notice.state} where nl_id in =
