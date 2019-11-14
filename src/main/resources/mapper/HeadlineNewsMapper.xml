@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gooalgene.labtest.dao.HeadlineNewsMapper">
     <insert id="updateHeadlineNews" parameterType="com.gooalgene.labtest.entity.HeadlineNews">
-        update headlineNews set hh_title = #{hh_title},hh_date = #{hh_date},hh_graph = #{hh_graph} WHERE hh_id = #{hh_id}
+        update homepage_headlineNews set hh_title = #{hh_title},hh_date = #{hh_date},hh_graph = #{hh_graph} WHERE hh_id = #{hh_id}
     </insert>
     <select id="findHeadlineNews" parameterType="integer" resultType="com.gooalgene.labtest.entity.HeadlineNews">
-        select * from headlineNews order by hh_date
+        select * from homepage_headlineNews order by hh_date
     </select>
     <insert id="insertHeadlineNews" parameterType="com.gooalgene.labtest.entity.HeadlineNews">
-        insert into headlineNews values(null,#{hh_graph},#{hh_date},#{hh_graph})
+        insert into homepage_headlineNews values(null,#{hh_graph},#{hh_date},#{hh_graph})
     </insert>
 </mapper>
