@@ -4,6 +4,8 @@ import com.gooalgene.labtest.dto.Postgraduate;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class Postgraduate_list {
@@ -11,7 +13,7 @@ public class Postgraduate_list {
     private String pl_name;
     private String pl_title;
     private String pl_content;
-    private String pl_date;
+    private Date pl_date;
     private Integer pl_state;
     private String pl_url;
     private Integer pl_type_id;
