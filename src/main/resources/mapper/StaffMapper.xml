@@ -89,6 +89,7 @@
         <trim prefix="set" suffixOverrides=",">
             <if test="si_state!=null">si_state = #{si_state},</if>
             <if test="si_content!=null">si_content = #{si_content},</if>
+            <if test="si_graph!=">si_graph = #{si_graph},</if>
             <if test="si_url!=null">si_url = #{si_url},</if>
         </trim>
         WHERE
