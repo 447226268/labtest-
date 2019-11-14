@@ -5,10 +5,10 @@
         select * from news_list order by nl_date desc
     </select>
     <select id="findById" resultType="com.gooalgene.labtest.entity.News_List">
-        select * from news_list where nl_id =#{nl_id} order by nl_date desc
+        select * from news_list where nl_id =#{nl_id}
     </select>
     <delete id="deleteNotices" parameterType="java.lang.Integer">
-        delete from news_list where nl_id=#{nl_id} order by nl_date desc
+        delete from news_list where nl_id=#{nl_id}
     </delete>
     <insert id="addNotice" parameterType="com.gooalgene.labtest.entity.News_List">
         insert  into  news_list values (
