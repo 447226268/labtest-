@@ -12,7 +12,7 @@
     </delete>
     <insert id="addResource">
         INSERT  INTO  news_list VALUES (
-            null,#{nl_title},#{nl_content},now(),#{nl_graph},#{nl_type_id},#{nl_subType_id},#{nl_state},#{nl_url}
+            null,#{nl_title},#{nl_content},#{nl_date},#{nl_graph},#{nl_type_id},#{nl_subType_id},#{nl_state},#{nl_url}
         )
         </insert>
     <update id="updateResource">
