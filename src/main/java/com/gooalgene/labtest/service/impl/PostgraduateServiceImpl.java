@@ -39,6 +39,9 @@ public class PostgraduateServiceImpl implements PostgraduateService {
     @Override
     public BaseResponse<String> insertPostgraduate(Postgraduate postgraduate) {
         Integer id = postgraduate.getId();
+        if (postgraduate.getTypeId().equals(0)) {
+            postgraduate.setTypeId(postgraduateMapper.typeToId(postgraduate.getType()));
+        }
         if (postgraduateMapper.getPostgraduate(id) != null) {
             postgraduateMapper.updatePostgraduate(new Postgraduate_list(postgraduate));
             return new BaseResponse<>("success!");

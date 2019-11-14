@@ -14,7 +14,7 @@ public class Postgraduate {
     private String date;
     private Integer state;
     private String url;
-    private Integer typeId;
+    private Integer typeId = 0;
     private String type;
 
     public Postgraduate() {
