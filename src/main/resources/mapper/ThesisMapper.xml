@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gooalgene.labtest.dao.ThesisMapper">
     <select id="findThesis" resultType="com.gooalgene.labtest.entity.Thesis_List">
-        select * from thesis_list
+        select * from thesis_list by tl_date desc
     </select>
     <select id="findById" resultType="com.gooalgene.labtest.entity.Thesis_List">
         select * from thesis_list where tl_id =#{tl_id}

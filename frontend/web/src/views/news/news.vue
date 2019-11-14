@@ -55,7 +55,8 @@
               ref="multipleTable"
               :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
               stripe
-              style="width: 100%" 
+              style="width: 100%"
+              :show-header="false" 
               @selection-change="handleSelectionChange"
               @row-click="clickTr">
               <el-table-column
@@ -197,13 +198,13 @@
 <script >
   import Axios from 'axios'
   import NewsInfo from './newsInfo.vue'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name : 'news',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
       NewsInfo
     },
 
@@ -214,7 +215,7 @@
         newData:[],
         totalcount:0,
         currentPage:1,
-        pagesize:30,
+        pagesize:10,
       };
  
     },
@@ -225,7 +226,12 @@
     methods: {
       clickTr(row, event, column){
         console.log(row.nl_id);
-        this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
+        if(row.nl_url==""){
+          this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
+        }
+        else{
+          window.location.href = row.nl_url
+        }
       },
       handle(row,column,event,cell){
         console.log(row)
@@ -254,7 +260,7 @@
         Axios.get('/api/news/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_nl_type_name=="新闻"&&this.tableData[i].nl_nl_subType_name=="头条新闻"){
+                if (this.tableData[i].nl_state==1&&this.tableData[i].nl_nl_subType_name=="头条新闻"){
                   console.log(this.tableData[i].nl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;

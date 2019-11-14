@@ -203,13 +203,13 @@
 <script >
   import Axios from 'axios'
   import ThesisInfo from './thesisInfo.vue'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name : 'thesis',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
       ThesisInfo
     },
 
@@ -220,7 +220,7 @@
         newData:[],
         totalcount:0,
         currentPage:1,
-        pagesize:30,
+        pagesize:10,
       };
  
     },
@@ -231,7 +231,12 @@
     methods: {
       clickTr(row, event, column){
         console.log(row.tl_id);
-        this.$router.push({name:'thesisInfo',query:{tl_id:row.tl_id}})
+        if(row.tl_url==""){
+          this.$router.push({name:'thesisInfo',query:{tl_id:row.tl_id}})
+        }
+        else{
+          window.location.href = row.tl_url
+        }
       },
       handle(row,column,event,cell){
         console.log(row)
@@ -260,11 +265,13 @@
         Axios.get('/api/thesis/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
+                if (this.tableData[i].nl_state==1){
                   console.log(this.tableData[i].tl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;
                   console.log(this.totalcount);
                   console.log(this.newData);
+                }
                 
               }
               console.log(this.tableData);

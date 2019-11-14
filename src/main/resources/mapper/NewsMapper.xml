@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gooalgene.labtest.dao.NewsMapper">
     <select id="findNews" resultType="com.gooalgene.labtest.entity.News_List">
-        select * from news_list order by nl_date
+        select * from news_list order by nl_date desc
     </select>
     <select id="findById" resultType="com.gooalgene.labtest.entity.News_List">
         select * from news_list where nl_id =#{nl_id}

@@ -68,9 +68,14 @@
               <h1 v-html = "newData.nl_content">  </h1>
             </div>
 
-            <div id="nlcontent" >
-              <h1 >{{lastpaper}}  {{lastData.nl_title}}</h1>
-              <h1 >{{nextpaper}}  {{nextData.nl_title}}</h1>
+            <div id="nlpage" >
+              
+                <a v-if="lastData.nl_title!=undefined" :href="'newsInfo?nl_id='+lastData.nl_id">上一篇：  {{lastData.nl_title}}</a>
+             
+              <br>
+              
+                <a v-if="nextData.nl_title!=undefined" :href="'newsInfo?nl_id='+nextData.nl_id">下一篇：  {{nextData.nl_title}}</a>
+              
             </div>
 
 
@@ -199,13 +204,13 @@
 
 <script >
   import Axios from 'axios'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name: 'newsInfo',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
     },
     data() {
       return {
@@ -215,9 +220,6 @@
         lastData:{},
         nextData:{},
         thispapernum:null,
-        lastpaper:"",
-        nextpaper:"",
-        // nl_id:0,
         nl_title:'标题',
         realTime:'日期',
         nl_graph:'图片',
@@ -243,18 +245,22 @@
                   console.log(this.thispapernum);
                 }
               };
-              for(var j = 0;j<this.thispapernum;j++){            
+              for(var j = 0;j<this.thispapernum;j++){
+                if(this.newData.nl_nl_subType_name==this.tableData[j].nl_nl_subType_name&&this.tableData[j].nl_state==1){
                   this.lastData=this.tableData[j];
-                  if(this.lastData!={}){this.lastpaper="<<上一篇："};
-                  console.log(this.lastData);
+                }            
               };
-              for(var k = 0;k<this.thispapernum;l++){            
+              for(var k = this.thispapernum+1;k<this.tableData.length;k++){            
+                if(this.newData.nl_nl_subType_name==this.tableData[k].nl_nl_subType_name&&this.tableData[k].nl_state==1){
                   this.nextData=this.tableData[k];
-                  if(this.nextData!={}){this.nextpaper=">>下一篇："};
-                  console.log(this.nextData);
+                  break;
+                }    
               };
               console.log(this.tableData);
-              console.log(this.tableData.length);
+              console.log(this.lastData);
+              console.log(this.nextData);
+              console.log(this.lastData.nl_title);
+              console.log(this.nextData.nl_title);
         }, response => {
             console.log("error");
           });

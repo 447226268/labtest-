@@ -53,6 +53,12 @@
               <h1 v-html = "newData.tl_content">  </h1>
             </div>
 
+            <div id="tlpage" >
+              <a v-if="lastData.tl_title!=undefined" :href="'thesisInfo?tl_id='+lastData.tl_id">上一篇：  {{lastData.tl_title}}</a>
+              <br>
+              <a v-if="nextData.tl_title!=undefined" :href="'thesisInfo?tl_id='+nextData.tl_id">下一篇：  {{nextData.tl_title}}</a>
+            </div>
+
           </el-row>
 
         </el-main>
@@ -171,19 +177,22 @@
 
 <script >
   import Axios from 'axios'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name: 'thesisInfo',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
     },
     data() {
       return {
         activeIndex:5,
         tableData:[],
         newData:{},
+        lastData:{},
+        nextData:{},
+        thispapernum:null,
         tl_title:'标题',
         realTime:'日期',
         tl_content:'内容',
@@ -204,7 +213,18 @@
                   console.log(this.newData);
 
                 }
-              }
+              };
+              for(var j = 0;j<this.thispapernum;j++){
+                if(this.newData.tl_tl_subType_name==this.tableData[j].tl_tl_subType_name&&this.tableData[j].tl_state==1){
+                  this.lastData=this.tableData[j];
+                }            
+              };
+              for(var k = this.thispapernum+1;k<this.tableData.length;k++){            
+                if(this.newData.tl_tl_subType_name==this.tableData[k].tl_tl_subType_name&&this.tableData[k].tl_state==1){
+                  this.nextData=this.tableData[k];
+                  break;
+                }    
+              };
               console.log(this.tableData);
               console.log(this.tableData.length);
         }, response => {

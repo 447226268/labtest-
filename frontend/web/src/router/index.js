@@ -169,9 +169,5 @@ export default new Router({
       name: "resourceInfo",
       component:  ResourceInfo
     },
-    
-    
-
-    
   ]
 });

@@ -1,6 +1,6 @@
 <template>    
     
-      <el-header height ="350px" class="header">
+      <el-header height ="350px" >
 
         <div id="labname" >
             武汉理工大学智能生物信息实验室
@@ -93,7 +93,7 @@
 
 <script>
 export default {
-  name: "header",
+  name: "webheader",
   data (){
     return {
 

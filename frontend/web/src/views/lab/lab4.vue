@@ -56,6 +56,7 @@
               :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
               stripe
               style="width: 100%" 
+              :show-header="false"
               @selection-change="handleSelectionChange"
               @row-click="clickTr">
               <el-table-column
@@ -198,13 +199,13 @@
 <script >
   import Axios from 'axios'
   import  Lab4Info from './lab4Info.vue'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name : 'lab4',
     components:{    
-      'v-header':header,
-      'v-footer':footer, 
+      'v-header':webheader,
+      'v-footer':webfooter, 
       Lab4Info
     },
 
@@ -215,7 +216,7 @@
         newData:[],
         totalcount:0,
         currentPage:1,
-        pagesize:30,
+        pagesize:10,
       };
  
     },
@@ -225,8 +226,8 @@
     },    
     methods: {
       clickTr(row, event, column){
-        console.log(row.id);
-        this.$router.push({name:'lab4Info',query:{id:row.id}})
+        console.log(row.nl_id);
+          this.$router.push({name:'lab4Info',query:{id:row.id}})
       },
       handle(row,column,event,cell){
         console.log(row)

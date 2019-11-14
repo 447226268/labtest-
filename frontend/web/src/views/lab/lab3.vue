@@ -219,13 +219,13 @@
 <script >
   import Axios from 'axios'
   import Lab3Info from './lab3Info.vue'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name : 'lab3',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
       Lab3Info
     },
 
@@ -236,7 +236,7 @@
         newData:[],
         totalcount:0,
         currentPage:1,
-        pagesize:30,
+        pagesize:10,
         professorlist:[],
         AssProfessorlist:[],
         Postdoctorallist:[],
@@ -248,22 +248,11 @@
       };
  
     },
-    computed: {
-      namegroup: function () {
-        return this.users.filter(function (user) {
-          return user.isActive
-        })
-      }
-    },
     mounted() {
       this.getData();
     },    
     methods: {
       
-      clickTr(row, event, column){
-        console.log(row.id);
-        this.$router.push({name:'labInfo',query:{id:row.id}})
-      },
       handle(row,column,event,cell){
         console.log(row)
         console.log(column)
@@ -304,12 +293,7 @@
                 console.log(typeobj);
                 console.log(this.typelist);
                 console.log(this.typelist.indexOf(typeobj));
-
-
-
             };
-
-
             console.log(this.typelist);
             console.log(this.tableData);
         }, response => {

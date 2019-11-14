@@ -59,13 +59,17 @@
               <div class="block" >
                 <el-image
                   style="margin:auto 50px auto 50px"
-                  :src="'http://192.168.1.126:8083'+newData.info.si_graph"
+                  :src="newData.info.si_graph"
                   :fit="contain"></el-image>
               </div>
             </div>
 
             <div id="licontent" >
               <h1 v-html = "newData.info.si_content">  </h1>
+            </div>
+
+            <div id="stafflink" >
+              <a :href="newData.info.si_url" v-if="newData.info.si_url!=null">个人链接</a>
             </div>
 
           </el-row>
@@ -194,13 +198,13 @@
 
 <script >
   import Axios from 'axios'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name: 'lab3Info',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
     },
     data() {
       return {

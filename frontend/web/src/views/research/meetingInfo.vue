@@ -53,6 +53,12 @@
               <h1 v-html = "newData.nl_content">  </h1>
             </div>
 
+            <div id="nlpage" >
+              <a v-if="lastData.nl_title!=undefined" :href="'meetingInfo?nl_id='+lastData.nl_id">上一篇：  {{lastData.nl_title}}</a>
+              <br>
+              <a v-if="nextData.nl_title!=undefined" :href="'meetingInfo?nl_id='+nextData.nl_id">下一篇：  {{nextData.nl_title}}</a>
+            </div>
+
           </el-row>
 
         </el-main>
@@ -171,19 +177,22 @@
 
 <script >
   import Axios from 'axios'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name: 'meetingInfo',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
     },
     data() {
       return {
         activeIndex:5,
         tableData:[],
         newData:{},
+        lastData:{},
+        nextData:{},
+        thispapernum:null,
         nl_title:'标题',
         realTime:'日期',
         nl_content:'内容',
@@ -204,7 +213,18 @@
                   console.log(this.newData);
 
                 }
-              }
+              };
+              for(var j = 0;j<this.thispapernum;j++){
+                if(this.newData.nl_nl_subType_name==this.tableData[j].nl_nl_subType_name&&this.tableData[j].nl_state==1){
+                  this.lastData=this.tableData[j];
+                }            
+              };
+              for(var k = this.thispapernum+1;k<this.tableData.length;k++){            
+                if(this.newData.nl_nl_subType_name==this.tableData[k].nl_nl_subType_name&&this.tableData[k].nl_state==1){
+                  this.nextData=this.tableData[k];
+                  break;
+                }    
+              };
               console.log(this.tableData);
               console.log(this.tableData.length);
         }, response => {

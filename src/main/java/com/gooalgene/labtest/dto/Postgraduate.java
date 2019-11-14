@@ -4,6 +4,8 @@ import com.gooalgene.labtest.entity.Postgraduate_list;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class Postgraduate {
@@ -11,7 +13,7 @@ public class Postgraduate {
     private String name;
     private String title;
     private String content;
-    private String date;
+    private Date date;
     private Integer state;
     private String url;
     private Integer typeId = 0;
