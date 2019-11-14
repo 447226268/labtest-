@@ -185,13 +185,13 @@
 
 <script >
   import Axios from 'axios'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name: 'lab4Info',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
     },
     data() {
       return {

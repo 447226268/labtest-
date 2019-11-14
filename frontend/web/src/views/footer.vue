@@ -18,11 +18,8 @@
 
       <el-col class="foottest" width="600px" >
 
-          <div id="address" style="top:50px">
-            <p>武汉理工大学鉴湖第四教学楼14层</p>
-            <p>yuanxiaohui(at)whut.edu.cn</p>
-            <p>http://www.wutbiolab.com</p>
-            <p>© Copyright 2019 武汉理工智能生物信息实验室</p>
+          <div id="address" style="top:50px" v-for="item in tableData" :key="item.hf_id">
+            <p>{{item.hf_text}}</p>
           </div>
 
       </el-col>
@@ -57,10 +54,33 @@
 </style>
 
 <script>
-export default {
-  name: "footer",
-  data (){
-    return {}
-  },
-};
+
+  import Axios from 'axios'
+
+  export default {
+    name : 'webfooter',
+
+    data() {
+      return {
+
+        tableData: [],
+      };
+ 
+    },
+    mounted() {
+      this.getData();
+
+    },    
+    methods: {
+      getData() {
+        Axios.get('/api/footer/getFooters').then(response => {
+            this.tableData=response.data.result;
+
+              console.log(this.tableData);
+        }, response => {
+            console.log("error");
+          });
+      },
+    },
+  }
 </script>

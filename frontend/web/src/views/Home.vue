@@ -7,20 +7,21 @@
       <div >
         <div class="homepictures" >
           <el-carousel >
-            <el-carousel-item v-for="item in news1Data" :key="item.nl_id">
-              <div class="carousel-explain">
-                <router-link :to="'newsInfo?nl_id='+item.nl_id">
-                  <el-image
-                    
-                    style="width: 460px; height: 300px; margin:0 "
-                    :src="figureData[0].hn_graph"
-                    :fit="'fill'">
-                  </el-image>
-                  <a   class="picturetext"  >{{item.nl_title}}</a>
-                </router-link>
-              </div>
+            <div v-for="item in news1Data" :key="item.nl_id">
+              <el-carousel-item  v-if="item.nl_graph!=''">
+                <div class="carousel-explain" >
+                  <router-link :to="'newsInfo?nl_id='+item.nl_id" >
+                    <el-image
+                      style="width: 460px; height: 300px; margin:0 "
+                      :src="item.nl_graph"
+                      :fit="'fill'">
+                    </el-image>
+                    <a   class="picturetext"  >{{item.nl_title}}</a>
+                  </router-link>
+                </div>
 
-            </el-carousel-item>
+              </el-carousel-item>
+            </div>
           </el-carousel>
         </div>
       </div>
@@ -223,9 +224,9 @@
 
       <el-container>
         <div class="linktable">
-          <div class="linkitem" v-for="item in linklist" :key="item.lk_id" >
+          <div class="linkitem" v-for="item in linklist" :key="item.hl_id" >
             <i class="el-icon-position"></i>
-            <a :href="item.lk_url" style="text-decoration:none">{{item.lk_name}}</a>
+            <a :href="item.hl_url" style="text-decoration:none">{{item.hl_text}}</a>
           </div>
         </div>
       </el-container>
@@ -266,8 +267,8 @@
     margin: 0;
     line-height: 80px;
     text-align: center;
-    /* background-color: rgba(255,255,255,0.2);  */
-    background-color: #333;
+    background-color: rgba(255,255,255,0.2);  
+    /* background-color: #333; */
     opacity: 0.8;
     color: black;
     font-size: 18px;
@@ -350,8 +351,8 @@
     margin: 0 20px;
     line-height: 40px;
     text-align: center;
-    /* background-color: rgba(255,255,255,0.2);  */
-    background-color: #333;
+    background-color: rgba(255,255,255,0.2);  
+    /* background-color: #333; */
     opacity: 0.8;
     color: black;
     font-size: 18px;
@@ -382,13 +383,13 @@
 
 <script>
   import Axios from 'axios';
-  import header from "./header.vue";
-  import footer from "./footer.vue";
+  import webheader from "./header.vue";
+  import webfooter from "./footer.vue";
   export default {
     name: "home",
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
     },
 
     data() {
@@ -405,13 +406,7 @@
         notice3Data:[],
         resource1Data:[],
         figureData:[],
-        linklist:[
-          {lk_id:1,lk_name:"武汉理工大学计算机科学与技术学院",lk_url:"http://cst.whut.edu.cn/"},
-          {lk_id:2,lk_name:"吉林农业大学植物保护学院",lk_url:"https://zwbh.jlau.edu.cn/index.htm/"},
-          {lk_id:3,lk_name:"华中农业大学动物科学技术学院动物医学院",lk_url:"http://my.hzau.edu.cn/"},
-          {lk_id:4,lk_name:"中科院东北地理所",lk_url:"http://www.neigae.ac.cn/"},
-          {lk_id:5,lk_name:"澳大利亚格里菲斯大学",lk_url:"https://www.griffith.edu.au/"},
-        ],
+        linklist:[],
       }
     },
     mounted() {
@@ -420,30 +415,45 @@
     methods: {
       clicknewsTr(row, event, column){
         console.log(row.nl_id);
-        this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
+        if(row.nl_url==""){
+          this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
+        }
+        else{
+          window.location.href = row.nl_url
+        }
       },
       clicknoticeTr(row, event, column){
         console.log(row.nl_id);
-        this.$router.push({name:'noticeInfo',query:{nl_id:row.nl_id}})
+        if(row.nl_url==""){
+          this.$router.push({name:'noticeInfo',query:{nl_id:row.nl_id}})
+        }
+        else{
+          window.location.href = row.nl_url
+        }
       },
       clickresourceTr(row, event, column){
         console.log(row.nl_id);
-        this.$router.push({name:'resourceInfo',query:{nl_id:row.nl_id}})
+        if(row.nl_url==""){
+          this.$router.push({name:'resourceInfo',query:{nl_id:row.nl_id}})
+        }
+        else{
+          window.location.href = row.nl_url
+        }
       },
       getData() {
         Axios.get('/api/news/findAll').then(response => {
             this.newsData=response.data.result;
               for(var i = 0;i<this.newsData.length;i++){
-                if (this.newsData[i].nl_nl_subType_name=="头条新闻"){
+                if (this.newsData[i].nl_nl_subType_name=="头条新闻"&&this.newsData[i].nl_state==1){
                   if(this.news1Data.length<5){this.news1Data.push(this.newsData[i])}
                 }
-                else if (this.newsData[i].nl_nl_subType_name=="综合新闻"){
+                else if (this.newsData[i].nl_nl_subType_name=="综合新闻"&&this.newsData[i].nl_state==1){
                   if(this.news2Data.length<5){this.news2Data.push(this.newsData[i])}
                 }
-                else if (this.newsData[i].nl_nl_subType_name=="科研动态"){
+                else if (this.newsData[i].nl_nl_subType_name=="科研动态"&&this.newsData[i].nl_state==1){
                   if(this.news3Data.length<5){this.news3Data.push(this.newsData[i])}
                 }
-                else if (this.newsData[i].nl_nl_subType_name=="学术活动"){
+                else if (this.newsData[i].nl_nl_subType_name=="学术活动"&&this.newsData[i].nl_state==1){
                   if(this.news4Data.length<5){this.news4Data.push(this.newsData[i])}
                 }
               }
@@ -456,10 +466,10 @@
         Axios.get('/api/notice/findAll').then(response => {
             this.noticeData=response.data.result;
               for(var i = 0;i<this.noticeData.length;i++){
-                if (this.noticeData[i].nl_nl_subType_name=="教育培养"){
+                if (this.noticeData[i].nl_nl_subType_name=="教育培养"&&this.noticeData[i].nl_state==1){
                   if(this.notice2Data.length<5){this.notice2Data.push(this.noticeData[i])}
                 }
-                else if (this.noticeData[i].nl_nl_subType_name=="招聘招生"){
+                else if (this.noticeData[i].nl_nl_subType_name=="招聘招生"&&this.noticeData[i].nl_state==1){
                   if(this.notice3Data.length<5){this.notice3Data.push(this.noticeData[i])}
                 }
               }
@@ -471,7 +481,7 @@
         Axios.get('/api/resource/findAll').then(response => {
             this.resourceData=response.data.result;
               for(var i = 0;i<this.resourceData.length;i++){
-                if (this.resourceData[i].nl_nl_type_name=="资源"){
+                if (this.resourceData[i].nl_nl_type_name=="资源"&&this.resourceData[i].nl_state==1){
                   if(this.resource1Data.length<5){this.resource1Data.push(this.resourceData[i])}
                 }
               }
@@ -484,6 +494,13 @@
             this.figureData=response.data.result;
               console.log("figureData");
               console.log(this.figureData);
+        }, response => {
+            console.log("error");
+          });
+        Axios.get('/api/link/getLinks').then(response => {
+            this.linklist=response.data.result;
+              console.log("linklist");
+              console.log(this.linklist);
         }, response => {
             console.log("error");
           });

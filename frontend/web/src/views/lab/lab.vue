@@ -156,13 +156,13 @@
 
 <script >
   import Axios from 'axios'
-  import header from "../header.vue";
-  import footer from "../footer.vue";
+  import webheader from "../header.vue";
+  import webfooter from "../footer.vue";
   export default {
     name : 'lab',
     components:{    
-      'v-header':header,
-      'v-footer':footer,
+      'v-header':webheader,
+      'v-footer':webfooter,
     },
     data() {
       return {
@@ -171,7 +171,7 @@
         newData:[],
         totalcount:0,
         currentPage:1,
-        pagesize:30,
+        pagesize:10,
       };
  
     },
