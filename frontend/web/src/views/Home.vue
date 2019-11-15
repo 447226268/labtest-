@@ -383,8 +383,8 @@
 
 <script>
   import Axios from 'axios';
-  import webheader from "./header.vue";
-  import webfooter from "./footer.vue";
+  import webheader from "./webheader.vue";
+  import webfooter from "./webfooter.vue";
   export default {
     name: "home",
     components:{    
