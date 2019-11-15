@@ -4,10 +4,7 @@ import com.gooalgene.labtest.entity.HeadlineNews;
 import com.gooalgene.labtest.response.BaseResponse;
 import com.gooalgene.labtest.service.HeadlineNewsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,7 @@ public class HeadlineNewsController {
     @Autowired
     private HeadlineNewsService headlineNewsService;
 
-    @GetMapping("/insertHeadlineNews")
+    @PostMapping("/insertHeadlineNews")
     public BaseResponse<String> insertHeadlineNews(@RequestBody List<HeadlineNews> list) {
         BaseResponse<String> response = new BaseResponse<>();
         List<HeadlineNews> list1 = headlineNewsService.findHeadlineNews();
