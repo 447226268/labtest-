@@ -68,7 +68,7 @@
         </el-upload>
         <div v-for="(item, i) in homepage_headlineNews_form" :key="i">
         <el-dialog :visible.sync="homepage_headlineNewsVisible">
-          <img width="100%" :src="item.url" alt />
+          <img width="100%" :src="item.hh_graph" alt />
         </el-dialog>
         </div>
       </div>
@@ -303,7 +303,7 @@ export default {
       }
     },
     async updataALLheadlineNewsFigure(){
-      let a = await updataheadlineNewsFigure(url_updataheadlineNewsFigure, {headlineNews: this.homepage_headlineNews_form}, "post");
+      let a = await updataheadlineNewsFigure(url_updataheadlineNewsFigure, this.homepage_headlineNews_form, "post");
     },
     async getAllLink(){
       let a = await getLinkall();
