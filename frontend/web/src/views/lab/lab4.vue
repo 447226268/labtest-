@@ -199,8 +199,8 @@
 <script >
   import Axios from 'axios'
   import  Lab4Info from './lab4Info.vue'
-  import webheader from "../header.vue";
-  import webfooter from "../footer.vue";
+  import webheader from "../webheader.vue";
+  import webfooter from "../webfooter.vue";
   export default {
     name : 'lab4',
     components:{    
