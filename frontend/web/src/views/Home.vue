@@ -16,7 +16,7 @@
                       :src="item.nl_graph"
                       :fit="'fill'">
                     </el-image>
-                    <a   class="picturetext"  >{{item.nl_title}}</a>
+                    <a class="picturetext" >{{&nbsp;&nbsp;&nbsp;&nbsp;+item.nl_title}}</a>
                   </router-link>
                 </div>
 
@@ -264,19 +264,19 @@
   .picturetext{
     width: 460px;
     display: block;
-    margin: 0;
-    line-height: 80px;
-    text-align: center;
+    margin: 0 ;
+    line-height: 35px;
+    text-align: left;
     background-color: rgba(255,255,255,0.2);  
-    /* background-color: #333; */
     opacity: 0.9;
-    color: black;
-    font-size: 18px;
+    color: white;
+    font-size: 14px;
+    font-weight: 40px!;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     position: relative;
-    bottom: 80px;
+    bottom: 40px;
   }
 
   /* 右上角科研动态 */
@@ -376,7 +376,20 @@
     margin:10px 0 10px 20px;
   }
 
+  .el-carousel__button{
+    width:8px!important;
+    height: 8px!important;
 
+  }
+
+  .el-carousel__indicators--horizontal{
+    margin-left:20px;
+    left:400px!important; 
+    width: 80px;
+
+  }
+    
+  
 
   
 </style>
