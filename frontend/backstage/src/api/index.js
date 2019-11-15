@@ -20,11 +20,6 @@ export const getHomeFigure = () => ajax("/figure/getFigure/", {})
 //新闻动态配图和学术活动配图上传
 export const url_insertHomeFigure = "/figure/insertFigure/"
 export const insertHomeFigure = (url_insertHomeFigure, data, type) => ajax(url_insertHomeFigure, data, "post") 
-//轮播图
-export const getheadlineNewsFigure = () => ajax("/headlineNews/getFigure/", {}) 
-//友情链接更新
-export const url_updataheadlineNewsFigure = "/headlineNews/insertHeadlineNews/"
-export const updataheadlineNewsFigure = (url_updataheadlineNewsFigure, data, type) => ajax(url_updataheadlineNewsFigure, data, "post")
 //友情链接获取
 export const getLinkall = () => ajax("/link/getLinks/", {})
 //友情链接更新
