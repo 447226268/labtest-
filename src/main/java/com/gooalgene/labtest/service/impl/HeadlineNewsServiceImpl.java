@@ -19,6 +19,11 @@ public class HeadlineNewsServiceImpl implements HeadlineNewsService {
     }
 
     @Override
+    public void insertHeadlineNews(HeadlineNews headlineNews) {
+        headlineNewsMapper.insertHeadlineNews(headlineNews);
+    }
+
+    @Override
     public void updateHeadlineNews(HeadlineNews headlineNews) {
         headlineNewsMapper.updateHeadlineNews(headlineNews);
     }

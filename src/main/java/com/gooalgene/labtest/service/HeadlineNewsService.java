@@ -7,5 +7,6 @@ import java.util.List;
 public interface HeadlineNewsService {
     List<HeadlineNews> findHeadlineNews();
 
+    void insertHeadlineNews(HeadlineNews headlineNews);
     void updateHeadlineNews(HeadlineNews headlineNews);
 }
