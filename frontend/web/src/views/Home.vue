@@ -62,7 +62,7 @@
         </div>
 
         <el-container>      
-          <div class="news2picture">
+          <div class="news2picture" v-if="figureData.length>0">
             <el-image
               v-if="figureData[0].hn_graph!=''"
               style="width: 260px; height: 200px; margin:20px"
@@ -128,7 +128,7 @@
         </div>
 
         <el-container>      
-          <div class="news4picture">
+          <div class="news4picture" v-if="figureData.length>0">
             <el-image
               v-if="figureData[1].hn_graph!=''"
               style="width: 260px; height: 200px; margin:20px"
