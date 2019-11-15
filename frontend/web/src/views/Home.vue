@@ -192,7 +192,7 @@
           <div >
             <div class="resourcetitle" style="margin:0 50px; height:50px">
               <p width="1000px" style="float: left;margin:0px 890px 0 0; font-size: 30px; font-weight: 600; color:#386CCA ">资源发布</p>
-              <router-link to="/resource" width="200px" height="50px"  style="margin-top:10px;font-size: 20px; font-weight: 400;  color:#386CCA "> 更多 </router-link>
+              <router-link to="/resource1" width="200px" height="50px"  style="margin-top:10px;font-size: 20px; font-weight: 400;  color:#386CCA "> 更多 </router-link>
               <i class="el-icon-right"></i>
             </div>
             <el-container class="resourcepicture">

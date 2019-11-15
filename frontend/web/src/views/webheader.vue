@@ -1,5 +1,5 @@
 <template>    
-    
+    <div class="webheader">
       <el-header height ="350px" >
 
         <div id="labname" >
@@ -25,15 +25,15 @@
           active-text-color="yellow"
           router>
           <el-menu-item index="1" route="/">首页</el-menu-item>
-          <el-menu-item index="2" route="/lab">实验室简介</el-menu-item>
-          <el-menu-item index="3" route="/news">新闻动态</el-menu-item>
-          <el-menu-item index="4" route="/notice">通知公告</el-menu-item>
+          <el-menu-item index="2" route="/lab1">实验室简介</el-menu-item>
+          <el-menu-item index="3" route="/news1">新闻动态</el-menu-item>
+          <el-menu-item index="4" route="/notice1">通知公告</el-menu-item>
           <el-menu-item index="5" route="/thesis">科研工作</el-menu-item>
-          <el-menu-item index="6" route="/resource">资源发布</el-menu-item>
+          <el-menu-item index="6" route="/resource1">资源发布</el-menu-item>
         </el-menu> 
 
       </el-header>
-    
+    </div>
 </template>
 
 <style>
@@ -84,10 +84,15 @@
     width:1200px;
     left: -20px;
     top:105px;
+    margin: auto
   } 
 
   el-menu-item{
     font-size:20px;
+  }
+
+  navigation el-menu--horizontal el-menu{
+    margin: auto
   }
 </style>
 

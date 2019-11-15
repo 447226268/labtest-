@@ -19,9 +19,7 @@
           <el-menu
             default-active="2"
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
+            :router="true">
             <el-menu-item index="1" route="/thesis">
               <span slot="title">论文发表</span>
             </el-menu-item>
@@ -52,7 +50,6 @@
               stripe
               style="width: 100%" 
               :show-header="false"
-              @selection-change="handleSelectionChange"
               @row-click="clickTr">
               <el-table-column
                 prop="nl_title"
@@ -70,8 +67,8 @@
           <div class="block" v-if="true"  >
             <el-pagination
               background 
-              small="true"
-              pager-count="5"
+              :small="true"
+              :pager-count="5"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -217,7 +214,6 @@
     },
     mounted() {
       this.getData();
-      this.getnewData();
     },    
     methods: {
       clickTr(row, event, column){
@@ -234,12 +230,6 @@
         console.log(column)
         console.log(event)
         console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

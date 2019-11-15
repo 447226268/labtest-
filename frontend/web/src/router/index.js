@@ -4,20 +4,22 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
 
-import Lab from "../views/lab/lab.vue";
+import Lab1 from "../views/lab/lab1.vue";
 import Lab2 from "../views/lab/lab2.vue";
 import Lab3 from "../views/lab/lab3.vue";
 import Lab3Info from "../views/lab/lab3Info.vue";
 import Lab4 from "../views/lab/lab4.vue";
 import Lab4Info from "../views/lab/lab4Info.vue";
 
-import News from "../views/news/news.vue";
+
+import News1copy from "../views/news/news1 copy.vue";
+import News1 from "../views/news/news1.vue";
 import News2 from "../views/news/news2.vue";
 import News3 from "../views/news/news3.vue";
 import News4 from "../views/news/news4.vue";
 import NewsInfo from "../views/news/newsInfo.vue";
 
-import Notice from "../views/notice/notice.vue";
+import Notice1 from "../views/notice/notice1.vue";
 import Notice2 from "../views/notice/notice2.vue";
 import Notice3 from "../views/notice/notice3.vue";
 import NoticeInfo from "../views/notice/noticeInfo.vue";
@@ -27,7 +29,7 @@ import ThesisInfo from "../views/research/thesisInfo.vue";
 import Meeting from "../views/research/meeting.vue";
 import MeetingInfo from "../views/research/meetingInfo.vue";
 
-import Resource from "../views/resource/resource.vue";
+import Resource1 from "../views/resource/resource1.vue";
 import Resource2 from "../views/resource/resource2.vue";
 import Resource3 from "../views/resource/resource3.vue";
 import ResourceInfo from "../views/resource/resourceInfo.vue";
@@ -40,6 +42,12 @@ export default new Router({
   // base: process.env.VUE_APP_TEST,
   routes: [
     {
+      path: "/news1copy",
+      name: "news1copy",
+      component: News1copy, 
+    },
+
+    {
       path: "/",
       name: "home",
       component: Home
@@ -51,9 +59,9 @@ export default new Router({
     },
 
     {
-      path: "/lab",
-      name: "lab",
-      component: Lab
+      path: "/lab1",
+      name: "lab1",
+      component: Lab1, alias: '/lab'
     },
     {
       path: "/lab2",
@@ -82,9 +90,9 @@ export default new Router({
     },
 
     {
-      path: "/news",
-      name: "news",
-      component: News
+      path: "/news1",
+      name: "news1",
+      component: News1, alias: '/news'
     },
     {
       path: "/news2",
@@ -108,9 +116,9 @@ export default new Router({
     },
 
     {
-      path: "/notice",
-      name: "notice",
-      component: Notice
+      path: "/notice1",
+      name: "notice1",
+      component: Notice1, alias: '/notice'
     },
     {
       path: "/notice2",
@@ -150,9 +158,9 @@ export default new Router({
     },
 
     {
-      path: "/resource",
-      name: "resource",
-      component: Resource
+      path: "/resource1",
+      name: "resource1",
+      component: Resource1, alias: '/resource'
     },
     {
       path: "/resource2",

@@ -18,10 +18,8 @@
           <el-menu
             default-active="1"
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/news">
+            :router="true">
+            <el-menu-item index="1" route="/news1">
               <span slot="title">头条新闻</span>
             </el-menu-item>
             <el-menu-item index="2" route="/news2">
@@ -41,7 +39,7 @@
 
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/news1' }">新闻动态</el-breadcrumb-item>
             <el-breadcrumb-item >{{newData.nl_nl_subType_name}}</el-breadcrumb-item>
           </el-breadcrumb>
             
@@ -271,12 +269,6 @@
         console.log(column)
         console.log(event)
         console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="news"> 
+  <div class="news3"> 
 
 
 
@@ -18,10 +18,8 @@
           <el-menu
             default-active="3"
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/news">
+            :router="true">
+            <el-menu-item index="1" route="/news1">
               <span slot="title">头条新闻</span>
             </el-menu-item>
             <el-menu-item index="2" route="/news2">
@@ -42,7 +40,7 @@
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/news1' }">新闻动态</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/news3' }">科研动态</el-breadcrumb-item>
           </el-breadcrumb>
 
@@ -57,7 +55,6 @@
               stripe
               style="width: 100%" 
               :show-header="false"
-              @selection-change="handleSelectionChange"
               @row-click="clickTr">
               <el-table-column
                 prop="nl_title"
@@ -75,8 +72,8 @@
           <div class="block" v-if="true"  >
             <el-pagination
               background 
-              small="true"
-              pager-count="5"
+              :small="true"
+              :pager-count="5"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -103,7 +100,7 @@
 </template>
 
 <style>
-  .news {
+  .news3 {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
@@ -201,7 +198,7 @@
   import webheader from "../webheader.vue";
   import webfooter from "../webfooter.vue";
   export default {
-    name : 'news',
+    name : 'news3',
     components:{    
       'v-header':webheader,
       'v-footer':webfooter,
@@ -220,7 +217,6 @@
     },
     mounted() {
       this.getData();
-      this.getnewData();
     },    
     methods: {
       clickTr(row, event, column){
@@ -237,12 +233,6 @@
         console.log(column)
         console.log(event)
         console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

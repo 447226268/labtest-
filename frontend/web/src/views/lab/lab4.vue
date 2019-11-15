@@ -18,10 +18,8 @@
           <el-menu
             default-active="4"
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/lab">
+            :router="true">
+            <el-menu-item index="1" route="/lab1">
               <span slot="title">机构概况</span>
             </el-menu-item>
             <el-menu-item index="2" route="/lab2">
@@ -42,7 +40,7 @@
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/lab' }">实验室简介</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/lab1' }">实验室简介</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/lab4' }">毕业生</el-breadcrumb-item>
           </el-breadcrumb>
 
@@ -57,7 +55,6 @@
               stripe
               style="width: 100%" 
               :show-header="false"
-              @selection-change="handleSelectionChange"
               @row-click="clickTr">
               <el-table-column
                 prop="title"
@@ -75,8 +72,8 @@
           <div class="block" v-if="true"  >
             <el-pagination
               background 
-              small="true"
-              pager-count="5"
+              :small="true"
+              :pager-count="5"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -222,7 +219,6 @@
     },
     mounted() {
       this.getData();
-      this.getnewData();
     },    
     methods: {
       clickTr(row, event, column){
@@ -234,12 +230,6 @@
         console.log(column)
         console.log(event)
         console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
