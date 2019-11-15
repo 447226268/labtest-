@@ -17,10 +17,8 @@
 
           <el-menu
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/resource">
+            :router="true">
+            <el-menu-item index="1" route="/resource1">
               <span slot="title">公共数据集</span>
             </el-menu-item>
             <el-menu-item index="2" route="/resource2">
@@ -37,7 +35,7 @@
 
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/resource' }">资源发布</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/resource1' }">资源发布</el-breadcrumb-item>
             <el-breadcrumb-item  >{{newData.nl_nl_subType_name}}</el-breadcrumb-item>
           </el-breadcrumb>
             

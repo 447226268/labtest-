@@ -17,10 +17,8 @@
 
           <el-menu
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/notice">
+            :router="true">
+            <el-menu-item index="1" route="/notice1">
               <span slot="title">规章制度</span>
             </el-menu-item>
             <el-menu-item index="2" route="/notice2">
@@ -37,7 +35,7 @@
 
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/notice' }">通知公告</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/notice1' }">通知公告</el-breadcrumb-item>
             <el-breadcrumb-item  >{{newData.nl_nl_subType_name}}</el-breadcrumb-item>
           </el-breadcrumb>
             

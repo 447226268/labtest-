@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="webfooter">
     <el-container class="foot">  
       <el-col class="logoandname" width="600px" >
 
@@ -29,7 +29,7 @@
 </template>
 
 <style>
-  .foot{
+  .webfooter{
     background-color: #398ef3;
     width: 1200px;
     height: 220px;

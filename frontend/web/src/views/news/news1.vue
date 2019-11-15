@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="news"> 
+  <div class="news1"> 
 
 
 
@@ -21,7 +21,7 @@
             @open="handleOpen"
             @close="handleClose"
             router="true">
-            <el-menu-item index="1" route="/news">
+            <el-menu-item index="1" route="/news1">
               <span slot="title">头条新闻</span>
             </el-menu-item>
             <el-menu-item index="2" route="/news2">
@@ -42,8 +42,8 @@
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">新闻动态</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/news' }">头条新闻</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/news1' }">新闻动态</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/news1' }">头条新闻</el-breadcrumb-item>
           </el-breadcrumb>
 
           <div id="nltitle" >
@@ -75,8 +75,8 @@
           <div class="block" v-if="true"  >
             <el-pagination
               background 
-              small="true"
-              pager-count="5"
+              :small="true"
+              :pager-count="5"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -103,7 +103,7 @@
 </template>
 
 <style>
-  .news {
+  .news1 {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
@@ -201,7 +201,7 @@
   import webheader from "../webheader.vue";
   import webfooter from "../webfooter.vue";
   export default {
-    name : 'news',
+    name : 'news1',
     components:{    
       'v-header':webheader,
       'v-footer':webfooter,

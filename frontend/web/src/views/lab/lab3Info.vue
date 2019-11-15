@@ -18,10 +18,8 @@
           <el-menu
             default-active="3"
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/lab">
+            :router="true">
+            <el-menu-item index="1" route="/lab1">
               <span slot="title">机构概况</span>
             </el-menu-item>
             <el-menu-item index="2" route="/lab2">
@@ -41,7 +39,7 @@
 
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/lab' }">实验室简介</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/lab1' }">实验室简介</el-breadcrumb-item>
             <el-breadcrumb-item >研究团队</el-breadcrumb-item>
           </el-breadcrumb>
             
@@ -56,9 +54,8 @@
             </div>
 
             <div class="liimage">
-              <div class="block" >
+              <div class="staffblock" >
                 <el-image
-                  style="margin:auto 50px auto 50px"
                   :src="newData.info.si_graph"
                   :fit="contain"></el-image>
               </div>
@@ -68,9 +65,7 @@
               <h1 v-html = "newData.info.si_content">  </h1>
             </div>
 
-            <div id="stafflink" >
-              <a :href="newData.info.si_url" v-if="newData.info.si_url!=null">个人链接</a>
-            </div>
+
 
           </el-row>
 
@@ -155,7 +150,10 @@
 
  
 
-  .block{
+  .staffblock{
+    margin: 30px auto;
+    width: 300px;
+    height: 400px;
     display: flex;
     justify-content: center;
   }
@@ -251,12 +249,6 @@
         console.log(column)
         console.log(event)
         console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

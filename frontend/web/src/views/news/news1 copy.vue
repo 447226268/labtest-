@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="notice"> 
+  <div class="news1"> 
 
 
 
@@ -9,42 +9,19 @@
 
       <el-container class="mid" justify="center">
 
-        <el-aside width="300px" style="background-color: white" >
-
-          <div id="asidetitle" >
-              通知公告
-          </div>
-
-          <el-menu
-            default-active="1"
-            class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/notice">
-              <span slot="title">规章制度</span>
-            </el-menu-item>
-            <el-menu-item index="2" route="/notice2">
-              <span slot="title">教育培养</span>
-            </el-menu-item>            
-            <el-menu-item index="3" route="/notice3">
-              <span slot="title">招聘招生</span>
-            </el-menu-item>
-          </el-menu>
-
-        </el-aside>
+        <v-aside :asideactive='asideactive+""' :asidetitle="asidetitle" :typelist="typelist" :routertype="routertype"></v-aside>
 
         <el-main width="900px">
 
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/notice' }">通知公告</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/notice2' }">规章制度</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/news1' }">新闻动态</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/news1' }">头条新闻</el-breadcrumb-item>
           </el-breadcrumb>
 
           <div id="nltitle" >
-            <h1>  规章制度  </h1>
+            <h1>  头条新闻  </h1>
           </div>
 
           <template>
@@ -52,9 +29,8 @@
               ref="multipleTable"
               :data="newData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
               stripe
-              style="width: 100%" 
-              :show-header="false"
-              @selection-change="handleSelectionChange"
+              style="width: 100%"
+              :show-header="false" 
               @row-click="clickTr">
               <el-table-column
                 prop="nl_title"
@@ -72,8 +48,8 @@
           <div class="block" v-if="true"  >
             <el-pagination
               background 
-              small="true"
-              pager-count="5"
+              :small="true"
+              :pager-count="5"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -85,10 +61,10 @@
           </div>
 
 
-
         </el-main>
 
       </el-container>
+
 
       <v-footer></v-footer>
 
@@ -100,7 +76,7 @@
 </template>
 
 <style>
-  .notice {
+  .news1 {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
@@ -121,43 +97,6 @@
     margin: auto;
   }
 
-  .el-aside {
-    position: relative;
-    height: 550px;
-  }
-
-  #asidetitle {
-    width:200px;
-    position: relative;
-    height: 40px;
-    font-size: 30px;
-    font-weight: 900;
-    color: #666;
-    left:50px;
-    top:20px;
-  }
-
-  .asidemenu{
-    width:270px;
-    position: relative;
-    height: 400px;
-    top: 50px;
-    color: #666;
-    margin: auto;
-    text-align: center;
-  }
-
-  .asidemenu .el-menu-item{
-    width:200px;
-    position: relative;
-    height: 60px;
-    font-size: 20px;
-    font-weight: 900;
-    color: #666;
-    left:30px;
-    margin: auto;
-    text-align: center;
-  }
   
   .el-main {
     position: relative;
@@ -188,32 +127,35 @@
     justify-content: center;
   }
 
-
-
-  body > .el-container {
-    margin-bottom: 40px;
-    text-align: center;
-    margin: auto;
-  }
+  
   
 </style>
 
 <script >
   import Axios from 'axios'
-  import NoticeInfo from './noticeInfo.vue'
+  import NewsInfo from './newsInfo.vue'
   import webheader from "../webheader.vue";
   import webfooter from "../webfooter.vue";
+  import webaside from "../webaside.vue";
   export default {
-    name : 'notice',
+    name : 'news1',
     components:{    
       'v-header':webheader,
       'v-footer':webfooter,
-      NoticeInfo
+      'v-aside':webaside,
+      NewsInfo
     },
 
     data() {
       return {
-        activeIndex:4,
+        activeIndex:3,
+        asideActive:"1",
+        asidetitle:"新闻动态",
+        typelist:[
+          {index:1,nl_subType_id:1,nl_nl_subType_name:"头条新闻"},
+          {index:2,nl_subType_id:2,nl_nl_subType_name:"综合新闻"},
+          {index:3,nl_subType_id:3,nl_nl_subType_name:"科研新闻"},],
+        routertype:'news',
         tableData: [],
         newData:[],
         totalcount:0,
@@ -224,13 +166,12 @@
     },
     mounted() {
       this.getData();
-      this.getnewData();
     },    
     methods: {
       clickTr(row, event, column){
         console.log(row.nl_id);
         if(row.nl_url==""){
-          this.$router.push({name:'noticeInfo',query:{nl_id:row.nl_id}})
+          this.$router.push({name:'newsInfo',query:{nl_id:row.nl_id}})
         }
         else{
           window.location.href = row.nl_url
@@ -241,12 +182,6 @@
         console.log(column)
         console.log(event)
         console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
@@ -260,10 +195,10 @@
               console.log(this.currentPage)  //点击第几页
       },
       getData() {
-        Axios.get('/api/notice/findAll').then(response => {
+        Axios.get('/api/news/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_state==1&&this.tableData[i].nl_nl_subType_name=="规章制度"){
+                if (this.tableData[i].nl_state==1&&this.tableData[i].nl_nl_subType_name=="头条新闻"){
                   console.log(this.tableData[i].nl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;

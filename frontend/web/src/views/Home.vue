@@ -16,7 +16,7 @@
                       :src="item.nl_graph"
                       :fit="'fill'">
                     </el-image>
-                    <a   class="picturetext"  >{{item.nl_title}}</a>
+                    <a class="picturetext" >{{&nbsp;&nbsp;&nbsp;&nbsp;+item.nl_title}}</a>
                   </router-link>
                 </div>
 
@@ -62,7 +62,7 @@
         </div>
 
         <el-container>      
-          <div class="news2picture">
+          <div class="news2picture" v-if="figureData.length>0">
             <el-image
               v-if="figureData[0].hn_graph!=''"
               style="width: 260px; height: 200px; margin:20px"
@@ -128,7 +128,7 @@
         </div>
 
         <el-container>      
-          <div class="news4picture">
+          <div class="news4picture" v-if="figureData.length>0">
             <el-image
               v-if="figureData[1].hn_graph!=''"
               style="width: 260px; height: 200px; margin:20px"
@@ -192,7 +192,7 @@
           <div >
             <div class="resourcetitle" style="margin:0 50px; height:50px">
               <p width="1000px" style="float: left;margin:0px 890px 0 0; font-size: 30px; font-weight: 600; color:#386CCA ">资源发布</p>
-              <router-link to="/resource" width="200px" height="50px"  style="margin-top:10px;font-size: 20px; font-weight: 400;  color:#386CCA "> 更多 </router-link>
+              <router-link to="/resource1" width="200px" height="50px"  style="margin-top:10px;font-size: 20px; font-weight: 400;  color:#386CCA "> 更多 </router-link>
               <i class="el-icon-right"></i>
             </div>
             <el-container class="resourcepicture">
@@ -200,7 +200,7 @@
                 <el-image
                    
                   style="width: 200px; height: 100px; margin:20px 20px 0 20px"
-                  :src="figureData[0].hn_graph"
+                  :src="item.nl_graph"
                   :fit="'fill'">
                 </el-image>
                 <a   class="resourcetext" :href="'resourceInfo?nl_id='+item.nl_id" style="text-decoration:none">{{item.nl_title}}</a>
@@ -264,19 +264,19 @@
   .picturetext{
     width: 460px;
     display: block;
-    margin: 0;
-    line-height: 80px;
-    text-align: center;
+    margin: 0 ;
+    line-height: 35px;
+    text-align: left;
     background-color: rgba(255,255,255,0.2);  
-    /* background-color: #333; */
-    opacity: 0.8;
-    color: black;
-    font-size: 18px;
+    opacity: 0.9;
+    color: white;
+    font-size: 14px;
+    font-weight: 40px!;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     position: relative;
-    bottom: 80px;
+    bottom: 40px;
   }
 
   /* 右上角科研动态 */
@@ -353,7 +353,7 @@
     text-align: center;
     background-color: rgba(255,255,255,0.2);  
     /* background-color: #333; */
-    opacity: 0.8;
+    opacity: 0.9;
     color: black;
     font-size: 18px;
     white-space: nowrap;
@@ -376,7 +376,20 @@
     margin:10px 0 10px 20px;
   }
 
+  .el-carousel__button{
+    width:8px!important;
+    height: 8px!important;
 
+  }
+
+  .el-carousel__indicators--horizontal{
+    margin-left:20px;
+    left:400px!important; 
+    width: 80px;
+
+  }
+    
+  
 
   
 </style>

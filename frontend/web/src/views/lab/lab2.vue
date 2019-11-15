@@ -18,10 +18,8 @@
           <el-menu
             default-active="2"
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/lab">
+            :router="true">
+            <el-menu-item index="1" route="/lab1">
               <span slot="title">机构概况</span>
             </el-menu-item>
             <el-menu-item index="2" route="/lab2">
@@ -42,7 +40,7 @@
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/lab' }">实验室简介</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/lab1' }">实验室简介</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/lab2' }">研究方向</el-breadcrumb-item>
           </el-breadcrumb>
 
@@ -172,7 +170,6 @@
       return {
         activeIndex:2,
         tableData: [],
-        newData:[],
         totalcount:0,
         currentPage:1,
         pagesize:10,
@@ -181,7 +178,6 @@
     },
     mounted() {
       this.getData();
-      this.getnewData();
     },    
     methods: {
       handle(row,column,event,cell){
@@ -189,12 +185,6 @@
         console.log(column)
         console.log(event)
         console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

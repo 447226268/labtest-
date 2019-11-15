@@ -18,10 +18,8 @@
           <el-menu
             default-active="3"
             class="asidemenu"
-            @open="handleOpen"
-            @close="handleClose"
-            router="true">
-            <el-menu-item index="1" route="/resource">
+            :router="true">
+            <el-menu-item index="1" route="/resource1">
               <span slot="title">公共数据集</span>
             </el-menu-item>
             <el-menu-item index="2" route="/resource2">
@@ -39,7 +37,7 @@
           <!-- 路径导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/resource' }">资源发布</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/resource1' }">资源发布</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/resource3' }">软件下载</el-breadcrumb-item>
           </el-breadcrumb>
 
@@ -54,7 +52,6 @@
               stripe
               style="width: 100%"
               :show-header="false" 
-              @selection-change="handleSelectionChange"
               @row-click="clickTr">
               <el-table-column
                 prop="nl_title"
@@ -72,8 +69,8 @@
           <div class="block" v-if="true"  >
             <el-pagination
               background 
-              small="true"
-              pager-count="5"
+              :small="true"
+              :pager-count="5"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -217,7 +214,6 @@
     },
     mounted() {
       this.getData();
-      this.getnewData();
     },    
     methods: {
       clickTr(row, event, column){
@@ -229,12 +225,6 @@
         console.log(column)
         console.log(event)
         console.log(cell)
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

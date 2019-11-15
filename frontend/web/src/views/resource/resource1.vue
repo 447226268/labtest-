@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="resource"> 
+  <div class="resource1"> 
 
 
 
@@ -16,7 +16,7 @@
           </div>
 
           <el-menu
-            default-active="2"
+            default-active="1"
             class="asidemenu"
             :router="true">
             <el-menu-item index="1" route="/resource1">
@@ -38,11 +38,11 @@
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/resource1' }">资源发布</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/resource2' }">在线数据库</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/resource2' }">公共数据集</el-breadcrumb-item>
           </el-breadcrumb>
 
           <div id="nltitle" >
-            <h1>  在线数据库  </h1>
+            <h1>  公共数据集  </h1>
           </div>
 
           <template>
@@ -97,7 +97,7 @@
 </template>
 
 <style>
-  .resource {
+  .resource1 {
     background-image:url('../../assets/images/banner2.png');
     background-repeat:no-repeat;
     background-size:100%;
@@ -195,7 +195,7 @@
   import webheader from "../webheader.vue";
   import webfooter from "../webfooter.vue";
   export default {
-    name : 'resource',
+    name : 'resource1',
     components:{    
       'v-header':webheader,
       'v-footer':webfooter,
@@ -218,7 +218,9 @@
     methods: {
       clickTr(row, event, column){
         console.log(row.nl_id);
+
           this.$router.push({name:'resourceInfo',query:{nl_id:row.nl_id}})
+        
       },
       handle(row,column,event,cell){
         console.log(row)
@@ -241,7 +243,7 @@
         Axios.get('/api/resource/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_state==1&&this.tableData[i].nl_nl_subType_name=="在线数据库"){
+                if (this.tableData[i].nl_state==1&&this.tableData[i].nl_nl_subType_name=="公共数据集"){
                   console.log(this.tableData[i].nl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;
