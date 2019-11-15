@@ -54,9 +54,8 @@
             </div>
 
             <div class="liimage">
-              <div class="block" >
+              <div class="staffblock" >
                 <el-image
-                  style="margin:auto 50px auto 50px"
                   :src="newData.info.si_graph"
                   :fit="contain"></el-image>
               </div>
@@ -66,9 +65,7 @@
               <h1 v-html = "newData.info.si_content">  </h1>
             </div>
 
-            <div id="stafflink" >
-              <a :href="newData.info.si_url" v-if="newData.info.si_url!=null">个人链接</a>
-            </div>
+
 
           </el-row>
 
@@ -153,7 +150,10 @@
 
  
 
-  .block{
+  .staffblock{
+    margin: 30px auto;
+    width: 300px;
+    height: 400px;
     display: flex;
     justify-content: center;
   }

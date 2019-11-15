@@ -50,7 +50,7 @@
 
           <div class="namelist" >
 
-            <table class="nametable" border="1" v-for="item in typelist" :key="item.type_id">
+            <table class="nametable" border="1" v-for="item in typelist" :key="item.typeid">
               <thead>
                 <tr >
                   <th class="nametitle" colspan="8">{{item.type}}</th>

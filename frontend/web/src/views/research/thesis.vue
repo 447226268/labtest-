@@ -255,16 +255,17 @@
         Axios.get('/api/thesis/findAll').then(response => {
             this.tableData=response.data.result;
               for(var i = 0;i<this.tableData.length;i++){
-                if (this.tableData[i].nl_state==1){
+                 if (this.tableData[i].tl_state==1){
                   console.log(this.tableData[i].tl_title);
                   this.newData.push(this.tableData[i]);
                   this.totalcount=this.newData.length;
                   console.log(this.totalcount);
                   console.log(this.newData);
-                }
+                 }
                 
               }
               console.log(this.tableData);
+              console.log(this.newData);
         }, response => {
             console.log("error");
           });

@@ -200,7 +200,7 @@
                 <el-image
                    
                   style="width: 200px; height: 100px; margin:20px 20px 0 20px"
-                  :src="figureData[0].hn_graph"
+                  :src="item.nl_graph"
                   :fit="'fill'">
                 </el-image>
                 <a   class="resourcetext" :href="'resourceInfo?nl_id='+item.nl_id" style="text-decoration:none">{{item.nl_title}}</a>
@@ -269,7 +269,7 @@
     text-align: center;
     background-color: rgba(255,255,255,0.2);  
     /* background-color: #333; */
-    opacity: 0.8;
+    opacity: 0.9;
     color: black;
     font-size: 18px;
     white-space: nowrap;
@@ -353,7 +353,7 @@
     text-align: center;
     background-color: rgba(255,255,255,0.2);  
     /* background-color: #333; */
-    opacity: 0.8;
+    opacity: 0.9;
     color: black;
     font-size: 18px;
     white-space: nowrap;
