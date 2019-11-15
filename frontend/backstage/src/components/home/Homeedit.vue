@@ -50,36 +50,6 @@
     </div>
 
 
-    <div name="轮播图上传">
-      <div style="height:240px; margin-top: 40px">
-        <div class="show">首页轮播图</div>
-        <el-upload
-          style="margin:20px"
-          action=""
-          :auto-upload="false"
-          list-type="picture-card"
-          :limit=5
-          :file-list="homepage_headlineNews_list"
-          :on-change="on_change_homepage_headlineNews"
-          :on-preview="handlePictureCardPreview_homepage_headlineNews"
-          :on-remove="handleRemove_homepage_headlineNews"
-        >
-          <i class="el-icon-plus"></i>
-        </el-upload>
-        <div v-for="(item, i) in homepage_headlineNews_form" :key="i">
-        <el-dialog :visible.sync="homepage_headlineNewsVisible">
-          <img width="100%" :src="item.hh_graph" alt />
-        </el-dialog>
-        </div>
-      </div>
-
-      <div class="postion">
-        <el-button type="primary" @click="updataALLheadlineNewsFigure" class="width">保存</el-button>
-        <el-button type="primary" @click="updataALLheadlineNewsFigure" class="width">发布</el-button>
-        <el-button type="danger" @click="pagereflsh" class="width">取消</el-button>
-      </div>
-    </div>
-
     <div name="友情链接" class="link_main">
       <div class="show">友情链接</div>
 
@@ -129,9 +99,6 @@ import {
   getHomeFigure,
   url_insertHomeFigure,
   insertHomeFigure,
-  getheadlineNewsFigure,
-  url_updataheadlineNewsFigure,
-  updataheadlineNewsFigure,
   getLinkall,
   url_updataLink,
   updataLink,
@@ -154,20 +121,16 @@ export default {
           hn_state: 0,
         }
       ],
-      homepage_headlineNews_form:[],
-      homepage_headlineNews_list:[],
       news_list:[],
       meeting_list:[],
       newsVisible: false,
       meetingVisible: false,
-      homepage_headlineNewsVisible: false,
       links_form:[],
       footer_form:[],
     };
   },
   created() {
     this.getAllFigure();
-    this.getAllheadlineNewsFigure();
     this.getAllLink();
     this.getAllFooter();
   },
@@ -253,57 +216,6 @@ export default {
           }
         }
       }
-    },
-    handlePictureCardPreview_homepage_headlineNews(){
-      this.homepage_headlineNewsVisible = true;
-    },
-    on_change_homepage_headlineNews(file){
-      var reader = new FileReader()
-      reader.readAsDataURL(file.raw)
-      reader.onload = () => {
-        this.homepage_headlineNews_form.push({
-          hh_date: new Date().getTime(),
-          hh_graph: reader.result,
-          hh_id: 0,
-          hh_title: file.name,
-        });
-      }
-    },
-    handleRemove_homepage_headlineNews(file, homepage_headlineNews_list) {
-      let s = [];
-      console.log(homepage_headlineNews_list);
-      for(let i = 0 ; i < homepage_headlineNews_list.length; i++){
-        s.push({
-          hh_date: homepage_headlineNews_list[i].hh_date,
-          hh_graph:homepage_headlineNews_list[i].hh_graph,
-          hh_id: homepage_headlineNews_list[i].hh_id,
-          hh_title: homepage_headlineNews_list[i].hh_title,
-        });
-      }
-      this.homepage_headlineNews_form = s;
-    },
-    async getAllheadlineNewsFigure(){
-      let a = await getheadlineNewsFigure();
-      if (a.data.result !== null){
-        for(let i = 0; i < a.data.result.length; i++){
-          if(a.data.result[i].hh_graph !== ""){
-            this.homepage_headlineNews_list.push({
-              hh_date: a.data.result[i].hh_date,
-              hh_graph: a.data.result[i].hh_graph,
-              hh_id: a.data.result[i].hh_id,
-              hh_title: a.data.result[i].hh_title,
-              url : a.data.result[i].hh_graph});
-              this.homepage_headlineNews_form.push({
-              hh_date: a.data.result[i].hh_date,
-              hh_graph: a.data.result[i].hh_graph,
-              hh_id: a.data.result[i].hh_id,
-              hh_title: a.data.result[i].hh_title,});
-          }
-        }
-      }
-    },
-    async updataALLheadlineNewsFigure(){
-      let a = await updataheadlineNewsFigure(url_updataheadlineNewsFigure, this.homepage_headlineNews_form, "post");
     },
     async getAllLink(){
       let a = await getLinkall();

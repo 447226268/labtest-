@@ -94,7 +94,15 @@ export default {
     },
     async updataNoticestate() {
       this.form.nl_state = 1;
-      let a = await updataNoticeIndex(url_updataNoticeIndex, this.form, "post");
+      if (this.index == "-1") {
+        let a = await insertNotice(url_insertNotice, this.form, "post");
+      } else {
+        let a = await updataNoticeIndex(
+          url_updataNoticeIndex,
+          this.form,
+          "post"
+        );
+      }
       this.$router.go(-1);
     },
     async updataNotice() {

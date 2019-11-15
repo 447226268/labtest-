@@ -141,7 +141,11 @@ export default {
     },
     async updataSourcestate() {
       this.form.nl_state = 1;
-      let a = await updataSourceIndex(url_updataSourceIndex, this.form, "post");
+      if (this.index == "-1") {
+        let a = await insertSource(url_insertSource, this.form, "post");
+      } else {
+        let a = await updataSourceIndex(url_updataSourceIndex, this.form, "post");
+      }
       this.$router.go(-1);
     },
     async updataSource() {

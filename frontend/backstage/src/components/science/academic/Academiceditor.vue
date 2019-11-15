@@ -95,7 +95,15 @@ export default {
     },
     async updataAcademicstate() {
       this.form.nl_state = 1;
-      let a = await updataAcademicIndex(url_updataAcademicIndex, this.form, "post");
+      if (this.index == "-1") {
+        let a = await insertAcademic(url_insertAcademic, this.form, "post");
+      } else {
+        let a = await updataAcademicIndex(
+          url_updataAcademicIndex,
+          this.form,
+          "post"
+        );
+      }
       this.$router.go(-1);
     },
     async updataAcademic() {

@@ -98,8 +98,17 @@ export default {
     },
     async updataArticlestate() {
       this.form.tl_state = 1;
-      this.form.tl_year = new Date(this.form.tl_year).getFullYear().toString();
-      let a = await updataArticleIndex(url_updataArticleIndex, this.form, "post");
+      if (this.index == "-1") {
+        this.form.tl_year = new Date(this.form.tl_year).getFullYear().toString();
+        let a = await insertArticle(url_insertArticle, this.form, "post");
+      } else {
+        this.form.tl_year = new Date(this.form.tl_year).getFullYear().toString();
+        let a = await updataArticleIndex(
+          url_updataArticleIndex,
+          this.form,
+          "post"
+        );
+      }
       this.$router.go(-1);
     },
     async updataArticle() {

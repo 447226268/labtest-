@@ -98,7 +98,15 @@ export default {
     },
     async updataGraduatestate() {
       this.form.nl_state = 1;
-      let a = await updataGraduateIndex(url_updataGraduateIndex, this.form, "post");
+       if (this.index == "-1") {
+        let a = await insertGraduate(url_insertGraduate, this.form, "post");
+      } else {
+        let a = await updataGraduateIndex(
+          url_updataGraduateIndex,
+          this.form,
+          "post"
+        );
+      }
       this.$router.go(-1);
     },
     async updataGraduate() {

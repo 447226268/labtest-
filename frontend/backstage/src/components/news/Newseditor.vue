@@ -141,7 +141,11 @@ export default {
     },
     async updataNewsstate() {
       this.form.nl_state = 1;
-      let a = await updataNewsIndex(url_updataNewsIndex, this.form, "post");
+      if (this.index == "-1") {
+        let a = await insertNews(url_insertNews, this.form, "post");
+      } else {
+        let a = await updataNewsIndex(url_updataNewsIndex, this.form, "post");
+      }
       this.$router.go(-1);
     },
     async updataNews() {
