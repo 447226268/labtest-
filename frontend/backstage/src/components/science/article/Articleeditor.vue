@@ -2,7 +2,7 @@
   <div>
     <div class="show">论文编辑</div>
     
-    <el-form ref="form" :model="form" label-width="85px" label-position="left" class="postion">
+    <el-form ref="form" :model="form" label-width="100px" label-position="left" class="postion">
 
       <el-form-item label="论文题目:" :required="true">
         <el-input v-model="form.tl_title"></el-input>

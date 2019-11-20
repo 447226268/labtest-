@@ -42,9 +42,9 @@ export default {
   data() {
     return {
       init: {
-        language_url: "/tinymce/zh_CN.js", //public目录下
+        language_url: "tinymce/zh_CN.js", //public目录下
         language: "zh_CN",
-        skin_url: "/tinymce/skins/ui/oxide", //public目录下
+        skin_url: "tinymce/skins/ui/oxide", //public目录下
         height: 600,
         plugins: this.plugins, // 父组件传入 或者 填写个默认的插件 要选用什么插件都可以 去官网可以查到
         toolbar: this.toolbar, // 工具栏 我用到的也就是lists image media table wordcount 这些 根据需求而定

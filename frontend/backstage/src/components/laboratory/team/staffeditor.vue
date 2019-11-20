@@ -2,7 +2,7 @@
   <div>
     <div class="show">个人信息</div>
 
-    <el-form ref="form" :model="form" label-width="85px" label-position="left" class="postion">
+    <el-form ref="form" :model="form" label-width="100px" label-position="left" class="postion">
 
       <el-form-item label="姓名:" :required="true">
         <div>{{form.name}}</div>

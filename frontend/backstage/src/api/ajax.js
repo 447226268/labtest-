@@ -3,7 +3,7 @@
 import axios from 'axios'
 
 const service = axios.create({
-  baseURL: "/api", //默认添加baseurl
+  baseURL: '/api', //默认添加baseurl
 })
 
 

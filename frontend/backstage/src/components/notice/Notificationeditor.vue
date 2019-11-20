@@ -2,7 +2,7 @@
   <div>
     <div class="show">通知编辑</div>
 
-    <el-form ref="form" :model="form" label-width="85px" label-position="left" class="postion">
+    <el-form ref="form" :model="form" label-width="100px" label-position="left" class="postion">
       <el-form-item label="类型选择:" :required="true">
         <el-select v-model="form.nl_subType_id">
           <el-option
