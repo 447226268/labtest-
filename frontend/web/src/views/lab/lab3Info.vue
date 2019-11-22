@@ -56,6 +56,7 @@
             <div class="liimage">
               <div class="staffblock" >
                 <el-image
+                  v-if="newData.info.si_graph!=''"
                   :src="newData.info.si_graph"
                   :fit="contain"></el-image>
               </div>
@@ -225,7 +226,7 @@
     },    
     methods: {
       getData() {
-        this.search=window.location.search.substr(1);
+        this.search=location.href.split("=")[1];
         console.log(this.search);
         Axios.get('/api/staff/getAllStaff').then(response => {
             this.tableData=response.data.result;

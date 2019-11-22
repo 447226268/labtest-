@@ -62,7 +62,7 @@
                     <td class="namecontent"  v-if="staff.type==item.type&&staff.info==null">{{staff.name}}</td>
 
                     <td class="namecontent"  v-if="staff.type==item.type&&staff.info!=null">
-                      <a :href="'lab3Info?'+staff.id" style="text-decoration:none">{{staff.name}}</a>
+                      <routerLink :to="'lab3Info?id='+staff.id" style="text-decoration:none">{{staff.name}}</routerLink>
                     </td>
                   </div>
                 </tr>
