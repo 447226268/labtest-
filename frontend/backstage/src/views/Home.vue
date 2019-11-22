@@ -4,11 +4,11 @@
       <Header></Header>
     </el-header>
 
-    <el-container>
+    <el-container style="width: 1510px">
       <el-aside>
         <Navmenuleft></Navmenuleft>
       </el-aside>
-      <el-main>
+      <el-main >
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -41,7 +41,7 @@ export default {
 
 .el-header,
 .el-footer {
-  width: 100%;
+  width: 1519px;
   height: 60px;
   color: black;
   text-align: center;

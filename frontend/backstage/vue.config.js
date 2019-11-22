@@ -5,6 +5,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+    publicPath: './',
     css: {
         sourceMap: false
     },
@@ -24,10 +25,10 @@ module.exports = {
                 ws: true,
                 changOrigin: true,
                 pathRewrite: {
-                    '^/api': '/' //请求的时候使用这个api就可以
+                    '^/api': '' //请求的时候使用这个api就可以
                 }
             }
         }
     },
-    publicPath : './',
+    
 }
