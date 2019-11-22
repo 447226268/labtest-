@@ -54,7 +54,7 @@
             </div>
 
             <div id="downloadlink" >
-              <a :href="newData.nl_url" v-if="newData.nl_url!=''">下载链接</a>
+              <a :href="newData.nl_url" v-if="newData.nl_url!=''">链接</a>
             </div>
 
             <div id="nlpage" >

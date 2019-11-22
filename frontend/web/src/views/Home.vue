@@ -10,13 +10,16 @@
             <div v-for="item in news1Data" :key="item.nl_id">
               <el-carousel-item  v-if="item.nl_graph!=''">
                 <div class="carousel-explain" >
-                  <router-link :to="'newsInfo?nl_id='+item.nl_id" >
+                  <router-link :to="'newsInfo?nl_id='+item.nl_id" style="text-decoration:none">
                     <el-image
                       style="width: 460px; height: 300px; margin:0 "
                       :src="item.nl_graph"
                       :fit="'fill'">
                     </el-image>
-                    <a class="picturetext" >{{&nbsp;&nbsp;&nbsp;&nbsp;+item.nl_title}}</a>
+                    <div class="picturetext">
+                      <h1  class="picturetitle">&nbsp;&nbsp;&nbsp;{{item.nl_title}}</h1>
+                    </div>
+                    
                   </router-link>
                 </div>
 
@@ -197,13 +200,16 @@
             </div>
             <el-container class="resourcepicture">
               <div v-for="item in resource1Data" :key="item.nl_id">
-                <el-image
-                   
-                  style="width: 200px; height: 100px; margin:20px 20px 0 20px"
-                  :src="item.nl_graph"
-                  :fit="'fill'">
-                </el-image>
-                <a   class="resourcetext" :href="'resourceInfo?nl_id='+item.nl_id" style="text-decoration:none">{{item.nl_title}}</a>
+                <router-link :to="'resourceInfo?nl_id='+item.nl_id" style="text-decoration:none">
+                  <el-image
+                    style="width: 200px; height: 100px; margin:20px 20px 0 20px"
+                    :src="item.nl_graph"
+                    :fit="'fill'">
+                  </el-image>
+                
+                    <h1  class="resourcetext">{{item.nl_title}}</h1>
+                </router-link>
+                
               </div>
             </el-container>
           
@@ -269,15 +275,28 @@
     text-align: left;
     background-color: rgba(255,255,255,0.2);  
     opacity: 0.9;
-    color: white;
-    font-size: 14px;
-    font-weight: 40px!;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     position: relative;
     bottom: 40px;
   }
+
+  .picturetitle{
+    width: 360px;
+    display: block;
+    margin: 0 ;
+    line-height: 35px;
+    text-align: left;
+    opacity: 0.9;
+    color: white;
+    font-size: 14px;
+    font-weight: 600!important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  
 
   /* 右上角科研动态 */
   .news3home{
@@ -356,6 +375,7 @@
     opacity: 0.9;
     color: black;
     font-size: 18px;
+    font-weight: 600!important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -379,12 +399,12 @@
   .el-carousel__button{
     width:8px!important;
     height: 8px!important;
-
+    border-radius:15px;
   }
 
   .el-carousel__indicators--horizontal{
     margin-left:20px;
-    left:400px!important; 
+    left:410px!important; 
     width: 80px;
 
   }

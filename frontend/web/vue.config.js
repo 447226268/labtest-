@@ -20,7 +20,8 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://localhost:8080', // 填写后台接口
+                
+                target: 'http://172.168.1.226:8080', // 填写后台接口
                 ws: true,
                 changOrigin: true, //允许跨域
                 pathRewrite: {
@@ -28,5 +29,6 @@ module.exports = {
                 }
             }
         } 
-    }
+    },
+    publicPath:'./',
 }
