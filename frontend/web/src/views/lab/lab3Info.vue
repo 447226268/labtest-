@@ -56,6 +56,7 @@
             <div class="liimage">
               <div class="staffblock" >
                 <el-image
+                  v-if="newData.info.si_graph!=''"
                   :src="newData.info.si_graph"
                   :fit="contain"></el-image>
               </div>

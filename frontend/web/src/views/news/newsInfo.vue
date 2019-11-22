@@ -56,6 +56,7 @@
             <div class="nlimage">
               <div class="block" >
                 <el-image
+                  v-if="newData.nl_graph!=''"
                   style="margin:auto 50px auto 50px"
                   :src="newData.nl_graph"
                   :fit="'contain'"></el-image>

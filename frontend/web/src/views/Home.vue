@@ -202,6 +202,7 @@
               <div v-for="item in resource1Data" :key="item.nl_id">
                 <router-link :to="'resourceInfo?nl_id='+item.nl_id" style="text-decoration:none">
                   <el-image
+                    v-if="item.nl_graph!=''"
                     style="width: 200px; height: 100px; margin:20px 20px 0 20px"
                     :src="item.nl_graph"
                     :fit="'fill'">
