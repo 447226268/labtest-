@@ -732,6 +732,11 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
+"@tinymce/tinymce-vue@^3.0.1":
+  version "3.2.7"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-vue/-/tinymce-vue-3.2.7.tgz#543bf9a3839a77ea8fb378a3054f9976f3e72dbd"
+  integrity sha512-ahGIuGFDlBnnqY2Q7sNBj8//nPuLP2kg9LSEBEi5xll9/F9wlJ3YYEGoe+YM8e9iSGAnkzfbo853HyCnVEV1/w==
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/@types/events/download/@types/events-3.0.0.tgz?cache=0&sync_timestamp=1567532284800&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fevents%2Fdownload%2F%40types%2Fevents-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -7348,6 +7353,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npm.taobao.org/timsort/download/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tinymce@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.6.0.tgz#b5eda4888e1a607ddd545619cfaa137d59de14b4"
+  integrity sha512-f8LsyT80j8hD4wrL8Sac0DWDG5k10cDyykL/qkJ6kexn1KMt7w1ByrGlUm53XCYDqtavBA5snTU7odioMwSXSQ==
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"
